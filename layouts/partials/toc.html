@@ -1,0 +1,59 @@
+{{- $title := .title | default "Overview" -}} {{- $items := .items | default
+(slice) -}} {{- if gt (len $items) 0 -}}
+
+<!-- Mobile TOC drawer (универсальный) -->
+<div class="toc-mobile">
+  <button class="toc-toggle" type="button" aria-expanded="false">
+    {{ $title }}
+  </button>
+  <div class="toc-drawer" role="menu">
+    <p class="toc-title">{{ $title }}</p>
+    <ul>
+      {{ range $items }}
+      <li><a href="#{{ .id }}">{{ .title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+
+<!-- Sidebar TOC (универсальный) -->
+<aside class="services-toc card toc-spy">
+  <h3>{{ $title }}</h3>
+  <ul>
+    {{ range $items }}
+    <li><a href="#{{ .id }}">{{ .title }}</a></li>
+    {{ end }}
+  </ul>
+</aside>
+
+<script>
+  (function () {
+    // Локальный toggle для конкретного блока на странице
+    const wrap =
+      document.currentScript &&
+      document.currentScript.previousElementSibling &&
+      document.currentScript.previousElementSibling.previousElementSibling
+        ? document.currentScript.previousElementSibling.previousElementSibling
+        : null;
+    // Fallback, если currentScript недоступен — работаем по ближайшим селекторам:
+    const mobile =
+      document.querySelector(".toc-mobile:last-of-type") ||
+      document.querySelector(".toc-mobile");
+    const drawer = mobile ? mobile.querySelector(".toc-drawer") : null;
+    const btn = mobile ? mobile.querySelector(".toc-toggle") : null;
+    if (!mobile || !drawer || !btn) return;
+
+    btn.addEventListener("click", function () {
+      const open = drawer.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!drawer.classList.contains("open")) return;
+      if (mobile.contains(e.target)) return;
+      drawer.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  })();
+</script>
+{{- end -}}

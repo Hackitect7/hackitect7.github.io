@@ -1,0 +1,54 @@
+{{ $meta := index site.Data (printf "meta.%s" .Site.Language.Lang) | default
+(index site.Data "meta.us") }}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ if .Title }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
+<link
+  rel="icon"
+  href="{{ with .Site.Params.favicon }}{{ . }}{{ else }}/assets/img/favicon.svg{{ end }}"
+/>
+<link rel="stylesheet" href="/assets/css/style.css" />
+{{ $sitejs := resources.Get "js/site.js" | minify | fingerprint }}
+<script src="{{ $sitejs.RelPermalink }}" defer></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.5.0/css/flag-icons.min.css"
+/>
+
+<meta
+  name="description"
+  content="{{ with .Params.description }}{{ . }}{{ else }}{{ $meta.description }}{{ end }}"
+/>
+<meta name="keywords" content="{{ $meta.keywords }}" />
+<meta name="author" content="{{ $meta.author }}" />
+
+<meta property="og:site_name" content="{{ $meta.brand }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ .Title }}" />
+<meta
+  property="og:description"
+  content="{{ with .Params.description }}{{ . }}{{ else }}{{ $meta.description }}{{ end }}"
+/>
+<meta property="og:image" content="{{ $meta.ogImage }}" />
+<meta property="og:url" content="{{ $meta.siteUrl }}{{ .RelPermalink }}" />
+
+<meta name="twitter:card" content="{{ $meta.twitterCard }}" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta name="twitter:description" content="{{ $meta.description }}" />
+<meta name="twitter:image" content="{{ $meta.ogImage }}" />
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ .Site.Params.author.name }}",
+    "jobTitle": "IT Infrastructure Architect, DevOps & Automation Engineer",
+    "email": "mailto:{{ .Site.Params.author.email }}",
+    "url": "{{ .Site.BaseURL }}",
+    "sameAs": [
+      "https://linkedin.com/in/hackitect7",
+      "https://github.com/Hackitect7",
+      "https://t.me/Manfred251278"
+    ]
+  }
+</script>

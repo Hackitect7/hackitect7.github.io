@@ -1,0 +1,233 @@
+title: "Навыки"
+intro: "Системы уровня Enterprise: проектирование, построение, автоматизация и эксплуатация. От начала до конца — от сетей и ОС до облаков, Kubernetes, безопасности, наблюдаемости и доставки."
+highlights:
+  - "22+ лет в инфраструктуре, автоматизации и эксплуатации"
+  - "Гибридные облака и мульти-ЦОД архитектуры"
+  - "Безопасность по умолчанию, практики SRE, осознанность затрат"
+
+# Глобальная легенда уровней
+levels:
+  expert: "Эксперт"
+  advanced: "Продвинутый"
+  working: "Рабочие знания"
+
+# Сегменты страницы
+segments:
+  - id: "platforms"
+    title: "Платформы и ОС"
+    groups:
+      - h: "Операционные системы"
+        level: expert
+        items:
+          [
+            "Linux (Debian/Ubuntu, RHEL)",
+            "Windows Server/Desktop",
+            "AD/Group Policy",
+          ]
+      - h: "Виртуализация и гипервизоры"
+        level: advanced
+        items: ["VMware ESXi/vSphere", "Proxmox VE", "Hyper-V", "KVM"]
+      - h: "Хранилища и файловые системы"
+        level: advanced
+        items: ["Ceph", "ZFS", "NFS", "S3-совместимые (MinIO)"]
+
+  - id: "networking"
+    title: "Сети"
+    groups:
+      - h: "Вендоры и оборудование"
+        level: expert
+        items:
+          [
+            "Cisco (R&S, ASA/Firepower)",
+            "Juniper",
+            "MikroTik",
+            "Palo Alto NGFW",
+            "Fortinet (FortiGate)",
+            "pfSense",
+          ]
+      - h: "Протоколы и L4-7"
+        level: expert
+        items:
+          [
+            "BGP, OSPF",
+            "VLAN/VXLAN",
+            "IPsec, WireGuard, OpenVPN",
+            "Nginx, HAProxy, Traefik",
+            "WAF/CDN: Cloudflare",
+            "DNS: Route 53, BIND",
+          ]
+
+  - id: "security"
+    title: "Безопасность и идентичность"
+    groups:
+      - h: "Hardening и контроль"
+        level: advanced
+        items: ["Базовый hardening", "SELinux/AppArmor", "Ротация секретов"]
+      - h: "IAM и SSO"
+        level: advanced
+        items: ["Keycloak (OIDC/OAuth2/SAML)", "AD/LDAP", "RBAC/ABAC"]
+      - h: "Секреты и PKI"
+        level: advanced
+        items: ["HashiCorp Vault", "ACME/Let's Encrypt", "mTLS"]
+
+  - id: "devops"
+    title: "DevOps и доставка"
+    groups:
+      - h: "CI/CD"
+        level: expert
+        items: ["GitHub Actions", "GitLab CI", "Jenkins"]
+      - h: "IaC и CM"
+        level: expert
+        items: ["Terraform", "Ansible", "Packer", "cloud-init"]
+      - h: "Контейнеры"
+        level: advanced
+        items: ["Docker/OCI", "Image hardening", "SBOM/attestations"]
+
+  - id: "k8s"
+    title: "Kubernetes и GitOps"
+    groups:
+      - h: "Оркестрация"
+        level: advanced
+        items: ["Kubernetes", "Helm", "Ingress, HPA, NetworkPolicies"]
+      - h: "GitOps"
+        level: advanced
+        items: ["Argo CD", "Flux", "Прогрессивная доставка"]
+      - h: "Service Mesh и политика"
+        level: working
+        items: ["Istio/Linkerd", "OPA/Gatekeeper"]
+
+  - id: "observability"
+    title: "Наблюдаемость и SRE"
+    groups:
+      - h: "Метрики и логи"
+        level: expert
+        items: ["Prometheus/Alertmanager", "Grafana/Loki", "ELK / OpenSearch"]
+      - h: "Надёжность"
+        level: advanced
+        items:
+          [
+            "SLO/SLI, error budgets",
+            "Реагирование на инциденты",
+            "Runbooks, постмортемы",
+          ]
+
+  - id: "data"
+    title: "Данные и обмен сообщениями"
+    groups:
+      - h: "Базы данных и кеши"
+        level: advanced
+        items: ["PostgreSQL", "MySQL", "Redis"]
+      - h: "Сообщения/стриминг"
+        level: working
+        items: ["RabbitMQ", "Kafka"]
+      - h: "Бэкапы и DR"
+        level: advanced
+        items: ["Veeam", "restic/Borg", "Снапшоты, неизменяемость"]
+
+  - id: "cloud"
+    title: "Облака"
+    groups:
+      - h: "AWS"
+        level: advanced
+        items: ["EC2, EKS, RDS, S3, IAM, Route53"]
+      - h: "Azure"
+        level: working
+        items: ["VM, AKS, SQL, Storage, AAD"]
+      - h: "GCP"
+        level: working
+        items: ["GKE, Cloud SQL, Storage"]
+
+  - id: "enterprise"
+    title: "Enterprise и комплаенс"
+    groups:
+      - h: "ITSM и коллаборация"
+        level: working
+        items: ["ServiceNow", "Jira/Confluence", "Slack/MS Teams"]
+      - h: "Стандарты"
+        level: working
+        items: ["ISO 27001", "SOC 2", "GDPR, NIST"]
+      - h: "Методы"
+        level: working
+        items:
+          [
+            "Архитектурные ревью",
+            "Анализ затрат/рисков",
+            "TOGAF-style viewpoints",
+          ]
+
+  - id: "code"
+    title: "Языки и инструменты"
+    groups:
+      - h: "Языки"
+        level: advanced
+        items: ["Bash", "Python", "Go", "PowerShell"]
+      - h: "Инструменты"
+        level: advanced
+        items: ["Git, Make", "Lint/format/scan", "SBOM (Syft/Grype)"]
+
+  - id: "business-economics"
+    kind: "bullets"
+    title: "Экономика и FinOps"
+    text: |
+      Делая технологии экономически обоснованными: полный жизненный цикл затрат, измеримая ценность и управление расходами на облако в масштабе.
+    bullets:
+      - "Модели TCO/ROI и бизнес-кейсы"
+      - "FinOps: бюджеты, теги, аномалии, RI/SP, chargeback/showback"
+      - "Unit-экономика: стоимость на арендатора/транзакцию/окружение"
+      - "Консолидация лицензий и переговоры с вендорами"
+      - "Планирование ёмкости vs оптимизация затрат"
+      - "Прогнозирование и отчётность для руководства"
+
+  - id: "governance-compliance"
+    kind: "bullets"
+    title: "Управление и соответствие"
+    text: |
+      Контрольные рамки, позволяющие двигаться быстро без потери управляемости.
+    bullets:
+      - "Фреймворки: ITIL 4, COBIT 2019, TOGAF ADM"
+      - "Безопасность и комплаенс: ISO 27001/2, SOC 2, PCI DSS, GDPR, NIST CSF"
+      - "Политики и контроль: IAM, управление изменениями, бэкапы/хранение, DLP"
+      - "Готовность к аудиту: доказательства, SoA, реестр рисков, мэппинг контролей"
+      - "Управление данными: классификация, lineage, законная обработка"
+
+  - id: "business-enablement"
+    kind: "bullets"
+    title: "Бизнес-акселерация"
+    text: |
+      Превращение IT в рычаг роста, эффективности и ускоренной доставки.
+    bullets:
+      - "Дорожные карты цифровой трансформации"
+      - "Platform Engineering / Internal Developer Platform (IDP)"
+      - "Проектирование SLA/SLO в связке с бизнес-KPI (DORA, MTTR, CFR)"
+      - "Self-service автоматизация и golden paths"
+      - "Интеграционная архитектура: API, шлюзы, event backbones"
+
+  - id: "leadership"
+    kind: "bullets"
+    title: "Лидерство"
+    text: |
+      Команды, вендоры и изменения — управление с ясностью и доказательностью.
+    bullets:
+      - "Оргдизайн для DevOps/SRE и программы апскиллинга/менторинга"
+      - "Управление инцидентами и безобвинительные постмортемы"
+      - "Управление вендорами/SLA, RFP/RFI, оптимизация контрактов"
+      - "Управление изменениями (ADKAR), согласование со стейкхолдерами"
+      - "Коммуникация с руководством: QBR, дорожные карты, меморандумы решений"
+
+  - id: "strategic-it"
+    kind: "bullets"
+    title: "Стратегическое IT"
+    text: |
+      Горизонты 12–36 месяцев, управление рисками и встроенная устойчивость.
+    bullets:
+      - "Технологические дорожные карты (12–36 месяцев)"
+      - "Управление рисками и сценарное планирование"
+      - "IT due diligence при M&A и постслияние"
+      - "Непрерывность бизнеса и disaster recovery"
+      - "Sustainability/Green IT и баланс энергозатрат"
+
+cta:
+  title: "Сложный стек?"
+  text: "Давайте согласуем архитектуру, доставку и эксплуатацию — с измеримыми результатами."
+  buttonText: "Обсудить ваш стек"
+  buttonHref: "/ru/contacts/?utm_source=skills"

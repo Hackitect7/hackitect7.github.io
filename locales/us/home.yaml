@@ -1,0 +1,109 @@
+title: "Hackitect7 — Designing Resilient IT Systems for Business Impact"
+
+hero:
+  title: "Hackitect7 - The Music of Systems"
+  subtitle: "I design and orchestrate resilient IT systems — spanning on-prem, cloud, and hybrid environments. From Infrastructure and DevOps pipelines to Automation and Observability, I bridge technology and crisis management to deliver secure, scalable, and efficient solutions that keep businesses running and growing."
+  highlights:
+    - "22+ years building IT infrastructure & automation"
+    - "Hybrid Cloud & Multi-DC expertise (CIS + Global scale)"
+    - "Crisis IT Management & Automation at scale"
+    - "Systems thinking → resilient, business-driven solutions"
+  primaryText: "Explore IT Expertise"
+  primaryHref: "/us/services/"
+  secondaryText: "View Projects"
+  secondaryHref: "/us/projects/"
+  tertiaryText: "Get in touch"
+  tertiaryHref: "/us/contacts/"
+
+sections:
+  - id: "what-i-do"
+    kind: "cards"
+    title: "What I Do"
+    items:
+      - icon: "🧭"
+        h: "Infrastructure Architecture"
+        p: "On-prem, Cloud, Hybrid, Multi-DC. Capacity, reliability, cost."
+        href: "/us/services/#infrastructure-architecture"
+
+      - icon: "⚙️"
+        h: "DevOps & Automation"
+        p: "CI/CD, IaC (Terraform/Ansible), GitOps. From idea to repeatable delivery."
+        href: "/us/services/#devops-automation"
+
+      - icon: "📈"
+        h: "Observability & SRE"
+        p: "SLO/SLI, alerting, MTTR↓. Prometheus, Grafana, ELK, incident response."
+        href: "/us/services/#observability-sre"
+
+      - icon: "🛡️"
+        h: "Security & Hardening"
+        p: "Least privilege, secrets, baseline hardening. Practical controls over buzzwords."
+        href: "/us/services/#security"
+
+      - icon: "⚡"
+        h: "Crisis IT Management"
+        p: "Handling incidents, outages, and migrations. Turning chaos into structured recovery."
+        href: "/us/services/#crisis-management"
+
+      - icon: "🎓"
+        h: "Consulting & Mentoring"
+        p: "Architecture reviews, team training, and mentoring in best practices."
+        href: "/us/services/#consulting"
+
+      - icon: "💼"
+        h: "Business Alignment"
+        p: "Translating technical complexity into business value: cost control, scalability, resilience."
+        href: "/us/services/#business-alignment"
+
+      - icon: "🌐"
+        h: "From Technology to Business Outcomes"
+        p: "Linking IT architecture with measurable ROI, governance, and strategic enablement for enterprise growth."
+        href: "/us/services/#business-outcomes"
+
+  - id: "why-hackitect7"
+    kind: "bullets"
+    title: "Why Hackitect7"
+    bullets:
+      - "Results over buzz — production-grade outcomes, not slides."
+      - "Architecture that matches ops reality — maintainable and cost-aware."
+      - "Crisis IT management — stabilize, simplify, automate."
+      - "Clear artifacts — repos, pipelines, dashboards, runbooks."
+      - "22+ years of cross-domain IT expertise — from networks to clouds."
+      - "Hybrid Cloud approach — CIS compliance + global best practices."
+      - "Systems thinking mindset — every design ties back to business impact."
+
+  - id: "featured-projects"
+    kind: "projects"
+    title: "Featured Projects"
+    items:
+      - title: "DevOps Cheat Sheet"
+        desc: "Structured IT knowledge base in 27+ languages."
+        href: "https://hackitect7.github.io/devops-cheat-sheet/"
+        badge: "Knowledge Base"
+      - title: "RouterOS Scripts"
+        desc: "Automation toolkit for MikroTik."
+        href: "https://github.com/Hackitect7/routeros-scripts"
+        badge: "Automation"
+      - title: "Hackademy"
+        desc: "Practice-first learning concept for engineers (WIP)."
+        href: "/us/projects/hackademy/"
+        badge: "Coming Soon"
+
+  - id: "big-vision"
+    kind: "vision"
+    title: "Beyond IT"
+    text: "Hackitect7 is more than IT — it’s systems thinking applied to technology, business, and life. Today, the focus is IT Architecture & DevOps; tomorrow, the Music of Systems grows into a broader vision."
+
+  - id: "blog-preview"
+    kind: "blog"
+    title: "Latest from the Blog"
+    count: 3
+    ctaText: "View all posts"
+    ctaHref: "/us/blog/"
+
+  - id: "contact-cta"
+    kind: "cta"
+    title: "Let’s talk about your systems"
+    text: "Need reliability, automation, and clarity? Let’s design, stabilize, and scale systems that truly support your business."
+    primaryText: "Contact me"
+    primaryHref: "/us/contacts/"

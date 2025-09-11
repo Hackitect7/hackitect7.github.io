@@ -1,0 +1,42 @@
+brand: "Hackitect7 — Музыка систем"
+
+common:
+  tocToggle: "Разделы"
+  backToTop: "Наверх"
+
+nav:
+  about: "О проекте"
+  skills: "Навыки"
+  services: "Услуги"
+  projects: "Проекты"
+  blog: "Блог"
+  contacts: "Контакты"
+
+services:
+  title: "Услуги"
+  tocTitle: "Обзор"
+
+about:
+  cred:
+    title: "Уникальная ценность"
+    expertise: "Экспертиза"
+    oss: "Open Source"
+    community: "Сообщество"
+
+blog:
+  title: "Блог"
+  filterTitle: "Категории и теги"
+  categories: "Категории"
+  tags: "Теги"
+  newer: "Новее"
+  older: "Старее"
+  empty: "Постов пока нет."
+  minRead: "мин чтения"
+  more: "Другие материалы"
+  backToList: "Назад к блогу"
+
+cta:
+  viewAllPosts: "Все публикации"
+
+footer:
+  made: "Сделано на Hugo и ❤️"

@@ -1,0 +1,56 @@
+# ===========================
+# Core: pagination, sitemap, outputs, permalinks, markdown, privacy
+# ===========================
+title = "Hackitect7 — The Music of Systems"
+languageCode = "en-us"
+defaultContentLanguage = "us"
+defaultContentLanguageInSubdir = true
+enableGitInfo = true
+relativeURLs = false
+canonifyURLs = false
+dataDir = "locales"
+
+# Пагинация
+[pagination]
+  pagerSize = 10
+
+# Таксономии
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# Карта сайта
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# Выходные форматы
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+# ЧПУ-ссылки
+[permalinks]
+  blog = "/blog/:year/:month/:slug/"
+  projects = "/projects/:slug/"
+  services = "/services/:slug/"
+
+# Markdown / TOC
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+# Privacy
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+  [privacy.youtube]
+    privacyEnhanced = true

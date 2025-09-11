@@ -1,0 +1,20 @@
+# глобальные параметры темы и автора
+
+brand   = "Hackitect7 — The Music of Systems"
+tagline = "IT Architecture • DevOps • Automation"
+
+# База UTM для CTA
+ctaBase = "/us/contacts/?utm_source=services&utm_medium=site&utm_campaign="
+
+# Дефолтные картинки/иконки
+favicon = "/assets/img/favicon.svg"
+ogimage = "/assets/img/hackitect7-banner-dark-us.svg"
+logo    = "/assets/img/hackitect7-banner-dark-us.svg"
+
+# CDN флагов
+flagCssCdn = "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.5.0/css/flag-icons.min.css"
+
+[author]
+  name     = "Hackitect7"
+  email    = "papulya2012@gmail.com"
+  timezone = "UTC+6 Asia/Bishkek"

@@ -1,0 +1,53 @@
+name: Deploy Hugo site to Pages (prod)
+
+on:
+  push:
+    branches: [main] # деплой только с main
+  workflow_dispatch: # ручной запуск
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Hugo (match local)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.149.1"
+          extended: true
+
+      # ВАЖНО: сборка именно в прод-режиме, без draft/future
+      # Если у тебя есть отдельный прод-конфиг, укажи его в --config.
+      - name: Build (production)
+        run: |
+          hugo --minify --gc --environment production --config config/production/config.toml
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

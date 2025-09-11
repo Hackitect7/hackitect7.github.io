@@ -1,0 +1,78 @@
+{{ define "main" }} {{- $Lang := .Site.Language.Lang -}} {{- $c := (index
+site.Data $Lang "contacts") | default (index site.Data "us" "contacts") -}} {{-
+$ui := (index site.Data $Lang "ui") | default (index site.Data "us" "ui") -}}
+{{- $pageTitle := $ui.nav.contacts -}} {{ with $ui.pages }}{{ with .contacts
+}}{{ with .title }}{{- $pageTitle = . -}}{{ end }}{{ end }}{{ end }}
+
+<section class="contacts-page">
+  <header class="contacts-hero">
+    <h1>{{ $pageTitle }}</h1>
+    {{ with $c.intro }}
+    <p class="sub">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="contacts-grid">
+    <!-- ЛЕВАЯ колонка: профиль + каналы -->
+    <div class="card">
+      <h2>{{ $c.person.name }}</h2>
+      <p class="sub">{{ $c.person.title }}</p>
+
+      <ul class="contact-meta">
+        <li>⏰ {{ $c.person.timezone }} · {{ $c.person.reply_hours }}</li>
+        <li>🗣️ {{ $c.person.languages }}</li>
+        <li>🟢 {{ $c.person.availability }}</li>
+      </ul>
+
+      <div class="contact-channels">
+        {{ range $c.channels }}
+        <a
+          class="contact-item"
+          href="{{ .href }}"
+          rel="noopener"
+          target="_blank"
+        >
+          <span class="ci-ico">{{ .icon }}</span>
+          <span class="ci-label">{{ .label }}</span>
+          <span class="ci-value">{{ .display }}</span>
+        </a>
+        {{ end }}
+      </div>
+
+      <div class="contact-actions">
+        {{ with $c.assets.vcard_href }}
+        <a class="btn secondary" href="{{ . }}">{{ $c.assets.vcard_text }}</a>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- ПРАВАЯ колонка: форма -->
+    <div class="card" id="contact-form">
+      <h2>{{ $c.form.title }}</h2>
+      <p class="sub">{{ $c.form.lead }}</p>
+
+      <div class="form-placeholder">
+        <div class="form-placeholder-inner">
+          <p style="margin: 0">{{ $c.form.soon }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ $c.person.name }}",
+    "jobTitle": "{{ $c.person.title }}",
+    "telephone": "+996501141183",
+    "url": "{{ .Site.BaseURL }}",
+    "sameAs": [
+      "https://linkedin.com/in/hackitect7",
+      "https://github.com/Hackitect7",
+      "https://t.me/Manfred251278"
+    ]
+  }
+</script>
+{{ end }}

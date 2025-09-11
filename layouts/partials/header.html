@@ -1,0 +1,292 @@
+<div class="container header-inner header-grid">
+  <!-- ЛОГО слева -->
+  <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+    <img
+      class="logo"
+      src="{{ with .Site.Params.logo }}{{ . }}{{ else }}/assets/img/hackitect7-banner-dark-us.svg{{ end }}"
+      alt="Hackitect7"
+    />
+  </a>
+
+  {{/* UI-словарь меню */}} {{- $lang := .Site.Language.Lang -}} {{- $ui :=
+  index site.Data $lang "ui" | default (index site.Data "us" "ui") -}} {{ $here
+  := .RelPermalink }}
+
+  <!-- МЕНЮ по центру -->
+  <nav class="nav" id="siteNav" role="navigation" aria-label="Main">
+    <ul>
+      {{- $about := ("/about/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $about }}"
+          class="{{ if strings.HasPrefix $here $about }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $about
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.about }}
+        </a>
+      </li>
+
+      {{- $services := ("/services/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $services }}"
+          class="{{ if strings.HasPrefix $here $services }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $services
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.services }}
+        </a>
+      </li>
+
+      {{- $projects := ("/projects/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $projects }}"
+          class="{{ if strings.HasPrefix $here $projects }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $projects
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.projects }}
+        </a>
+      </li>
+
+      {{- $blog := ("/blog/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $blog }}"
+          class="{{ if strings.HasPrefix $here $blog }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $blog
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.blog }}
+        </a>
+      </li>
+
+      {{- $skills := ("/skills/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $skills }}"
+          class="{{ if strings.HasPrefix $here $skills }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $skills
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.skills }}
+        </a>
+      </li>
+
+      {{- $contacts := ("/contacts/" | relLangURL) -}}
+      <li>
+        <a
+          href="{{ $contacts }}"
+          class="{{ if strings.HasPrefix $here $contacts }}is-current{{ end }}"
+          {{
+          if
+          strings.HasPrefix
+          $here
+          $contacts
+          }}aria-current="page"
+          {{
+          end
+          }}
+        >
+          {{ $ui.nav.contacts }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ДЕЙСТВИЯ справа: бургер (моб.) + язык -->
+  <div class="header-actions">
+    <button
+      id="hamburger"
+      class="hamburger"
+      type="button"
+      aria-label="Toggle menu"
+      aria-controls="siteNav"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="lang dropdown">
+      <button
+        id="langBtn"
+        class="dropbtn"
+        type="button"
+        aria-haspopup="true"
+        aria-controls="langDropdown"
+        aria-expanded="false"
+      >
+        <span class="fi fi-{{ .Site.Params.flag }}"></span>
+        <span class="code">{{ .Site.Language.LanguageName }}</span>
+      </button>
+      <div id="langDropdown" class="dropdown-content" role="menu">
+        {{ range $i, $s := site.Sites }} {{ $L := $s.Language }} {{/* по
+        умолчанию ведём на главную выбранного языка */}} {{ $target := $s.Home
+        }} {{ with $.Page }} {{/* ищем перевод текущей страницы в нужном языке
+        (включая self) */}} {{ $alts := where .AllTranslations "Lang" $L.Lang }}
+        {{ if gt (len $alts) 0 }} {{/* берём первую подходящую страницу */}} {{
+        $target = index $alts 0 }} {{ end }} {{ end }}
+        <a
+          href="{{ $target.RelPermalink }}"
+          class="{{ if eq $.Site.Language.Lang $L.Lang }}active{{ end }}"
+          role="menuitem"
+        >
+          <span class="fi fi-{{ $L.Params.flag }}"></span>
+          <span class="label">{{ $L.LanguageName }}</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const langBtn = document.getElementById("langBtn");
+    const langDd = document.getElementById("langDropdown");
+    const burger = document.getElementById("hamburger");
+    const nav = document.getElementById("siteNav");
+    const host = document.querySelector(".header-actions");
+    if (!nav || !host) return;
+
+    function closeLang() {
+      langDd?.classList.remove("show");
+      langBtn?.setAttribute("aria-expanded", "false");
+    }
+    function openLang() {
+      closeNav();
+      langDd?.classList.add("show");
+      langBtn?.setAttribute("aria-expanded", "true");
+    }
+    function toggleLang(e) {
+      e?.stopPropagation();
+      if (!langDd) return;
+      langDd.classList.contains("show") ? closeLang() : openLang();
+    }
+
+    function openNav() {
+      closeLang();
+      attachMobileIfNeeded();
+      positionPanel();
+      nav.classList.add("open");
+      burger?.setAttribute("aria-expanded", "true");
+    }
+    function closeNav() {
+      nav.classList.remove("open");
+      burger?.setAttribute("aria-expanded", "false");
+    }
+    function toggleNav(e) {
+      e?.stopPropagation();
+      if (!isMobile()) return;
+      nav.classList.contains("open") ? closeNav() : openNav();
+    }
+
+    if (langBtn && langDd) langBtn.addEventListener("click", toggleLang);
+    if (burger) burger.addEventListener("click", toggleNav);
+
+    const mql = window.matchMedia("(max-width: 800px)");
+    let mobileAttached = false;
+    const origParent = nav.parentNode;
+    const origNext = nav.nextSibling;
+    function isMobile() {
+      return mql.matches;
+    }
+
+    function attachMobileIfNeeded() {
+      if (!isMobile() || mobileAttached) return;
+      host.appendChild(nav);
+      nav.classList.add("nav-mobile");
+      mobileAttached = true;
+    }
+    function detachMobileIfNeeded() {
+      if (!mobileAttached) return;
+      origParent.insertBefore(nav, origNext);
+      nav.classList.remove("nav-mobile", "open");
+      nav.style.left = nav.style.right = nav.style.top = "";
+      mobileAttached = false;
+      burger?.setAttribute("aria-expanded", "false");
+    }
+    function positionPanel() {
+      if (!mobileAttached) return;
+      nav.style.left = "0";
+      nav.style.right = "auto";
+      nav.style.top = "calc(100% + 8px)";
+      const r = nav.getBoundingClientRect();
+      const vwRight = document.documentElement.clientWidth - 8;
+      if (r.right > vwRight) {
+        nav.style.left = "auto";
+        nav.style.right = "0";
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const clickInsideNav =
+        nav.contains(e.target) || burger?.contains(e.target);
+      const clickInsideLang =
+        langDd?.contains(e.target) || langBtn?.contains(e.target);
+      if (!clickInsideNav && !clickInsideLang) {
+        closeNav();
+        closeLang();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeNav();
+        closeLang();
+      }
+    });
+
+    function handleMode(e) {
+      if (e.matches) {
+        attachMobileIfNeeded();
+        closeNav();
+      } else {
+        detachMobileIfNeeded();
+        closeLang();
+      }
+    }
+    mql.addEventListener("change", handleMode);
+    handleMode(mql);
+
+    window.addEventListener("resize", () => {
+      if (nav.classList.contains("open")) positionPanel();
+    });
+  })();
+</script>

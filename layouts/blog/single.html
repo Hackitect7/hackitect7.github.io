@@ -1,0 +1,73 @@
+{{ define "main" }}
+  {{- $lang := .Site.Language.Lang -}}
+  {{- $ui := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+
+  <!-- HERO -->
+  <section class="hero section">
+    <h1>{{ .Title }}</h1>
+    <p class="sub">
+      {{- .Date.Format "02 Jan 2006" -}}
+      {{- with .ReadingTime }} · {{ . }} {{ or $ui.blog.minRead "min read" }}{{ end -}}
+      {{- with .Params.categories }} · {{ delimit . ", " }}{{ end -}}
+    </p>
+  </section>
+
+  <!-- COVER (optional) -->
+  {{ with .Params.cover }}
+    <figure class="section card" style="padding:0; overflow:hidden">
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}" style="display:block; width:100%; height:auto">
+    </figure>
+  {{ end }}
+
+  <!-- CONTENT -->
+  <article class="section card">
+    {{ .Content }}
+
+    {{ with .Params.tags }}
+      <p class="sub" style="margin-top:12px">
+        {{- $links := slice -}}
+        {{- range . -}}
+          {{- $slug := urlize . -}}
+          {{- $links = $links | append (printf `<a href="%s">#%s</a>` ((printf "/%s/tags/%s/" $lang $slug) | relLangURL) .) -}}
+        {{- end -}}
+        {{- delimit $links ", " | safeHTML -}}
+      </p>
+    {{ end }}
+
+    {{ with .Params.categories }}
+      <p class="sub" style="margin-top:6px">
+        {{- $links := slice -}}
+        {{- range . -}}
+          {{- $slug := urlize . -}}
+          {{- $links = $links | append (printf `<a href="%s">%s</a>` ((printf "/%s/categories/%s/" $lang $slug) | relLangURL) .) -}}
+        {{- end -}}
+        {{- delimit $links ", " | safeHTML -}}
+      </p>
+    {{ end }}
+  </article>
+
+  <!-- PREV/NEXT -->
+  <section class="section">
+    <nav class="cta-row" aria-label="Post navigation">
+      {{ if .PrevInSection }}
+        <a class="btn secondary" href="{{ .PrevInSection.RelPermalink }}" rel="prev">← {{ .PrevInSection.Title }}</a>
+      {{ else }}
+        <span></span> <!-- пустышка для выравнивания -->
+      {{ end }}
+
+      {{ if .NextInSection }}
+        <a class="btn secondary" href="{{ .NextInSection.RelPermalink }}" rel="next">{{ .NextInSection.Title }} →</a>
+      {{ else }}
+        <span></span> <!-- пустышка для выравнивания -->
+      {{ end }}
+    </nav>
+  </section>
+
+  <!-- BACK TO LIST -->
+  <section class="section card" style="text-align:center">
+    <h2>{{ or $ui.blog.more "More to explore" }}</h2>
+    <a class="btn" href="{{ (printf "/%s/blog/" $lang) | relLangURL }}">
+      {{ or $ui.blog.backToList "Back to blog" }}
+    </a>
+  </section>
+{{ end }}

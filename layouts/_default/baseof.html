@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    <header>{{ partial "header.html" . }}</header>
+    <main class="container">{{ block "main" . }}{{ end }}</main>
+    <footer class="site-footer container">{{ partial "footer.html" . }}</footer>
+    {{ partial "scrollspy.html" . }}
+  </body>
+</html>

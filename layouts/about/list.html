@@ -1,0 +1,155 @@
+{{ define "main" }} {{- $lang := .Site.Language.Lang -}} {{- $about := (index
+site.Data $lang "about") | default (index site.Data "us" "about") -}} {{- $ui :=
+(index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+
+<!-- HERO -->
+<section class="hero">
+  <h1>{{ or $about.title .Title }}</h1>
+  {{ with $about.subtitle }}
+  <p class="tagline">{{ . }}</p>
+  {{ end }} {{ with $about.highlights }}
+  <ul class="sub">
+    {{ range . }}
+    <li>{{ . }}</li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>
+
+<div class="services-layout">
+  <!-- УНИВЕРСАЛЬНЫЙ TOC -->
+  {{ partial "toc.html" (dict "title" (or $ui.about.tocTitle (or
+  $ui.services.tocTitle "Overview")) "items" $about.sections) }}
+
+  <!-- Контент -->
+  <div class="services-content">
+    {{ range $about.sections }}
+    <section id="{{ .id }}" class="service-block card spy-section">
+      <h2>{{ .title }}</h2>
+
+      {{ with .text }} {{- $paras := split . "\n\n" -}} {{- range $paras }}
+      <p>{{ . | markdownify }}</p>
+      {{ end -}} {{ end }} {{ with .facts }}
+      <dl class="facts">
+        {{ range . }}
+        <dt>{{ .label }}</dt>
+        <dd>
+          {{- if .items -}}
+          <ul class="facts-list">
+            {{ range .items }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{- else -}} {{ .text }} {{- end -}}
+        </dd>
+        {{ end }}
+      </dl>
+      {{ end }} {{ with .steps }}
+      <ol class="sub">
+        {{ range . }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ol>
+      {{ end }} {{ with .notes }}
+      <p>{{ . | markdownify }}</p>
+      {{ end }} {{ with .bullets }}
+      <ul class="bullets">
+        {{ range . }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+      {{ end }} {{/* Карточки сеткой (универсально для what/cred/engagement)
+      */}} {{ with .cards }}
+      <div class="grid">
+        {{ range . }}
+        <div class="card">
+          {{ with .badge }}
+          <p class="sub">{{ . }}</p>
+          {{ end }} {{ with .h }}
+          <h3>{{ . }}</h3>
+          {{ end }} {{ with .p }}
+          <p class="sub">{{ . }}</p>
+          {{ end }} {{ with .bullets }}
+          <ul>
+            {{ range . }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ end }} {{/* Проекты-кейсы + метрики */}} {{ with .cases }}
+      <div class="grid">
+        {{ range . }}
+        <article class="card">
+          {{ with .badge }}
+          <p class="sub">{{ . }}</p>
+          {{ end }}
+          <h3>{{ .title }}</h3>
+          <p>{{ .desc }}</p>
+          {{ with .metrics }}
+          <ul class="bullets">
+            {{ range . }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </article>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <!-- INDUSTRIES -->
+      {{ with .industries }}
+      <section id="{{ .id }}" class="section card spy-section">
+        <h2>{{ .title }}</h2>
+        {{ with .text }}
+        <p class="sub">{{ . }}</p>
+        {{ end }}
+
+        <div class="grid">
+          {{ range .cards }}
+          <div class="card">
+            {{ with .h }}
+            <h3>{{ . }}</h3>
+            {{ end }} {{ with .bullets }}
+            <ul>
+              {{ range . }}
+              <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }} {{ with .cta }} {{- $raw := .href | default "contacts" -}} {{-
+      $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim
+      $raw "/")) | relLangURL) -}}
+      <p>
+        <a class="btn" href="{{ $href }}"
+          >{{ or .text (or $ui.cta.contact "Contact me") }}</a
+        >
+      </p>
+      {{ end }}
+    </section>
+    {{ end }}
+
+    <!-- Финальный CTA -->
+    {{ with $about.finalCta }} {{- $raw := .href | default "contacts" -}} {{-
+    $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim
+    $raw "/")) | relLangURL) -}}
+    <section class="service-cta-final card" style="text-align: center">
+      <h2>{{ .title }}</h2>
+      {{ with .text }}
+      <p class="sub">{{ . }}</p>
+      {{ end }}
+      <a class="btn" href="{{ $href }}"
+        >{{ or .button (or $ui.cta.contact "Contact me") }}</a
+      >
+    </section>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

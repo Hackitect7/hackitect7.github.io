@@ -1,0 +1,4 @@
+{
+  "assets/**/*.css": ["stylelint --fix"],
+  "layouts/**/*.html": ["stylelint --fix"]
+}

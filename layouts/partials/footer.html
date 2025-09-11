@@ -1,0 +1,8 @@
+{{/* Берём brand из языка, иначе из глобального params */}} {{ $brand := or
+.Site.Language.Params.brand .Site.Params.brand }} {{ $ui := index site.Data
+(printf "ui.%s" .Site.Language.Lang) | default (index site.Data "ui.us") }}
+
+<div class="container footer-inner">
+  <span>© {{ now.Year }} {{ $brand }}</span>
+  <span class="footer-made">{{ $ui.footer.made }}</span>
+</div>

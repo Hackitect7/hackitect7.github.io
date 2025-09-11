@@ -1,0 +1,156 @@
+title: "About Hackitect7"
+subtitle: "I design resilient, secure, economically-sound IT that serves the business."
+highlights:
+  - "Enterprise architecture & SRE with measurable outcomes"
+  - "Security-first, FinOps-aware, automation at scale"
+
+sections:
+  - id: "who"
+    title: "Who I Am"
+    text: >
+      I'm a principal architect focused on reliable, observable, cost-efficient systems.
+      I bridge technology and business: SLAs/SLOs, security, and TCO/ROI.
+    facts:
+      - label: "Based in:"
+        text: "Bishkek · UTC+6 (flexible hours for US/EU)"
+      - label: "Languages:"
+        items:
+          - "Russian — full (conversation, documents, presentations)"
+          - "English — strong written, conversational basic"
+          - "Other languages — written communication with native quality (via professional localization)"
+      - label: "Engagement:"
+        text: "Consulting, audits, hands-on delivery, mentoring"
+
+  - id: "what"
+    title: "What I Do"
+    text: "Core capabilities aligned to business outcomes."
+    cards:
+      - h: "Architecture"
+        p: "On-prem, cloud, hybrid; reliability, scale, cost controls."
+        bullets:
+          - "Multi-region designs"
+          - "Networking & security baselines"
+          - "Migration & modernization"
+      - h: "DevOps & Automation"
+        p: "CI/CD, IaC (Terraform/Ansible), GitOps, platform engineering."
+        bullets:
+          - "Golden images/base layers"
+          - "Policy as code"
+          - "Release safety (progressive delivery)"
+      - h: "SRE & Observability"
+        p: "SLO/SLI, incident response, on-call hygiene."
+        bullets:
+          - "Metrics/logs/traces"
+          - "Runbooks & MTTR↓"
+          - "Capacity mgmt"
+      - h: "Security & Governance"
+        p: "Least privilege, hardening, ISO/SOC2/GDPR practices."
+      - h: "Business & Strategy"
+        p: "FinOps, TCO/ROI, modernization roadmaps aligned with OKRs."
+
+  - id: "how"
+    title: "How I Work"
+    steps:
+      - "Discover → assess risks, constraints, economics"
+      - "Design → architecture, security, observability, cost guardrails"
+      - "Pilot → validate SLOs, performance, cost"
+      - "Scale → automate, codify, document"
+      - "Operate → measure, improve, transfer"
+    notes: "Engagements include clear deliverables, runbooks, and decision logs."
+
+  - id: "proof"
+    title: "Proof"
+    cases:
+      - badge: "SRE"
+        title: "MTTR -55% and alert fatigue -60%"
+        desc: "Introduced SLOs, unified alerting, and incident workflows."
+        metrics:
+          - "Unified runbooks"
+          - "Postmortems = learning, not blaming"
+      - badge: "FinOps"
+        title: "Cloud spend -23% without performance loss"
+        desc: "Right-sizing, autoscaling, storage tiers, reserved capacity."
+        metrics:
+          - "Guardrails & budgets"
+          - "Weekly cost review"
+
+  - id: "industries"
+    title: "Industries"
+    text: "I work with companies of any size and sector, from startups to enterprises. Key areas where my expertise is applied most often:"
+    cards:
+      - h: "Main Areas"
+        bullets:
+          - "Finance & FinTech"
+          - "E-commerce & Retail"
+          - "Telecom & Networking"
+          - "Government & GovTech"
+      - h: "Other Sectors"
+        bullets:
+          - "Healthcare"
+          - "Media & Entertainment"
+          - "Education"
+          - "Logistics"
+
+  - id: "cred"
+    title: "Unique Value"
+    cards:
+      - h: "Expertise"
+        bullets:
+          - "22+ years across infrastructure, networking & DevOps"
+          - "Multi-cloud (AWS, GCP, Azure) — hands-on delivery"
+          - "Resilient architectures, pragmatic automation, SRE mindset"
+          - "From bare-metal & networks to Kubernetes & observability"
+      - h: "Open Source"
+        bullets:
+          - "GitHub: [Hackitect7](https://github.com/Hackitect7) — tools & scripts"
+          - "DevOps Cheat Sheet (multilingual, Hugo/Quarto)"
+          - "MikroTik RouterOS automation snippets"
+      - h: "Community"
+        bullets:
+          - "Knowledge sharing: blog posts & technical notes"
+          - "Internal enablement sessions, mentoring"
+          - "Brand: *Hackitect7 — The Music of Systems*"
+
+  - id: "values"
+    title: "Values & Security"
+    text: "Pragmatic, secure-by-default, measurable, documentation-first."
+    bullets:
+      - "Privacy & compliance respected"
+      - "Cost transparency and guardrails"
+      - "Knowledge transfer by design"
+
+  - id: "engagement"
+    title: "Engagement Models"
+    cards:
+      - h: "Assessment / Audit"
+        p: "Short engagement to surface risks & opportunities."
+        bullets:
+          - "Architecture review"
+          - "Security posture"
+          - "Cost baseline"
+      - h: "Project Delivery"
+        p: "Design & implement with measurable outcomes."
+        bullets:
+          - "Roadmap & milestones"
+          - "SLOs & KPIs"
+          - "Handover"
+      - h: "Fractional Architect"
+        p: "On-going strategic guidance and reviews."
+        bullets:
+          - "Architecture board"
+          - "Vendor control"
+          - "Change mgmt"
+
+finalCta:
+  title: "Let's work together"
+  text: "From technology to business outcomes."
+  href: "contacts"
+  button: "Contact"
+
+schema:
+  person:
+    name: "Hackitect7"
+    title: "Principal Architect"
+    sameAs:
+      - "https://github.com/Hackitect7"
+      - "https://linkedin.com/in/hackitect7"

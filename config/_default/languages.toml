@@ -1,0 +1,69 @@
+# вся мультиязычность, включая меню для каждого языка
+
+[us]
+  languageName = "English (US)"
+  weight = 1
+  contentDir = "content/us"
+  title = "Hackitect7 — The Music of Systems"
+
+  [us.params]
+    flag    = "us"
+    tagline = "IT Architecture • DevOps • Automation"
+    logo    = "/assets/img/us/hackitect7-logo-dark-us.svg"
+    ogimage = "/assets/img/us/hackitect7-logo-dark-us.svg"
+
+  [us.menus]
+    [[us.menus.main]]
+      identifier = "skills"
+      name = "Skills"
+      url = "/skills/"
+      weight = 10
+    [[us.menus.main]]
+      identifier = "services"
+      name = "Services"
+      url = "/services/"
+      weight = 20
+    [[us.menus.main]]
+      identifier = "projects"
+      name = "Projects"
+      url = "/projects/"
+      weight = 30
+    [[us.menus.main]]
+      identifier = "contacts"
+      name = "Contacts"
+      url = "/contacts/"
+      weight = 40
+
+[ru]
+  languageName = "Русский"
+  weight = 2
+  contentDir = "content/ru"
+  title = "Hackitect7 — Музыка систем"
+
+  [ru.params]
+    flag    = "ru"
+    tagline = "IT-архитектура • DevOps • Автоматизация"
+    logo    = "/assets/img/ru/hackitect7-logo-dark-ru.svg"
+    ogimage = "/assets/img/ru/hackitect7-logo-dark-ru.svg"
+
+  [ru.menus]
+    [[ru.menus.main]]
+      identifier = "skills"
+      name = "Навыки"
+      url = "/skills/"
+      weight = 10
+    [[ru.menus.main]]
+      identifier = "services"
+      name = "Услуги"
+      url = "/services/"
+      weight = 20
+    [[ru.menus.main]]
+      identifier = "projects"
+      name = "Проекты"
+      url = "/projects/"
+      weight = 30
+    [[ru.menus.main]]
+      identifier = "contacts"
+      name = "Контакты"
+      url = "/contacts/"
+      weight = 40

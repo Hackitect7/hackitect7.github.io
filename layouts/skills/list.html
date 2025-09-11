@@ -1,0 +1,70 @@
+{{ define "main" }} {{- $lang := .Site.Language.Lang -}} {{- $skills := (index
+site.Data $lang "skills") | default (index site.Data "us" "skills") -}} {{- $ui
+:= (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+
+<!-- HERO -->
+<section class="hero">
+  <h1>{{ or $skills.title "Skills" }}</h1>
+  {{ with $skills.intro }}
+  <p class="sub">{{ . }}</p>
+  {{ end }} {{ with $skills.highlights }}
+  <ul class="sub">
+    {{ range . }}
+    <li>{{ . }}</li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>
+
+<div class="services-layout">
+  <!-- УНИВЕРСАЛЬНЫЙ TOC -->
+  {{ partial "toc.html" (dict "title" (or $ui.skills.tocTitle "Overview")
+  "items" $skills.segments) }}
+
+  <!-- Контент -->
+  <div class="services-content">
+    {{ $levels := $skills.levels }} {{ range $skills.segments }}
+    <section id="{{ .id }}" class="service-block card spy-section">
+      <h2>{{ .title }}</h2>
+
+      {{ with .text }} {{ $paras := split . "\n\n" }} {{ range $paras }}
+      <p>{{ . }}</p>
+      {{ end }} {{ end }}
+
+      <div class="grid">
+        {{ range .groups }}
+        <div class="card">
+          <h3>{{ .h }}</h3>
+          {{ with .level }}
+          <p class="sub">{{ index $levels . }}</p>
+          {{ end }} {{ with .items }}
+          <ul>
+            {{ range . }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    <!-- Финальный CTA -->
+    {{ with $skills.cta }} {{- $ctaHref := "" -}} {{- if .buttonHref -}} {{-
+    $ctaHref = (printf "/%s%s" $lang (trim .buttonHref "/")) | relLangURL -}}
+    {{- else -}} {{- $ctaHref = (printf "/%s/contacts/" $lang) | relLangURL -}}
+    {{- end -}}
+    <section class="service-cta-final card" style="text-align: center">
+      <h2>{{ .title }}</h2>
+      {{ with .text }}
+      <p class="sub">{{ . }}</p>
+      {{ end }}
+      <a class="btn" href="{{ $ctaHref }}"
+        >{{ or .buttonText (or $ui.cta.contact "Contact me") }}</a
+      >
+    </section>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

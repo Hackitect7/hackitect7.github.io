@@ -1,0 +1,634 @@
+:root {
+  --bg: #0b0f14;
+  --card: #121823;
+  --accent: #5eead4;
+  --accent2: #60a5fa;
+  --text: #e6edf3;
+  --muted: #a1a9b3;
+}
+
+/* ========== Base ========== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.link {
+  color: var(--accent);
+}
+
+.sub {
+  color: var(--muted);
+  margin: 14px 0 18px;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #1e2633;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0b0f14;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn.secondary {
+  background: #1f2937;
+  color: var(--text);
+  border: 1px solid #2b3647;
+}
+
+.btn.tertiary {
+  background: transparent;
+  color: var(--accent2);
+  border: 1px solid var(--accent2);
+}
+
+.btn.tertiary:hover {
+  background: var(--accent2);
+  color: #0b0f14;
+}
+
+.site-footer {
+  border-top: 1px solid #1e2633;
+  margin-top: 12px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-made {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ========== Header ========== */
+
+/* Сетка: бренд | нав | экшены (бургер+язык) */
+.header-inner.header-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "brand nav actions";
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  grid-area: brand;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+}
+
+.header-grid .nav {
+  grid-area: nav;
+  justify-self: center;
+}
+
+.header-actions,
+.header-right {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+  margin-left: auto;
+  position: relative; /* якорь для выпадений */
+}
+
+/* Навигация (горизонтально, desktop) */
+.nav ul {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Активный пункт меню (desktop/mobile одинаково) */
+.nav a.is-current,
+.nav a[aria-current="page"] {
+  color: var(--accent);
+  background: rgb(96 165 250 / 10%);
+  border: 1px solid #2b3647;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Унифицированные состояния для пунктов меню и языков */
+.nav a:hover,
+.dropdown .dropdown-content a:hover {
+  background: #1e2633;
+  color: var(--text);
+}
+
+/* Выбранный пункт в языковом списке */
+.dropdown .dropdown-content a.active {
+  background: #1e2633;
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+/* Бургер (скрыт на десктопе) */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid #2b3647;
+  border-radius: 10px;
+  background: #1f2937;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: #e6edf3;
+  border-radius: 1px;
+}
+
+/* ========== Language dropdown ========== */
+.dropdown {
+  flex: 0 0 auto;
+  position: relative;
+} /* локальный контекст */
+.dropbtn {
+  background: #1f2937;
+  color: #e6edf3;
+  padding: 8px 14px;
+  font-weight: 600;
+  border: 1px solid #2b3647;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 40px;
+}
+
+.fi {
+  border-radius: 3px;
+} /* флагик чуть скруглён */
+
+/* Выпадающее меню языка — строго под кнопкой */
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: auto;
+  top: calc(100% + 8px);
+  background-color: #121823;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 40%);
+  z-index: 2000;
+  width: max-content;
+  max-height: 70vh;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+.dropdown .dropdown-content a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #e6edf3;
+  text-decoration: none;
+}
+
+.dropdown .show {
+  display: block;
+} /* класс открывает меню */
+
+/* ========== Hero basics ========== */
+.hero .tagline {
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cta-row span {
+  flex: 1; /* пустышки занимают место */
+}
+
+.cta-row a {
+  text-align: center;
+}
+
+/* ========== Services / Skills layout ========== */
+.services-hero h1 {
+  margin-bottom: 6px;
+}
+
+.services-hero .sub {
+  margin: 0 0 18px;
+}
+
+.services-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+}
+
+.services-content .service-block + .service-block {
+  margin-top: 16px;
+}
+
+.service-block h2 {
+  margin-top: 0;
+}
+
+.service-block .bullets {
+  margin: 10px 0 0;
+}
+
+.service-block .bullets li + li {
+  margin-top: 6px;
+}
+
+.service-cta-final {
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* TOC (левый сайдбар) */
+.services-toc {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+
+.services-toc h3 {
+  margin-top: 0;
+}
+
+.services-toc ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.services-toc li + li {
+  margin-top: 6px;
+}
+/* stylelint-disable-next-line no-descending-specificity */
+.services-toc a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.services-toc a:hover {
+  color: var(--accent);
+}
+
+/* Лёгкие CTA внутри секций */
+.service-block .btn {
+  margin-top: 8px;
+}
+
+.btn.tertiary,
+.service-block .btn {
+  background: transparent;
+  color: var(--accent2);
+  border: 1px solid var(--accent2);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.service-block .btn:hover {
+  background: var(--accent2);
+  color: #0b0f14;
+}
+
+/* Scroll-spy */
+.toc-spy a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.spy-section {
+  scroll-margin-top: 96px;
+}
+
+/* ========== Contacts page ========== */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-placeholder {
+  border: 1px dashed #2b3647;
+  border-radius: 12px;
+  padding: 14px;
+  background: #0f141e;
+}
+
+.form-placeholder-inner {
+  padding: 12px 10px;
+  border-radius: 8px;
+  background: #0b0f14;
+  color: var(--muted);
+}
+
+.contact-meta {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 16px;
+}
+
+.contact-meta li {
+  color: var(--muted);
+}
+
+.contact-channels {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.contact-item {
+  display: grid;
+  grid-template-columns: 28px 140px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #1e2633;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  background: #101621;
+}
+
+.contact-item:hover {
+  background: #151d2a;
+  border-color: #2b3647;
+}
+
+.ci-ico {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.ci-label {
+  color: var(--muted);
+}
+
+.ci-value {
+  justify-self: end;
+  color: var(--text);
+}
+
+.contact-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ========== Mobile TOC (для services/skills) ========== */
+.toc-mobile {
+  display: none;
+  margin-bottom: 12px;
+}
+
+.toc-toggle {
+  background: #1f2937;
+  color: var(--text);
+  border: 1px solid #2b3647;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toc-drawer {
+  display: none;
+  margin-top: 8px;
+  background: var(--card);
+  border: 1px solid #1e2633;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.toc-drawer.open {
+  display: block;
+}
+
+.toc-drawer .toc-title {
+  margin: 0 0 6px;
+}
+
+.toc-drawer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-drawer li + li {
+  margin-top: 6px;
+}
+/* stylelint-disable-next-line no-descending-specificity */
+.toc-drawer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.toc-drawer a:hover {
+  color: var(--accent);
+}
+
+/* ========== Responsive ========== */
+
+/* ≤ 800px: меню прячется под бургер, язык ещё с названием */
+@media (width <= 800px) {
+  .hamburger {
+    display: inline-block;
+  }
+
+  .header-inner.header-grid {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header-actions {
+    position: relative;
+  } /* якорь для абсолютной панели */
+
+  /* мобильная версия меню */
+  .nav.nav-mobile {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: auto;
+    display: none;
+    z-index: 900;
+    background: var(--card);
+    border: 1px solid #1e2633;
+    border-radius: 12px;
+    width: max-content;
+    max-width: min(92vw, 420px);
+    box-shadow: 0 6px 12px rgb(0 0 0 / 40%);
+    overflow: hidden;
+  }
+
+  .nav.nav-mobile.open {
+    display: block;
+  }
+
+  .nav.nav-mobile ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+  }
+
+  .nav.nav-mobile a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 8px;
+  }
+
+  .nav.nav-mobile a:hover {
+    background: #1e2633;
+  }
+
+  /* Активный пункт — без рамки */
+  .nav.nav-mobile a.is-current,
+  .nav.nav-mobile a[aria-current="page"] {
+    background: #1e2633;
+    border-color: transparent;
+  }
+
+  /* скрываем левый сайдбар (services/skills) и переводим в mobile-TOC */
+  .services-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .services-toc {
+    display: none;
+  }
+
+  .toc-mobile {
+    display: block;
+  }
+
+  /* контакты в одну колонку */
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ≤ 500px: язык = только флаг, список выравниваем к правому краю кнопки */
+@media (width <= 500px) {
+  .dropbtn .code {
+    display: none;
+  }
+
+  .dropdown .dropdown-content {
+    left: auto;
+    right: 0;
+    text-align: left;
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 12px;
+  margin: 12px 0 0;
+}
+
+.facts dt {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.facts-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.facts-list li {
+  margin: 2px 0;
+}
+
+/* Унифицированные отступы между блоками секций */
+.section + .section {
+  margin-top: 16px;
+}

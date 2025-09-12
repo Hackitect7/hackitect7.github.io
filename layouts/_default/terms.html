@@ -1,0 +1,31 @@
+{{- define "main" -}}
+  {{- $lang := .Site.Language.Lang -}}
+  <section
+    class="blog-page taxonomy-page taxonomy-terms tax-{{ .Data.Singular }}"
+  >
+    <section class="hero section">
+      <h1>{{ .Title }}</h1>
+      {{/* Например: Tags / Categories */}}
+      <p class="sub">Browse all {{ .Data.Plural | title }}</p>
+    </section>
+
+    <div class="services-layout section">
+      <div class="services-content">
+        <article class="card section">
+          <ul class="facts-list">
+            {{- /* .Data.Terms: map (term => Pages) для текущей таксономии */ -}}
+            {{- range $term, $pages := .Data.Terms -}}
+              {{- $langPages := where $pages "Lang" $lang -}}
+              {{- if gt (len $langPages) 0 -}}
+                {{- $href := printf "%s%s/" $.RelPermalink (urlize $term) -}}
+                <li>
+                  <a href="{{ $href }}">#{{ $term }}</a> ({{ len $langPages }})
+                </li>
+              {{- end -}}
+            {{- end -}}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+{{- end -}}

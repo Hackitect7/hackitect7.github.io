@@ -1,5 +1,6 @@
 ---
 title: "Architecture as a Balance: Speed vs. Scalability"
+slug: "Architecture as a Balance: Speed vs. Scalability"
 date: 2025-09-01
 description: "Thoughts on why MVP-to-Scale is my guiding principle for resilient, growing systems."
 tags: ["architecture", "scalability", "mvp"]

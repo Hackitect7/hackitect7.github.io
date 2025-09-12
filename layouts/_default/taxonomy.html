@@ -1,0 +1,59 @@
+{{- define "main" -}}
+  {{- $lang := .Site.Language.Lang -}}
+  {{- $ui   := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+
+  {{/* Классы для таргетинга CSS: blog-page + taxonomy-page + tax-tag/tax-category */}}
+  <section class="blog-page taxonomy-page tax-{{ .Data.Singular }}">
+    <section class="hero section">
+      <h1>
+        {{- /* Пример: #hackitect7 · Tags */ -}}
+        {{ printf "%s · %s" .Title (title .Data.Plural) }}
+      </h1>
+    </section>
+
+    <div class="services-layout section">
+      <!-- Контент (карточки постов с этим тегом/категорией) -->
+      <div class="services-content">
+        {{- $pages := sort .Pages "Date" "desc" -}}
+        {{- $p := .Paginate $pages -}}
+
+        {{- if $p.Pages -}}
+          {{- range $p.Pages -}}
+            <article class="card section">
+              <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              <p>
+                {{ with .Params.description }}
+                  {{ . }}
+                {{ else }}
+                  {{ .Summary }}
+                {{ end }}
+              </p>
+              <p class="sub">
+                {{ .Date.Format "02 Jan 2006" }}
+                {{ with .ReadingTime }}· {{ . }} min read{{ end }}
+                {{ with .Params.tags }}· {{ delimit . ", " }}{{ end }}
+              </p>
+            </article>
+          {{- end -}}
+
+          {{- if gt $p.TotalPages 1 -}}
+            <nav class="cta-row section" aria-label="Pagination">
+              {{ if $p.HasPrev }}
+                <a class="btn secondary" href="{{ $p.Prev.URL }}"
+                  >← {{ or $ui.blog.newer "Newer" }}</a
+                >
+              {{ end }}
+              {{ if $p.HasNext }}
+                <a class="btn secondary" href="{{ $p.Next.URL }}"
+                  >{{ or $ui.blog.older "Older" }} →</a
+                >
+              {{ end }}
+            </nav>
+          {{- end -}}
+        {{- else -}}
+          <p class="sub section">{{ or $ui.blog.empty "No posts yet." }}</p>
+        {{- end -}}
+      </div>
+    </div>
+  </section>
+{{- end -}}

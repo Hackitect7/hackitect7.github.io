@@ -1,29 +1,42 @@
 {{ define "main" }}
-<section class="hero">
-  <h1>{{ .Title }}</h1>
-  {{ with .Params.description }}
-  <p class="sub">{{ . }}</p>
-  {{ end }}
-</section>
-
-<div class="services-layout">
-  <div class="services-content">
-    {{ $pages := .Pages }} {{ if $pages }} {{ range $pages }}
-    <article class="card">
-      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-      <p>
-        {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}
-      </p>
-      <p class="sub">
-        {{ with .Date }}{{ .Format "02 Jan 2006" }}{{ end }} {{ with
-        .ReadingTime }} · {{ . }} min read{{ end }} {{ $tags := .Params.tags |
-        default (slice) }} {{ if gt (len $tags) 0 }} · {{ delimit $tags ", "
-        }}{{ end }}
-      </p>
-    </article>
-    {{ end }} {{ else }}
-    <p class="sub">No content yet.</p>
+  <section class="hero">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+      <p class="sub">{{ . }}</p>
     {{ end }}
+  </section>
+
+  <div class="services-layout">
+    <div class="services-content">
+      {{ $pages := .Pages }}
+      {{ if $pages }}
+        {{ range $pages }}
+          <article class="card">
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p>
+              {{ with .Params.description }}
+                {{ . }}
+              {{ else }}
+                {{ .Summary }}
+              {{ end }}
+            </p>
+            <p class="sub">
+              {{ with .Date }}{{ .Format "02 Jan 2006" }}{{ end }}
+              {{ with
+                .ReadingTime
+              }}
+                · {{ . }} min read
+              {{ end }}
+              {{ $tags := .Params.tags |
+                default (slice)
+              }}
+              {{ if gt (len $tags) 0 }}· {{ delimit $tags ", " }}{{ end }}
+            </p>
+          </article>
+        {{ end }}
+      {{ else }}
+        <p class="sub">No content yet.</p>
+      {{ end }}
+    </div>
   </div>
-</div>
 {{ end }}

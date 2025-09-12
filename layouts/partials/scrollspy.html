@@ -1,8 +1,11 @@
-{{/* Hugo Pipes: берём из assets/, минифицируем и добавляем fingerprint */}} {{
-$src := resources.Get "js/scrollspy.js" }} {{ $min := $src | resources.Minify }}
+{{/* Hugo Pipes: берём из assets/, минифицируем и добавляем fingerprint */}}
+{{ $src := resources.Get "js/scrollspy.js" }}
+{{ $min := $src | resources.Minify }}
 {{ $fp := $min | resources.Fingerprint }}
 <script src="{{ $fp.RelPermalink }}" defer></script>
 
-{{/* UI (mobile TOC, smart header, back-to-top) */}} {{ $ui := resources.Get
-"js/ui.js" | resources.Minify | resources.Fingerprint "sha256" }}
+{{/* UI (mobile TOC, smart header, back-to-top) */}}
+{{ $ui := resources.Get
+  "js/ui.js" | resources.Minify | resources.Fingerprint "sha256"
+}}
 <script src="{{ $ui.RelPermalink }}" defer></script>

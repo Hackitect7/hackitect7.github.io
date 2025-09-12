@@ -1,9 +1,21 @@
 {{ define "main" }}
-<article class="prose">
-  <h1>{{ .Title }}</h1>
-  <p class="sub">
-    {{ .Date.Format "02 Jan 2006" }} · {{ delimit .Params.tags ", " }}
-  </p>
-  {{ .Content }}
-</article>
+  <section class="hero section">
+    <h1>{{ .Title }}</h1>
+    {{- /* Собираем строку меты безопасно */ -}}
+    {{- $meta := slice ( .Date.Format "02 Jan 2006" ) -}}
+    {{- with .ReadingTime -}}
+      {{- $meta = $meta | append (printf "%d min read" .) -}}
+    {{- end -}}
+    {{- with .Params.tags -}}
+      {{- $meta = $meta | append (delimit . ", ") -}}
+    {{- end -}}
+    {{- with .Params.categories -}}
+      {{- $meta = $meta | append (delimit . ", ") -}}
+    {{- end -}}
+    <p class="sub">{{ delimit $meta " · " }}</p>
+  </section>
+
+  <article class="section card">
+    {{ .Content }}
+  </article>
 {{ end }}

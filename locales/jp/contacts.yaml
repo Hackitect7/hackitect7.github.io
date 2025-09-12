@@ -1,0 +1,41 @@
+title: "連絡先"
+intro: "信頼性・自動化・実際のビジネスインパクトについて話しましょう。ご都合の良いチャネルを選んでください — 私のタイムゾーン内では迅速に返信します。"
+
+person:
+  name: "Aleksei Polovinkin"
+  title: "IT インフラストラクチャアーキテクト • DevOps & 自動化 (Hackitect7)"
+  timezone: "UTC+6 (アジア/ビシュケク)"
+  reply_hours: "09:00–22:00"
+  languages: "ロシア語（会話）、英語（+ 他の言語） — ネイティブレベルでの読み書き対応"
+  availability: "世界中で対応可能 — プロジェクト、パートナーシップ、長期コラボレーション"
+
+channels:
+  - icon: "📞"
+    label: "電話"
+    href: "tel:+996501141183"
+    display: "+996-501-141-183"
+  - icon: "✈️"
+    label: "Telegram"
+    href: "https://t.me/Manfred251278"
+    display: "@Manfred251278"
+  - icon: "💬"
+    label: "WhatsApp"
+    href: "https://wa.me/996501141183"
+    display: "wa.me/996501141183"
+  - icon: "🔗"
+    label: "LinkedIn"
+    href: "https://www.linkedin.com/in/hackitect7/"
+    display: "linkedin.com/in/hackitect7"
+  - icon: "🐙"
+    label: "GitHub"
+    href: "https://github.com/Hackitect7"
+    display: "github.com/Hackitect7"
+
+assets:
+  vcard_href: "/vcard/hackitect7.vcf"
+  vcard_text: "vCard (.vcf) をダウンロード"
+
+form:
+  title: "メッセージを送る"
+  lead: "現在は Telegram または WhatsApp からご連絡ください。"
+  soon: "こちらにフォームが近日追加されます。"

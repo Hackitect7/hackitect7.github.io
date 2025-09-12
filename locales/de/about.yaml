@@ -1,0 +1,156 @@
+title: "Über Hackitect7"
+subtitle: "Ich entwerfe belastbare, sichere und wirtschaftlich tragfähige IT, die dem Geschäft dient."
+highlights:
+  - "Enterprise-Architektur & SRE mit messbaren Ergebnissen"
+  - "Security-first, FinOps-bewusst, Automatisierung im großen Maßstab"
+
+sections:
+  - id: "who"
+    title: "Wer ich bin"
+    text: >
+      Ich bin Principal Architect mit Fokus auf zuverlässige, beobachtbare und kosteneffiziente Systeme.
+      Ich überbrücke Technologie und Geschäft: SLAs/SLOs, Sicherheit und TCO/ROI.
+    facts:
+      - label: "Standort:"
+        text: "Bischkek · UTC+6 (flexible Arbeitszeiten für US/EU)"
+      - label: "Sprachen:"
+        items:
+          - "Russisch — fließend (Gespräche, Dokumente, Präsentationen)"
+          - "Englisch — stark schriftlich, konversationell grundlegend"
+          - "Andere Sprachen — schriftliche Kommunikation in Muttersprachenqualität (via professionelle Lokalisierung)"
+      - label: "Engagement:"
+        text: "Beratung, Audits, praktische Umsetzung, Mentoring"
+
+  - id: "what"
+    title: "Was ich tue"
+    text: "Kernkompetenzen, die auf Geschäftsergebnisse ausgerichtet sind."
+    cards:
+      - h: "Architektur"
+        p: "On-Prem, Cloud, Hybrid; Zuverlässigkeit, Skalierung, Kostenkontrollen."
+        bullets:
+          - "Multi-Region-Designs"
+          - "Netzwerk- & Sicherheits-Baselines"
+          - "Migration & Modernisierung"
+      - h: "DevOps & Automatisierung"
+        p: "CI/CD, IaC (Terraform/Ansible), GitOps, Plattform-Engineering."
+        bullets:
+          - "Golden Images/Basis-Layer"
+          - "Policy as Code"
+          - "Release-Sicherheit (Progressive Delivery)"
+      - h: "SRE & Observability"
+        p: "SLO/SLI, Incident Response, On-Call-Hygiene."
+        bullets:
+          - "Metriken/Logs/Traces"
+          - "Runbooks & MTTR↓"
+          - "Kapazitätsmanagement"
+      - h: "Sicherheit & Governance"
+        p: "Least Privilege, Hardening, ISO/SOC2/GDPR-Praktiken."
+      - h: "Business & Strategie"
+        p: "FinOps, TCO/ROI, Modernisierungs-Roadmaps abgestimmt auf OKRs."
+
+  - id: "how"
+    title: "Wie ich arbeite"
+    steps:
+      - "Entdecken → Risiken, Einschränkungen, Wirtschaftlichkeit bewerten"
+      - "Design → Architektur, Sicherheit, Observability, Kostenleitplanken"
+      - "Pilot → SLOs, Leistung, Kosten validieren"
+      - "Skalieren → automatisieren, kodifizieren, dokumentieren"
+      - "Betrieb → messen, verbessern, übergeben"
+    notes: "Engagements beinhalten klare Deliverables, Runbooks und Entscheidungsprotokolle."
+
+  - id: "proof"
+    title: "Nachweise"
+    cases:
+      - badge: "SRE"
+        title: "MTTR -55 % und Alarmmüdigkeit -60 %"
+        desc: "Einführung von SLOs, vereinheitlichtem Alerting und Incident-Workflows."
+        metrics:
+          - "Vereinheitlichte Runbooks"
+          - "Postmortems = Lernen, nicht Schuldzuweisung"
+      - badge: "FinOps"
+        title: "Cloud-Kosten -23 % ohne Performanceverlust"
+        desc: "Right-Sizing, Autoscaling, Storage-Tiers, reservierte Kapazität."
+        metrics:
+          - "Leitplanken & Budgets"
+          - "Wöchentliche Kostenkontrolle"
+
+  - id: "industries"
+    title: "Branchen"
+    text: "Ich arbeite mit Unternehmen jeder Größe und Branche, von Startups bis zu Konzernen. Hauptbereiche, in denen meine Expertise am häufigsten eingesetzt wird:"
+    cards:
+      - h: "Hauptbereiche"
+        bullets:
+          - "Finanzen & FinTech"
+          - "E-Commerce & Einzelhandel"
+          - "Telekommunikation & Netzwerke"
+          - "Regierung & GovTech"
+      - h: "Weitere Sektoren"
+        bullets:
+          - "Gesundheitswesen"
+          - "Medien & Unterhaltung"
+          - "Bildung"
+          - "Logistik"
+
+  - id: "cred"
+    title: "Einzigartiger Wert"
+    cards:
+      - h: "Expertise"
+        bullets:
+          - "22+ Jahre in Infrastruktur, Netzwerken & DevOps"
+          - "Multi-Cloud (AWS, GCP, Azure) — praktische Umsetzung"
+          - "Resiliente Architekturen, pragmatische Automatisierung, SRE-Mindset"
+          - "Von Bare-Metal & Netzwerken bis Kubernetes & Observability"
+      - h: "Open Source"
+        bullets:
+          - "GitHub: [Hackitect7](https://github.com/Hackitect7) — Tools & Skripte"
+          - "DevOps Cheat Sheet (mehrsprachig, Hugo/Quarto)"
+          - "MikroTik RouterOS Automatisierungsskripte"
+      - h: "Community"
+        bullets:
+          - "Wissensaustausch: Blogposts & technische Notizen"
+          - "Interne Enablement-Sessions, Mentoring"
+          - "Brand: *Hackitect7 — Die Musik der Systeme*"
+
+  - id: "values"
+    title: "Werte & Sicherheit"
+    text: "Pragmatisch, Secure-by-Default, messbar, Dokumentation zuerst."
+    bullets:
+      - "Datenschutz & Compliance respektiert"
+      - "Kostentransparenz und Leitplanken"
+      - "Wissensweitergabe von Anfang an"
+
+  - id: "engagement"
+    title: "Engagement-Modelle"
+    cards:
+      - h: "Assessment / Audit"
+        p: "Kurzes Engagement, um Risiken & Chancen aufzuzeigen."
+        bullets:
+          - "Architektur-Review"
+          - "Sicherheitslage"
+          - "Kostenbasis"
+      - h: "Projektumsetzung"
+        p: "Design & Implementierung mit messbaren Ergebnissen."
+        bullets:
+          - "Roadmap & Meilensteine"
+          - "SLOs & KPIs"
+          - "Übergabe"
+      - h: "Fractional Architect"
+        p: "Laufende strategische Beratung und Reviews."
+        bullets:
+          - "Architecture Board"
+          - "Vendor Control"
+          - "Change Management"
+
+finalCta:
+  title: "Lass uns zusammenarbeiten"
+  text: "Von Technologie zu Geschäftsergebnissen."
+  href: "contacts"
+  button: "Kontakt"
+
+schema:
+  person:
+    name: "Hackitect7"
+    title: "Principal Architect"
+    sameAs:
+      - "https://github.com/Hackitect7"
+      - "https://linkedin.com/in/hackitect7"

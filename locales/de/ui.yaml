@@ -1,0 +1,42 @@
+brand: "Hackitect7 — Die Musik der Systeme"
+
+common:
+  tocToggle: "Abschnitte"
+  backToTop: "Zurück nach oben"
+
+nav:
+  about: "Über"
+  skills: "Fähigkeiten"
+  services: "Dienstleistungen"
+  projects: "Projekte"
+  blog: "Blog"
+  contacts: "Kontakt"
+
+services:
+  title: "Dienstleistungen"
+  tocTitle: "Überblick"
+
+about:
+  cred:
+    title: "Einzigartiger Wert"
+    expertise: "Expertise"
+    oss: "Open Source"
+    community: "Community"
+
+blog:
+  title: "Blog"
+  filterTitle: "Durchsuchen"
+  categories: "Kategorien"
+  tags: "Tags"
+  newer: "Neuer"
+  older: "Älter"
+  empty: "Noch keine Beiträge."
+  minRead: "Min. Lesezeit"
+  more: "Mehr entdecken"
+  backToList: "Zurück zum Blog"
+
+cta:
+  viewAllPosts: "Alle Beiträge ansehen"
+
+footer:
+  made: "Erstellt mit Hugo und ❤️"

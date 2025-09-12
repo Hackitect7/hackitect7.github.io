@@ -1,0 +1,109 @@
+title: "Hackitect7 — ビジネスインパクトのためのレジリエントな IT システム設計"
+
+hero:
+  title: "Hackitect7 - システムの音楽"
+  subtitle: "オンプレ・クラウド・ハイブリッド環境をまたぎ、堅牢な IT システムを設計・オーケストレーションします。インフラと DevOps パイプラインから自動化と可観測性まで、テクノロジーと危機管理をつなぎ、ビジネスを支え成長させる安全・スケーラブル・効率的なソリューションを提供します。"
+  highlights:
+    - "22年以上の IT インフラ & 自動化経験"
+    - "ハイブリッドクラウド & マルチデータセンター専門知識 (CIS + グローバル規模)"
+    - "大規模な危機的 IT 管理 & 自動化"
+    - "システム思考 → レジリエントでビジネス主導のソリューション"
+  primaryText: "IT 専門知識を探る"
+  primaryHref: "/ja/services/"
+  secondaryText: "プロジェクトを見る"
+  secondaryHref: "/ja/projects/"
+  tertiaryText: "連絡する"
+  tertiaryHref: "/ja/contacts/"
+
+sections:
+  - id: "what-i-do"
+    kind: "cards"
+    title: "私がすること"
+    items:
+      - icon: "🧭"
+        h: "インフラアーキテクチャ"
+        p: "オンプレ、クラウド、ハイブリッド、マルチ DC。キャパシティ、信頼性、コスト管理。"
+        href: "/ja/services/#infrastructure-architecture"
+
+      - icon: "⚙️"
+        h: "DevOps & 自動化"
+        p: "CI/CD、IaC (Terraform/Ansible)、GitOps。アイデアから反復可能なデリバリーへ。"
+        href: "/ja/services/#devops-automation"
+
+      - icon: "📈"
+        h: "可観測性 & SRE"
+        p: "SLO/SLI、アラート、MTTR 短縮。Prometheus、Grafana、ELK、インシデント対応。"
+        href: "/ja/services/#observability-sre"
+
+      - icon: "🛡️"
+        h: "セキュリティ & ハードニング"
+        p: "最小特権、シークレット、ベースラインハードニング。バズワードではなく実用的なコントロール。"
+        href: "/ja/services/#security"
+
+      - icon: "⚡"
+        h: "危機的 IT マネジメント"
+        p: "インシデント、障害、移行への対応。カオスを構造化されたリカバリに変える。"
+        href: "/ja/services/#crisis-management"
+
+      - icon: "🎓"
+        h: "コンサルティング & メンタリング"
+        p: "アーキテクチャレビュー、チームトレーニング、ベストプラクティスのメンタリング。"
+        href: "/ja/services/#consulting"
+
+      - icon: "💼"
+        h: "ビジネス整合性"
+        p: "技術的複雑さをビジネス価値に変換: コスト管理、スケーラビリティ、レジリエンス。"
+        href: "/ja/services/#business-alignment"
+
+      - icon: "🌐"
+        h: "テクノロジーからビジネス成果へ"
+        p: "IT アーキテクチャを ROI、ガバナンス、戦略的推進力に結びつけ、企業成長を支援。"
+        href: "/ja/services/#business-outcomes"
+
+  - id: "why-hackitect7"
+    kind: "bullets"
+    title: "Hackitect7 を選ぶ理由"
+    bullets:
+      - "バズワードより成果 — 本番レベルの結果を重視。"
+      - "運用現実に即したアーキテクチャ — 保守可能でコスト意識を持つ。"
+      - "危機的 IT マネジメント — 安定化、単純化、自動化。"
+      - "明確な成果物 — リポジトリ、パイプライン、ダッシュボード、ランブック。"
+      - "22年以上のクロスドメイン IT 専門知識 — ネットワークからクラウドまで。"
+      - "ハイブリッドクラウドアプローチ — CIS 準拠 + グローバルベストプラクティス。"
+      - "システム思考 — すべての設計をビジネスインパクトに結びつける。"
+
+  - id: "featured-projects"
+    kind: "projects"
+    title: "注目のプロジェクト"
+    items:
+      - title: "DevOps チートシート"
+        desc: "27以上の言語で提供される体系的な IT ナレッジベース。"
+        href: "https://hackitect7.github.io/devops-cheat-sheet/"
+        badge: "ナレッジベース"
+      - title: "RouterOS スクリプト"
+        desc: "MikroTik 向け自動化ツールキット。"
+        href: "https://github.com/Hackitect7/routeros-scripts"
+        badge: "自動化"
+      - title: "Hackademy"
+        desc: "エンジニアのための実践重視型学習コンセプト (開発中)。"
+        href: "/ja/projects/hackademy/"
+        badge: "近日公開"
+
+  - id: "big-vision"
+    kind: "vision"
+    title: "IT を超えて"
+    text: "Hackitect7 は単なる IT ではなく、システム思考を技術・ビジネス・生活に応用する取り組みです。現在は IT アーキテクチャ & DevOps に注力していますが、将来は「システムの音楽」がより広いビジョンへと発展します。"
+
+  - id: "blog-preview"
+    kind: "blog"
+    title: "最新のブログ"
+    count: 3
+    ctaText: "すべての投稿を見る"
+    ctaHref: "/ja/blog/"
+
+  - id: "contact-cta"
+    kind: "cta"
+    title: "あなたのシステムについて話しましょう"
+    text: "信頼性・自動化・明確さが必要ですか？ ビジネスを真に支えるシステムを設計・安定化・拡張しましょう。"
+    primaryText: "連絡する"
+    primaryHref: "/ja/contacts/"

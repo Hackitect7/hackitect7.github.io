@@ -1,10 +1,11 @@
 # вся мультиязычность, включая меню для каждого языка
 
 [us]
-  languageName = "English (US)"
+  languageName = "English"
   weight = 1
   contentDir = "content/us"
   title = "Hackitect7 — The Music of Systems"
+  languageCode = "en-US"
 
   [us.params]
     flag    = "us"
@@ -14,9 +15,9 @@
 
   [us.menus]
     [[us.menus.main]]
-      identifier = "skills"
-      name = "Skills"
-      url = "/skills/"
+      identifier = "about"
+      name = "About"
+      url = "/about/"
       weight = 10
     [[us.menus.main]]
       identifier = "services"
@@ -29,16 +30,27 @@
       url = "/projects/"
       weight = 30
     [[us.menus.main]]
+      identifier = "blog"
+      name = "Blog"
+      url = "/blog/"
+      weight = 40
+    [[us.menus.main]]
+      identifier = "skills"
+      name = "Skills"
+      url = "/skills/"
+      weight = 50
+    [[us.menus.main]]
       identifier = "contacts"
       name = "Contacts"
       url = "/contacts/"
-      weight = 40
+      weight = 60
 
 [ru]
   languageName = "Русский"
   weight = 2
   contentDir = "content/ru"
   title = "Hackitect7 — Музыка систем"
+  languageCode = "ru-RU"
 
   [ru.params]
     flag    = "ru"
@@ -48,9 +60,9 @@
 
   [ru.menus]
     [[ru.menus.main]]
-      identifier = "skills"
-      name = "Навыки"
-      url = "/skills/"
+      identifier = "about"
+      name = "О проекте"
+      url = "/about/"
       weight = 10
     [[ru.menus.main]]
       identifier = "services"
@@ -63,7 +75,107 @@
       url = "/projects/"
       weight = 30
     [[ru.menus.main]]
+      identifier = "blog"
+      name = "Блог"
+      url = "/blog/"
+      weight = 40
+    [[ru.menus.main]]
+      identifier = "skills"
+      name = "Навыки"
+      url = "/skills/"
+      weight = 50
+    [[ru.menus.main]]
       identifier = "contacts"
       name = "Контакты"
       url = "/contacts/"
+      weight = 60
+
+[de]
+  languageName = "Deutsch"
+  weight = 3
+  contentDir = "content/de"
+  title = "Hackitect7 — Die Musik der Systeme"
+  languageCode = "de-DE"
+
+  [de.params]
+    flag    = "de"
+    tagline = "IT-Architektur • DevOps • Automatisierung"
+    logo    = "/assets/img/de/hackitect7-logo-dark-de.svg"
+    ogimage = "/assets/img/de/hackitect7-logo-dark-de.svg"
+
+  [de.menus]
+    [[de.menus.main]]
+      identifier = "about"
+      name = "Über"
+      url = "/about/"
+      weight = 10
+    [[de.menus.main]]
+      identifier = "services"
+      name = "Dienstleistungen"
+      url = "/services/"
+      weight = 20
+    [[de.menus.main]]
+      identifier = "projects"
+      name = "Projekte"
+      url = "/projects/"
+      weight = 30
+    [[de.menus.main]]
+      identifier = "blog"
+      name = "Blog"
+      url = "/blog/"
       weight = 40
+    [[de.menus.main]]
+      identifier = "skills"
+      name = "Fähigkeiten"
+      url = "/skills/"
+      weight = 50
+    [[de.menus.main]]
+      identifier = "contacts"
+      name = "Kontakte"
+      url = "/contacts/"
+      weight = 60
+
+[jp]
+  languageName = "日本語"
+  weight = 4
+  contentDir = "content/jp"
+  title = "Hackitect7 — システムの音楽"
+  languageCode = "ja-JP"
+
+  [jp.params]
+    flag    = "jp"
+    tagline = "IT アーキテクチャ • DevOps • 自動化"
+    logo    = "/assets/img/jp/hackitect7-logo-dark-jp.svg"
+    ogimage = "/assets/img/jp/hackitect7-logo-dark-jp.svg"
+
+  [jp.menus]
+    [[jp.menus.main]]
+      identifier = "about"
+      name = "概要"
+      url = "/about/"
+      weight = 10
+    [[jp.menus.main]]
+      identifier = "services"
+      name = "サービス"
+      url = "/services/"
+      weight = 20
+    [[jp.menus.main]]
+      identifier = "projects"
+      name = "プロジェクト"
+      url = "/projects/"
+      weight = 30
+    [[jp.menus.main]]
+      identifier = "blog"
+      name = "ブログ"
+      url = "/blog/"
+      weight = 40
+    [[jp.menus.main]]
+      identifier = "skills"
+      name = "スキル"
+      url = "/skills/"
+      weight = 50
+    [[jp.menus.main]]
+      identifier = "contacts"
+      name = "連絡先"
+      url = "/contacts/"
+      weight = 60

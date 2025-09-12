@@ -1,11 +1,16 @@
 {{ $meta := index site.Data (printf "meta.%s" .Site.Language.Lang) | default
-(index site.Data "meta.us") }}
+  (index site.Data "meta.us")
+}}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{{ if .Title }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
+<title>{{ if .Title }}{{ .Title }} —{{ end }}{{ .Site.Title }}</title>
 <link
   rel="icon"
-  href="{{ with .Site.Params.favicon }}{{ . }}{{ else }}/assets/img/favicon.svg{{ end }}"
+  href="{{ with .Site.Params.favicon }}
+    {{ . }}
+  {{ else }}
+    /assets/img/favicon.svg
+  {{ end }}"
 />
 <link rel="stylesheet" href="/assets/css/style.css" />
 {{ $sitejs := resources.Get "js/site.js" | minify | fingerprint }}
@@ -17,7 +22,11 @@
 
 <meta
   name="description"
-  content="{{ with .Params.description }}{{ . }}{{ else }}{{ $meta.description }}{{ end }}"
+  content="{{ with .Params.description }}
+    {{ . }}
+  {{ else }}
+    {{ $meta.description }}
+  {{ end }}"
 />
 <meta name="keywords" content="{{ $meta.keywords }}" />
 <meta name="author" content="{{ $meta.author }}" />
@@ -27,7 +36,11 @@
 <meta property="og:title" content="{{ .Title }}" />
 <meta
   property="og:description"
-  content="{{ with .Params.description }}{{ . }}{{ else }}{{ $meta.description }}{{ end }}"
+  content="{{ with .Params.description }}
+    {{ . }}
+  {{ else }}
+    {{ $meta.description }}
+  {{ end }}"
 />
 <meta property="og:image" content="{{ $meta.ogImage }}" />
 <meta property="og:url" content="{{ $meta.siteUrl }}{{ .RelPermalink }}" />

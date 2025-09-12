@@ -1,59 +1,70 @@
-{{ define "main" }} {{- $lang := .Site.Language.Lang -}} {{- $svc := (index
-site.Data $lang "services") | default (index site.Data "us" "services") -}} {{-
-$ui := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+{{ define "main" }}
+  {{- $lang := .Site.Language.Lang -}}
+  {{- $svc  := (index site.Data $lang "services") | default (index site.Data "us" "services") -}}
+  {{- $ui   := (index site.Data $lang "ui")       | default (index site.Data "us" "ui") -}}
 
-<section class="services-page">
-  <!-- HERO -->
-  <header class="services-hero">
-    <h1>{{ or $svc.title $ui.services.title }}</h1>
-    {{ with $svc.intro }}
-    <p class="sub">{{ . }}</p>
-    {{ end }}
-  </header>
+
+  <!-- HERO (как в skills) -->
+  <section class="hero">
+    <h1>{{ or $svc.title (or $ui.services.title "Services") }}</h1>
+    {{ with $svc.intro }}<p class="tagline">{{ . }}</p>{{ end }}
+  </section>
 
   <div class="services-layout">
-    <!-- УНИВЕРСАЛЬНЫЙ TOC -->
+    <!-- Универсальный TOC (как в skills) -->
     {{ partial "toc.html" (dict "title" (or $ui.services.tocTitle "Overview")
-    "items" $svc.sections) }}
+      "items" $svc.sections)
+    }}
 
-    <!-- Основной контент -->
+
+    <!-- Контент -->
     <div class="services-content">
       {{ range $svc.sections }}
-      <section id="{{ .id }}" class="service-block card spy-section">
-        <h2>{{ .title }}</h2>
+        <section id="{{ .id }}" class="service-block card spy-section">
+          <h2>{{ .title }}</h2>
 
-        {{ with .text }} {{ $paras := split . "\n\n" }} {{ range $paras }}
-        <p>{{ . | markdownify }}</p>
-        {{ end }} {{ end }} {{ with .bullets }}
-        <ul class="bullets">
-          {{ range . }}
-          <li>{{ . }}</li>
+          {{ with .text }}
+            {{ $paras := split . "\n\n" }}
+            {{ range $paras }}<p>{{ . | markdownify }}</p>{{ end }}
           {{ end }}
-        </ul>
-        {{ end }} {{ with .cta }} {{- $raw := .href | default "contacts" -}} {{-
-        $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang
-        (trim $raw "/")) | relLangURL) -}}
-        <p>
-          <a class="btn" href="{{ $href }}">{{ or .text $ui.cta.contact }}</a>
-        </p>
-        {{ end }}
-      </section>
+
+          {{ with .bullets }}
+            <ul class="bullets">
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          {{ end }}
+
+          {{ with .cta }}
+            {{- $raw := .href | default "contacts" -}}
+            {{- $href := cond (hasPrefix $raw "http")
+              $raw
+              ((printf "/%s/%s/" $lang (trim $raw "/")) | relLangURL)
+            -}}
+            <p>
+              <a class="btn" href="{{ $href }}"
+                >{{ or .text $ui.cta.contact }}</a
+              >
+            </p>
+          {{ end }}
+        </section>
       {{ end }}
 
-      <!-- Финальный CTA -->
-      {{ with $svc.finalCta }} {{- $raw := .href | default "contacts" -}} {{-
-      $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim
-      $raw "/")) | relLangURL) -}}
 
-      <section class="service-cta-final card" style="text-align: center">
-        <h2>{{ .title }}</h2>
-        {{ with .text }}
-        <p class="sub">{{ . }}</p>
-        {{ end }}
-        <a class="btn" href="{{ $href }}">{{ or .contact $ui.cta.contact }}</a>
-      </section>
+      <!-- Финальный CTA (как в skills по стилю) -->
+      {{ with $svc.finalCta }}
+        {{- $raw := .href | default "contacts" -}}
+        {{- $href := cond (hasPrefix $raw "http")
+          $raw
+          ((printf "/%s/%s/" $lang (trim $raw "/")) | relLangURL)
+        -}}
+        <section class="service-cta-final card" style="text-align:center">
+          <h2>{{ .title }}</h2>
+          {{ with .text }}<p class="sub">{{ . }}</p>{{ end }}
+          <a class="btn" href="{{ $href }}"
+            >{{ or .contact $ui.cta.contact }}</a
+          >
+        </section>
       {{ end }}
     </div>
   </div>
-</section>
 {{ end }}

@@ -1,0 +1,109 @@
+title: "Hackitect7 — Belastbare IT-Systeme für Geschäftserfolg gestalten"
+
+hero:
+  title: "Hackitect7 - Die Musik der Systeme"
+  subtitle: "Ich entwerfe und orchestriere belastbare IT-Systeme — von On-Prem über Cloud bis zu hybriden Umgebungen. Von Infrastruktur und DevOps-Pipelines bis hin zu Automatisierung und Observability verbinde ich Technologie und Krisenmanagement, um sichere, skalierbare und effiziente Lösungen zu liefern, die Unternehmen am Laufen halten und Wachstum ermöglichen."
+  highlights:
+    - "22+ Jahre Aufbau von IT-Infrastruktur & Automatisierung"
+    - "Hybrid-Cloud- & Multi-DC-Expertise (CIS + globaler Maßstab)"
+    - "Krisen-IT-Management & Automatisierung im großen Maßstab"
+    - "Systemisches Denken → resiliente, geschäftsorientierte Lösungen"
+  primaryText: "IT-Expertise entdecken"
+  primaryHref: "/de/services/"
+  secondaryText: "Projekte ansehen"
+  secondaryHref: "/de/projects/"
+  tertiaryText: "Kontakt aufnehmen"
+  tertiaryHref: "/de/contacts/"
+
+sections:
+  - id: "what-i-do"
+    kind: "cards"
+    title: "Was ich tue"
+    items:
+      - icon: "🧭"
+        h: "Infrastrukturarchitektur"
+        p: "On-Prem, Cloud, Hybrid, Multi-DC. Kapazität, Zuverlässigkeit, Kosten."
+        href: "/de/services/#infrastructure-architecture"
+
+      - icon: "⚙️"
+        h: "DevOps & Automatisierung"
+        p: "CI/CD, IaC (Terraform/Ansible), GitOps. Von der Idee bis zur wiederholbaren Bereitstellung."
+        href: "/de/services/#devops-automation"
+
+      - icon: "📈"
+        h: "Observability & SRE"
+        p: "SLO/SLI, Alerting, MTTR↓. Prometheus, Grafana, ELK, Incident Response."
+        href: "/de/services/#observability-sre"
+
+      - icon: "🛡️"
+        h: "Sicherheit & Hardening"
+        p: "Least Privilege, Secrets, Baseline-Hardening. Praktische Kontrollen statt Buzzwords."
+        href: "/de/services/#security"
+
+      - icon: "⚡"
+        h: "Krisen-IT-Management"
+        p: "Umgang mit Incidents, Ausfällen und Migrationen. Chaos in strukturierte Wiederherstellung verwandeln."
+        href: "/de/services/#crisis-management"
+
+      - icon: "🎓"
+        h: "Beratung & Mentoring"
+        p: "Architektur-Reviews, Teamtraining und Mentoring in Best Practices."
+        href: "/de/services/#consulting"
+
+      - icon: "💼"
+        h: "Business-Ausrichtung"
+        p: "Technische Komplexität in Geschäftswert übersetzen: Kostenkontrolle, Skalierbarkeit, Resilienz."
+        href: "/de/services/#business-alignment"
+
+      - icon: "🌐"
+        h: "Von Technologie zu Geschäftsergebnissen"
+        p: "Verknüpfung von IT-Architektur mit messbarem ROI, Governance und strategischem Enablement für Unternehmenswachstum."
+        href: "/de/services/#business-outcomes"
+
+  - id: "why-hackitect7"
+    kind: "bullets"
+    title: "Warum Hackitect7"
+    bullets:
+      - "Ergebnisse statt Buzzwords — produktionsreife Resultate, keine Folien."
+      - "Architektur, die zur Realität des Betriebs passt — wartbar und kostenbewusst."
+      - "Krisen-IT-Management — stabilisieren, vereinfachen, automatisieren."
+      - "Klare Artefakte — Repos, Pipelines, Dashboards, Runbooks."
+      - "22+ Jahre bereichsübergreifende IT-Expertise — von Netzwerken bis Clouds."
+      - "Hybrid-Cloud-Ansatz — CIS-Compliance + globale Best Practices."
+      - "Systemisches Denken — jedes Design mit direktem Bezug zum Geschäftserfolg."
+
+  - id: "featured-projects"
+    kind: "projects"
+    title: "Ausgewählte Projekte"
+    items:
+      - title: "DevOps Cheat Sheet"
+        desc: "Strukturierte IT-Wissensbasis in 27+ Sprachen."
+        href: "https://hackitect7.github.io/devops-cheat-sheet/"
+        badge: "Wissensbasis"
+      - title: "RouterOS Scripts"
+        desc: "Automatisierungstoolkit für MikroTik."
+        href: "https://github.com/Hackitect7/routeros-scripts"
+        badge: "Automatisierung"
+      - title: "Hackademy"
+        desc: "Praxisorientiertes Lernkonzept für Ingenieure (in Arbeit)."
+        href: "/de/projects/hackademy/"
+        badge: "Demnächst"
+
+  - id: "big-vision"
+    kind: "vision"
+    title: "Über IT hinaus"
+    text: "Hackitect7 ist mehr als IT — es ist systemisches Denken, angewandt auf Technologie, Geschäft und Leben. Heute liegt der Fokus auf IT-Architektur & DevOps; morgen wächst die Musik der Systeme zu einer umfassenderen Vision."
+
+  - id: "blog-preview"
+    kind: "blog"
+    title: "Neueste Beiträge aus dem Blog"
+    count: 3
+    ctaText: "Alle Beiträge ansehen"
+    ctaHref: "/de/blog/"
+
+  - id: "contact-cta"
+    kind: "cta"
+    title: "Lassen Sie uns über Ihre Systeme sprechen"
+    text: "Brauchen Sie Zuverlässigkeit, Automatisierung und Klarheit? Lassen Sie uns Systeme entwerfen, stabilisieren und skalieren, die Ihr Geschäft wirklich unterstützen."
+    primaryText: "Kontakt aufnehmen"
+    primaryHref: "/de/contacts/"

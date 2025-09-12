@@ -1,181 +1,185 @@
-<div class="container header-inner header-grid">
-  <!-- ЛОГО слева -->
-  <a class="brand" href="{{ .Site.Home.RelPermalink }}">
-    <img
-      class="logo"
-      src="{{ with .Site.Params.logo }}{{ . }}{{ else }}/assets/img/hackitect7-banner-dark-us.svg{{ end }}"
-      alt="Hackitect7"
-    />
-  </a>
+<header class="site-header">
+  <div class="container header-inner header-grid">
+    <!-- ЛОГО слева -->
+    <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+      <img
+        class="logo"
+        src="{{ with .Site.Params.logo }}
+          {{ . }}
+        {{ else }}
+          /assets/img/hackitect7-banner-dark-us.svg
+        {{ end }}"
+        alt="Hackitect7"
+      />
+    </a>
 
-  {{/* UI-словарь меню */}} {{- $lang := .Site.Language.Lang -}} {{- $ui :=
-  index site.Data $lang "ui" | default (index site.Data "us" "ui") -}} {{ $here
-  := .RelPermalink }}
+    {{/* Текущая локаль и UI-словарь */}}
+    {{- $lang := .Site.Language.Lang -}}
+    {{- $ui   := index site.Data $lang "ui" | default (index site.Data "us" "ui") -}}
+    {{- $here := .RelPermalink -}}
 
-  <!-- МЕНЮ по центру -->
-  <nav class="nav" id="siteNav" role="navigation" aria-label="Main">
-    <ul>
-      {{- $about := ("/about/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $about }}"
-          class="{{ if strings.HasPrefix $here $about }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $about
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.about }}
-        </a>
-      </li>
 
-      {{- $services := ("/services/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $services }}"
-          class="{{ if strings.HasPrefix $here $services }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $services
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.services }}
-        </a>
-      </li>
+    <!-- МЕНЮ по центру -->
+    <nav class="nav" id="siteNav" role="navigation" aria-label="Main">
+      <ul>
+        {{- $curr := . -}}
+        {{- $menu := .Site.Menus.main -}}
 
-      {{- $projects := ("/projects/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $projects }}"
-          class="{{ if strings.HasPrefix $here $projects }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $projects
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.projects }}
-        </a>
-      </li>
+        {{- if $menu }}
+          {{- range $menu }}
+            {{- $active := or ($curr.IsMenuCurrent "main" .) ($curr.HasMenuCurrent "main" .) -}}
+            {{- $href := "" -}}
+            {{- if .Page -}}
+              {{- $href = .Page.RelPermalink -}}
+            {{- else if .URL -}}
+              {{- $href = cond (hasPrefix .URL "http") .URL (.URL | relLangURL) -}}
+            {{- end -}}
+            <li>
+              <a
+                href="{{ $href }}"
+                class="{{ if $active }}is-current{{ end }}"
+                {{ if $active }}aria-current="page"{{ end }}
+                >{{ .Name }}</a
+              >
+            </li>
+          {{- end }}
+        {{- else }}
+          {{/* Fallback: как у тебя было вручную, если меню не задано */}}
+          {{- $about := ("/about/"     | relLangURL) -}}
+          {{- $services := ("/services/" | relLangURL) -}}
+          {{- $projects := ("/projects/" | relLangURL) -}}
+          {{- $blog := ("/blog/"       | relLangURL) -}}
+          {{- $skills := ("/skills/"     | relLangURL) -}}
+          {{- $contacts := ("/contacts/" | relLangURL) -}}
 
-      {{- $blog := ("/blog/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $blog }}"
-          class="{{ if strings.HasPrefix $here $blog }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $blog
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.blog }}
-        </a>
-      </li>
 
-      {{- $skills := ("/skills/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $skills }}"
-          class="{{ if strings.HasPrefix $here $skills }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $skills
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.skills }}
-        </a>
-      </li>
+          <li>
+            <a
+              href="{{ $about }}"
+              class="{{ if strings.HasPrefix $here $about }}is-current{{ end }}"
+              {{ if strings.HasPrefix $here $about }}
+                aria-current="page"
+              {{ end }}
+            >
+              {{ $ui.nav.about }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ $services }}"
+              class="{{ if strings.HasPrefix $here $services }}
+                is-current
+              {{ end }}"
+              {{ if strings.HasPrefix $here $services }}
+                aria-current="page"
+              {{ end }}
+            >
+              {{ $ui.nav.services }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ $projects }}"
+              class="{{ if strings.HasPrefix $here $projects }}
+                is-current
+              {{ end }}"
+              {{ if strings.HasPrefix $here $projects }}
+                aria-current="page"
+              {{ end }}
+            >
+              {{ $ui.nav.projects }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ $blog }}"
+              class="{{ if strings.HasPrefix $here $blog }}is-current{{ end }}"
+              {{ if strings.HasPrefix $here $blog }}aria-current="page"{{ end }}
+            >
+              {{ $ui.nav.blog }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ $skills }}"
+              class="{{ if strings.HasPrefix $here $skills }}
+                is-current
+              {{ end }}"
+              {{ if strings.HasPrefix $here $skills }}
+                aria-current="page"
+              {{ end }}
+            >
+              {{ $ui.nav.skills }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ $contacts }}"
+              class="{{ if strings.HasPrefix $here $contacts }}
+                is-current
+              {{ end }}"
+              {{ if strings.HasPrefix $here $contacts }}
+                aria-current="page"
+              {{ end }}
+            >
+              {{ $ui.nav.contacts }}
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    </nav>
 
-      {{- $contacts := ("/contacts/" | relLangURL) -}}
-      <li>
-        <a
-          href="{{ $contacts }}"
-          class="{{ if strings.HasPrefix $here $contacts }}is-current{{ end }}"
-          {{
-          if
-          strings.HasPrefix
-          $here
-          $contacts
-          }}aria-current="page"
-          {{
-          end
-          }}
-        >
-          {{ $ui.nav.contacts }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- ДЕЙСТВИЯ справа: бургер (моб.) + язык -->
-  <div class="header-actions">
-    <button
-      id="hamburger"
-      class="hamburger"
-      type="button"
-      aria-label="Toggle menu"
-      aria-controls="siteNav"
-      aria-expanded="false"
-    >
-      <span></span><span></span><span></span>
-    </button>
-
-    <div class="lang dropdown">
+    <!-- ДЕЙСТВИЯ справа: бургер (моб.) + язык -->
+    <div class="header-actions">
       <button
-        id="langBtn"
-        class="dropbtn"
+        id="hamburger"
+        class="hamburger"
         type="button"
-        aria-haspopup="true"
-        aria-controls="langDropdown"
+        aria-label="Toggle menu"
+        aria-controls="siteNav"
         aria-expanded="false"
       >
-        <span class="fi fi-{{ .Site.Params.flag }}"></span>
-        <span class="code">{{ .Site.Language.LanguageName }}</span>
+        <span></span><span></span><span></span>
       </button>
-      <div id="langDropdown" class="dropdown-content" role="menu">
-        {{ range $i, $s := site.Sites }} {{ $L := $s.Language }} {{/* по
-        умолчанию ведём на главную выбранного языка */}} {{ $target := $s.Home
-        }} {{ with $.Page }} {{/* ищем перевод текущей страницы в нужном языке
-        (включая self) */}} {{ $alts := where .AllTranslations "Lang" $L.Lang }}
-        {{ if gt (len $alts) 0 }} {{/* берём первую подходящую страницу */}} {{
-        $target = index $alts 0 }} {{ end }} {{ end }}
-        <a
-          href="{{ $target.RelPermalink }}"
-          class="{{ if eq $.Site.Language.Lang $L.Lang }}active{{ end }}"
-          role="menuitem"
+
+      <div class="lang dropdown">
+        <button
+          id="langBtn"
+          class="dropbtn"
+          type="button"
+          aria-haspopup="true"
+          aria-controls="langDropdown"
+          aria-expanded="false"
         >
-          <span class="fi fi-{{ $L.Params.flag }}"></span>
-          <span class="label">{{ $L.LanguageName }}</span>
-        </a>
-        {{ end }}
+          <span class="fi fi-{{ .Site.Params.flag }}"></span>
+          <span class="code">{{ .Site.Language.LanguageName }}</span>
+        </button>
+        <div id="langDropdown" class="dropdown-content" role="menu">
+          {{ range $i, $s := site.Sites }}
+            {{ $L := $s.Language }}
+            {{/* по умолчанию ведём на главную выбранного языка */}}
+            {{ $target := $s.Home }}
+            {{ with $.Page }}
+              {{/* ищем перевод текущей страницы на нужный язык */}}
+              {{ $alts := where .AllTranslations "Lang" $L.Lang }}
+              {{ if gt (len $alts) 0 }}
+                {{ $target = index $alts 0 }}
+              {{ end }}
+            {{ end }}
+            <a
+              href="{{ $target.RelPermalink }}"
+              class="{{ if eq $.Site.Language.Lang $L.Lang }}active{{ end }}"
+              role="menuitem"
+            >
+              <span class="fi fi-{{ $L.Params.flag }}"></span>
+              <span class="label">{{ $L.LanguageName }}</span>
+            </a>
+          {{ end }}
+        </div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
 <script>
   (function () {
@@ -186,6 +190,7 @@
     const host = document.querySelector(".header-actions");
     if (!nav || !host) return;
 
+    // === Язык ===
     function closeLang() {
       langDd?.classList.remove("show");
       langBtn?.setAttribute("aria-expanded", "false");
@@ -200,34 +205,14 @@
       if (!langDd) return;
       langDd.classList.contains("show") ? closeLang() : openLang();
     }
-
-    function openNav() {
-      closeLang();
-      attachMobileIfNeeded();
-      positionPanel();
-      nav.classList.add("open");
-      burger?.setAttribute("aria-expanded", "true");
-    }
-    function closeNav() {
-      nav.classList.remove("open");
-      burger?.setAttribute("aria-expanded", "false");
-    }
-    function toggleNav(e) {
-      e?.stopPropagation();
-      if (!isMobile()) return;
-      nav.classList.contains("open") ? closeNav() : openNav();
-    }
-
     if (langBtn && langDd) langBtn.addEventListener("click", toggleLang);
-    if (burger) burger.addEventListener("click", toggleNav);
 
-    const mql = window.matchMedia("(max-width: 800px)");
+    // === Мобильное меню ===
+    const MIN_BP = 860;
+    const mql = window.matchMedia(`(max-width:${MIN_BP}px)`);
     let mobileAttached = false;
     const origParent = nav.parentNode;
     const origNext = nav.nextSibling;
-    function isMobile() {
-      return mql.matches;
-    }
 
     function attachMobileIfNeeded() {
       if (!isMobile() || mobileAttached) return;
@@ -256,12 +241,65 @@
       }
     }
 
+    function openNav() {
+      closeLang();
+      attachMobileIfNeeded();
+      positionPanel();
+      nav.classList.add("open");
+      burger?.setAttribute("aria-expanded", "true");
+    }
+    function closeNav() {
+      nav.classList.remove("open");
+      burger?.setAttribute("aria-expanded", "false");
+    }
+    function toggleNav(e) {
+      e?.stopPropagation();
+      if (!isMobile()) return;
+      nav.classList.contains("open") ? closeNav() : openNav();
+    }
+    if (burger) burger.addEventListener("click", toggleNav);
+
+    // === Контент-детект переполнения (разные языки/длины) ===
+    const list = nav.querySelector("ul");
+
+    function navOverflows() {
+      if (!list || !list.firstElementChild || !list.lastElementChild)
+        return false;
+      const firstTop = list.firstElementChild.offsetTop || 0;
+      const lastTop = list.lastElementChild.offsetTop || 0;
+      if (lastTop > firstTop) return true; // перенос на вторую строку
+      return list.scrollWidth > list.clientWidth; // либо горизонтальный скролл
+    }
+    function isMobile() {
+      return (
+        mql.matches || document.documentElement.classList.contains("nav-force")
+      );
+    }
+    function recompute() {
+      const force = navOverflows();
+      document.documentElement.classList.toggle("nav-force", force);
+      if (isMobile()) attachMobileIfNeeded();
+      else detachMobileIfNeeded();
+      if (!isMobile()) closeNav();
+    }
+
+    // Слушатели
+    mql.addEventListener("change", recompute);
+    window.addEventListener("resize", () => {
+      if (nav.classList.contains("open")) positionPanel();
+      recompute();
+    });
+    if (document.fonts?.ready) document.fonts.ready.then(recompute);
+    if (window.ResizeObserver) {
+      new ResizeObserver(recompute).observe(list || nav);
+      new ResizeObserver(recompute).observe(nav);
+    }
+
+    // Закрытие по клику вне / ESC
     document.addEventListener("click", (e) => {
-      const clickInsideNav =
-        nav.contains(e.target) || burger?.contains(e.target);
-      const clickInsideLang =
-        langDd?.contains(e.target) || langBtn?.contains(e.target);
-      if (!clickInsideNav && !clickInsideLang) {
+      const inNav = nav.contains(e.target) || burger?.contains(e.target);
+      const inLang = langDd?.contains(e.target) || langBtn?.contains(e.target);
+      if (!inNav && !inLang) {
         closeNav();
         closeLang();
       }
@@ -273,20 +311,7 @@
       }
     });
 
-    function handleMode(e) {
-      if (e.matches) {
-        attachMobileIfNeeded();
-        closeNav();
-      } else {
-        detachMobileIfNeeded();
-        closeLang();
-      }
-    }
-    mql.addEventListener("change", handleMode);
-    handleMode(mql);
-
-    window.addEventListener("resize", () => {
-      if (nav.classList.contains("open")) positionPanel();
-    });
+    // Первый расчёт
+    recompute();
   })();
 </script>

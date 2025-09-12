@@ -5,6 +5,12 @@
   --accent2: #60a5fa;
   --text: #e6edf3;
   --muted: #a1a9b3;
+
+  /* ссылки (для контентных областей) */
+  --link: #5eead4;
+  --link-visited: #93c5fd;
+  --link-hover: #22d3ee;
+  --link-active: #34d399;
 }
 
 /* ========== Base ========== */
@@ -25,17 +31,32 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Ubuntu,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   line-height: 1.6;
 }
 
+/* Контейнеры */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 0 24px 24px;
 }
 
+/* Только для хедера — вернуть верхний отступ */
+.site-header .container {
+  padding-top: 24px;
+}
+
+/* Текстовые утилиты */
 .link {
   color: var(--accent);
 }
@@ -45,6 +66,7 @@ body {
   margin: 14px 0 18px;
 }
 
+/* Карточки/сетка/кнопки */
 .card {
   background: var(--card);
   padding: 20px;
@@ -86,6 +108,7 @@ body {
   color: #0b0f14;
 }
 
+/* Footer */
 .site-footer {
   border-top: 1px solid #1e2633;
   margin-top: 12px;
@@ -105,8 +128,6 @@ body {
 }
 
 /* ========== Header ========== */
-
-/* Сетка: бренд | нав | экшены (бургер+язык) */
 .header-inner.header-grid {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -143,7 +164,48 @@ body {
   position: relative; /* якорь для выпадений */
 }
 
-/* Навигация (горизонтально, desktop) */
+/* === Hamburger === */
+
+/* База: всегда скрыт (десктоп) */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid #2b3647;
+  border-radius: 10px;
+  background: #1f2937;
+  cursor: pointer;
+  line-height: 0;
+  overflow: visible;
+}
+
+/* Полоски: задаём универсально (на случай переопределений где-то ещё) */
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #e6edf3;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* отступ между полосками */
+.hamburger span + span {
+  margin-top: 6px;
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Показывать на любых экранах, если JS решил, что меню не влезло */
+.nav-force .hamburger {
+  display: inline-flex;
+}
+
+/* Навигация (desktop) */
 .nav ul {
   display: flex;
   gap: 16px;
@@ -157,7 +219,7 @@ body {
   text-decoration: none;
 }
 
-/* Активный пункт меню (desktop/mobile одинаково) */
+/* Активный пункт меню */
 .nav a.is-current,
 .nav a[aria-current="page"] {
   color: var(--accent);
@@ -168,46 +230,19 @@ body {
   font-weight: 700;
 }
 
-/* Унифицированные состояния для пунктов меню и языков */
+/* Hover для меню и языка */
 .nav a:hover,
 .dropdown .dropdown-content a:hover {
   background: #1e2633;
   color: var(--text);
 }
 
-/* Выбранный пункт в языковом списке */
-.dropdown .dropdown-content a.active {
-  background: #1e2633;
-  color: var(--accent);
-  font-weight: 700;
-  border-radius: 8px;
-}
-
-/* Бургер (скрыт на десктопе) */
-.hamburger {
-  display: none;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  border: 1px solid #2b3647;
-  border-radius: 10px;
-  background: #1f2937;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: block;
-  height: 2px;
-  margin: 5px 0;
-  background: #e6edf3;
-  border-radius: 1px;
-}
-
 /* ========== Language dropdown ========== */
 .dropdown {
   flex: 0 0 auto;
   position: relative;
-} /* локальный контекст */
+}
+
 .dropbtn {
   background: #1f2937;
   color: #e6edf3;
@@ -222,11 +257,14 @@ body {
   min-width: 40px;
 }
 
+.dropbtn .fi {
+  font-size: 20px;
+  line-height: 1;
+} /* увеличить флаг */
 .fi {
   border-radius: 3px;
-} /* флагик чуть скруглён */
+}
 
-/* Выпадающее меню языка — строго под кнопкой */
 .dropdown .dropdown-content {
   display: none;
   position: absolute;
@@ -255,41 +293,53 @@ body {
   text-decoration: none;
 }
 
+.dropdown .dropdown-content a.active {
+  background: #1e2633;
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 8px;
+}
+
 .dropdown .show {
   display: block;
-} /* класс открывает меню */
+}
 
-/* ========== Hero basics ========== */
+/* ========== Hero + CTA ========== */
 .hero .tagline {
   color: var(--accent);
   margin-top: 8px;
 }
 
+.hero h1 {
+  margin-top: 0;
+}
+
+/* Базово: слева, без растягивания */
 .cta-row {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-}
-
-.cta-row span {
-  flex: 1; /* пустышки занимают место */
+  justify-content: flex-start;
 }
 
 .cta-row a {
   text-align: center;
+  flex: 0 0 auto;
+}
+
+/* Плейсхолдеры в старой разметке не влияют */
+.cta-row span {
+  display: none;
+}
+
+/* Только для навигации/пагинации растягиваем по краям */
+.cta-row[aria-label="Post navigation"],
+.cta-row[aria-label="Pagination"] {
+  justify-content: space-between;
 }
 
 /* ========== Services / Skills layout ========== */
-.services-hero h1 {
-  margin-bottom: 6px;
-}
-
-.services-hero .sub {
-  margin: 0 0 18px;
-}
-
 .services-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -347,13 +397,9 @@ body {
   color: var(--accent);
 }
 
-/* Лёгкие CTA внутри секций */
+/* CTA-кнопки внутри секций */
 .service-block .btn {
   margin-top: 8px;
-}
-
-.btn.tertiary,
-.service-block .btn {
   background: transparent;
   color: var(--accent2);
   border: 1px solid var(--accent2);
@@ -452,11 +498,10 @@ body {
   flex-wrap: wrap;
 }
 
-/* ========== Mobile TOC (для services/skills) ========== */
+/* ========== Mobile TOC (details/summary) ========== */
 .toc-mobile {
   display: none;
-  margin-bottom: 12px;
-}
+} /* desktop — скрыт */
 
 .toc-toggle {
   background: #1f2937;
@@ -466,23 +511,18 @@ body {
   padding: 8px 12px;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .toc-drawer {
-  display: none;
   margin-top: 8px;
   background: var(--card);
   border: 1px solid #1e2633;
   border-radius: 12px;
   padding: 10px 12px;
-}
-
-.toc-drawer.open {
-  display: block;
-}
-
-.toc-drawer .toc-title {
-  margin: 0 0 6px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
 }
 
 .toc-drawer ul {
@@ -504,104 +544,7 @@ body {
   color: var(--accent);
 }
 
-/* ========== Responsive ========== */
-
-/* ≤ 800px: меню прячется под бургер, язык ещё с названием */
-@media (width <= 800px) {
-  .hamburger {
-    display: inline-block;
-  }
-
-  .header-inner.header-grid {
-    grid-template-columns: auto 1fr auto;
-  }
-
-  .header-actions {
-    position: relative;
-  } /* якорь для абсолютной панели */
-
-  /* мобильная версия меню */
-  .nav.nav-mobile {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: auto;
-    display: none;
-    z-index: 900;
-    background: var(--card);
-    border: 1px solid #1e2633;
-    border-radius: 12px;
-    width: max-content;
-    max-width: min(92vw, 420px);
-    box-shadow: 0 6px 12px rgb(0 0 0 / 40%);
-    overflow: hidden;
-  }
-
-  .nav.nav-mobile.open {
-    display: block;
-  }
-
-  .nav.nav-mobile ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 0;
-    padding: 6px;
-    list-style: none;
-  }
-
-  .nav.nav-mobile a {
-    display: block;
-    padding: 8px 12px;
-    color: var(--text);
-    text-decoration: none;
-    white-space: nowrap;
-    border-radius: 8px;
-  }
-
-  .nav.nav-mobile a:hover {
-    background: #1e2633;
-  }
-
-  /* Активный пункт — без рамки */
-  .nav.nav-mobile a.is-current,
-  .nav.nav-mobile a[aria-current="page"] {
-    background: #1e2633;
-    border-color: transparent;
-  }
-
-  /* скрываем левый сайдбар (services/skills) и переводим в mobile-TOC */
-  .services-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .services-toc {
-    display: none;
-  }
-
-  .toc-mobile {
-    display: block;
-  }
-
-  /* контакты в одну колонку */
-  .contacts-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ≤ 500px: язык = только флаг, список выравниваем к правому краю кнопки */
-@media (width <= 500px) {
-  .dropbtn .code {
-    display: none;
-  }
-
-  .dropdown .dropdown-content {
-    left: auto;
-    right: 0;
-    text-align: left;
-  }
-}
-
+/* ========== Facts / helpers ========== */
 .facts {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -631,4 +574,241 @@ body {
 /* Унифицированные отступы между блоками секций */
 .section + .section {
   margin-top: 16px;
+}
+
+/* ========== Link styling by page types ========== */
+
+/* Projects: ссылки только в контенте справа */
+.projects-page .services-content a:not(.btn),
+.projects-page .section a:not(.btn),
+/* Blog list/cards + single article */
+.blog-page .services-content .card a:not(.btn),
+.blog-page article.card a:not(.btn),
+/* Taxonomy term pages content */
+.taxonomy-page .services-content .card a:not(.btn) {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+}
+
+.projects-page .services-content a:not(.btn):visited,
+.projects-page .section a:not(.btn):visited,
+.blog-page .services-content .card a:not(.btn):visited,
+.blog-page article.card a:not(.btn):visited,
+.taxonomy-page .services-content .card a:not(.btn):visited {
+  color: var(--link-visited);
+}
+
+.projects-page .services-content a:not(.btn):hover,
+.projects-page .section a:not(.btn):hover,
+.blog-page .services-content .card a:not(.btn):hover,
+.blog-page article.card a:not(.btn):hover,
+.taxonomy-page .services-content .card a:not(.btn):hover {
+  color: var(--link-hover);
+}
+
+.projects-page .services-content a:not(.btn):active,
+.projects-page .section a:not(.btn):active,
+.blog-page .services-content .card a:not(.btn):active,
+.blog-page article.card a:not(.btn):active,
+.taxonomy-page .services-content .card a:not(.btn):active {
+  color: var(--link-active);
+}
+
+/* Доступность: focus видим, без фиолетового visited */
+.blog-page .services-content .card a:not(.btn):focus-visible,
+.blog-page article.card a:not(.btn):focus-visible,
+.taxonomy-page .services-content .card a:not(.btn):focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Browse (сайдбар блога) — нейтральные ссылки */
+.blog-page .services-toc a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.blog-page .services-toc a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.blog-page .services-toc a:visited {
+  color: var(--muted);
+}
+
+/* В мета-строках не подсвечиваем таксономии (и на single, и на taxonomy) */
+.blog-page article.card .sub a[href*="/tags/"],
+.blog-page article.card .sub a[href*="/categories/"],
+.taxonomy-page .card .sub a[href*="/tags/"],
+.taxonomy-page .card .sub a[href*="/categories/"] {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.blog-page article.card .sub a[href*="/tags/"]:hover,
+.blog-page article.card .sub a[href*="/categories/"]:hover,
+.taxonomy-page .card .sub a[href*="/tags/"]:hover,
+.taxonomy-page .card .sub a[href*="/categories/"]:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.blog-page article.card .sub a[href*="/tags/"]:visited,
+.blog-page article.card .sub a[href*="/categories/"]:visited,
+.taxonomy-page .card .sub a[href*="/tags/"]:visited,
+.taxonomy-page .card .sub a[href*="/categories/"]:visited {
+  color: var(--text);
+}
+
+/* === Home: ссылки внутри карточек/секций — как в Blog/Projects === */
+.home-page .card a:not(.btn),
+.home-page .section a:not(.btn) {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+}
+
+.home-page .card a:not(.btn):visited,
+.home-page .section a:not(.btn):visited {
+  color: var(--link-visited);
+}
+
+.home-page .card a:not(.btn):hover,
+.home-page .section a:not(.btn):hover {
+  color: var(--link-hover);
+}
+
+.home-page .card a:not(.btn):active,
+.home-page .section a:not(.btn):active {
+  color: var(--link-active);
+}
+
+/* Доступность */
+.home-page .card a:not(.btn):focus-visible,
+.home-page .section a:not(.btn):focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ========== Responsive ========== */
+
+/* ≤ 860px */
+@media (width <= 53.75em) {
+  .hamburger {
+    display: inline-block;
+  }
+
+  .header-inner.header-grid {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header-actions {
+    position: relative;
+  }
+
+  .nav.nav-mobile {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: auto;
+    display: none;
+    z-index: 900;
+    background: var(--card);
+    border: 1px solid #1e2633;
+    border-radius: 12px;
+    width: max-content;
+    max-width: min(92vw, 26.25em);
+    box-shadow: 0 0.375em 0.75em rgb(0 0 0 / 40%);
+    overflow: hidden;
+  }
+
+  .nav.nav-mobile.open {
+    display: block;
+  }
+
+  .nav.nav-mobile ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 0.375em;
+    list-style: none;
+  }
+
+  .nav.nav-mobile a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 8px;
+  }
+
+  .nav.nav-mobile a:hover {
+    background: #1e2633;
+  }
+
+  .nav.nav-mobile a.is-current,
+  .nav.nav-mobile a[aria-current="page"] {
+    background: #1e2633;
+    border-color: transparent;
+  }
+
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ≤ 660px — mobile Overview поверх контента */
+@media (width <= 41.25em) {
+  .toc-mobile {
+    display: inline-block;
+    position: relative;
+  }
+
+  .toc-mobile .toc-drawer {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 1200;
+    width: max-content;
+    min-width: 260px;
+    max-width: calc(100vw - 32px);
+    white-space: nowrap;
+    max-height: 60vh;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .toc-mobile[open] .toc-drawer {
+    display: block;
+  }
+
+  .services-toc {
+    display: none;
+  }
+
+  .services-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ≤ 500px — в кнопке языка скрыть код, открыть меню вправо */
+@media (width <= 500px) {
+  .dropbtn .code {
+    display: none;
+  }
+
+  .dropdown .dropdown-content {
+    left: auto;
+    right: 0;
+    text-align: left;
+  }
 }

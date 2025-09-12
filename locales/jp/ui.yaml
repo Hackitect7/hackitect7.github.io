@@ -1,0 +1,42 @@
+brand: "Hackitect7 — システムの音楽"
+
+common:
+  tocToggle: "セクション"
+  backToTop: "トップに戻る"
+
+nav:
+  about: "概要"
+  skills: "スキル"
+  services: "サービス"
+  projects: "プロジェクト"
+  blog: "ブログ"
+  contacts: "連絡先"
+
+services:
+  title: "サービス"
+  tocTitle: "概要"
+
+about:
+  cred:
+    title: "ユニークな価値"
+    expertise: "専門知識"
+    oss: "オープンソース"
+    community: "コミュニティ"
+
+blog:
+  title: "ブログ"
+  filterTitle: "閲覧"
+  categories: "カテゴリー"
+  tags: "タグ"
+  newer: "新しい投稿"
+  older: "古い投稿"
+  empty: "まだ投稿がありません。"
+  minRead: "分で読める"
+  more: "さらに読む"
+  backToList: "ブログに戻る"
+
+cta:
+  viewAllPosts: "すべての投稿を見る"
+
+footer:
+  made: "Hugo と ❤️ で構築"

@@ -1,0 +1,39 @@
+title: "プロジェクト"
+intro: "選ばれた実績: オープンソース、ブループリント、教育。"
+highlights:
+  - "実世界のアーキテクチャ"
+  - "オープンソース & ツール"
+
+sections:
+  - id: "open-source"
+    title: "オープンソース"
+    text: "再利用可能なツールとテンプレート。"
+    items:
+      - icon: "🐙"
+        title: "RouterOS スクリプト"
+        desc: "冪等性のあるスクリプトで MikroTik 群を自動化。"
+        href: "/ja/projects/routeros-scripts/"
+        repo: "https://github.com/Hackitect7/routeros-scripts"
+        badge: "ネットワーキング"
+
+      - icon: "⚙️"
+        title: "DevOps チートシート"
+        desc: "実戦で鍛えた DevOps/SRE クイックリファレンス。"
+        href: "/ja/projects/devops-cheat-sheet/"
+        repo: "https://github.com/Hackitect7/devops-cheat-sheet"
+        badge: "DevOps"
+
+  - id: "blueprints"
+    title: "アーキテクチャ ブループリント"
+    items:
+      - icon: "🏗️"
+        title: "マルチリージョン Kubernetes"
+        desc: "GitOps を用いたリージョン間 HA K8s。"
+        href: "/ja/projects/k8s-multi-region/"
+        badge: "ブループリント"
+
+cta:
+  title: "同様の成果が必要ですか？"
+  text: "要件を信頼性・可観測性・セキュリティを備えたシステムに変えます。"
+  href: "contacts"
+  button: "プロジェクトを始める"

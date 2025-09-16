@@ -1,20 +1,21 @@
-{{- $env := default "production" (index .Site.Params "env" | default dict | index "name") -}}
-{{- $noindex := or (ne $env "production") .Site.Params.noindex -}}
+{{- /* layouts/robots.txt */ -}}
+{{- $noindex := or
+  (ne hugo.Environment "production")  /* всё, что не production */
+  .Site.Params.noindex                /* глобально запретить индексацию */
+  .Params.noindex                     /* запретить для конкретной страницы/раздела */
+-}}
 
-{{- if $noindex }}
-# robots.txt (dev/staging build)
 User-agent: *
+{{- if $noindex -}}
 Disallow: /
-{{ else }}
-# robots.txt (production build)
-User-agent: *
+{{- else -}}
 Allow: /
 
-# Заблокированные системные разделы
+# Системные разделы, которые не хотим индексировать
 Disallow: /tags/
 Disallow: /categories/
 Disallow: /drafts/
 
-# Sitemap
-Sitemap: {{ .Site.BaseURL }}sitemap.xml
-{{ end }}
+# Карта сайта
+Sitemap: {{ "sitemap.xml" | absURL }}
+{{- end -}}

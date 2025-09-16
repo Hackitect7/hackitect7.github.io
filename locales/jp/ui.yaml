@@ -18,6 +18,7 @@ ui:
     noPosts: "まだ投稿はありません。"
     viewAll: "すべての投稿を見る"
     min: "分で読めます"
+    updated: "更新日"
 
   projects:
     title: "プロジェクト"

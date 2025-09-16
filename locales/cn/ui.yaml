@@ -18,6 +18,7 @@ ui:
     noPosts: "暂无文章。"
     viewAll: "查看全部文章"
     min: "分钟阅读"
+    updated: "更新于"
 
   projects:
     title: "项目"

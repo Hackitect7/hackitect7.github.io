@@ -18,6 +18,7 @@ ui:
     noPosts: "No posts yet."
     viewAll: "View all posts"
     min: "min read"
+    updated: "Updated"
 
   projects:
     title: "Projects"

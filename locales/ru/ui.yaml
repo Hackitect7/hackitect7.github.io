@@ -18,6 +18,7 @@ ui:
     noPosts: "Постов пока нет."
     viewAll: "Все посты"
     min: "мин. чтения"
+    updated: "Обновлено"
 
   projects:
     title: "Проекты"

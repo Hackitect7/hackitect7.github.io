@@ -1,8 +1,8 @@
 {{- /* layouts/robots.txt */ -}}
 {{- $noindex := or
-  (ne hugo.Environment "production")  /* всё, что не production */
-  .Site.Params.noindex                /* глобально запретить индексацию */
-  .Params.noindex                     /* запретить для конкретной страницы/раздела */
+  (ne hugo.Environment "production")
+  .Site.Params.noindex
+  .Params.noindex
 -}}
 
 User-agent: *

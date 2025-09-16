@@ -1,0 +1,169 @@
+about:
+  title: "Acerca de Hackitect7"
+  subtitle: "Diseño TI resiliente, segura y económicamente sólida que sirve al negocio."
+  highlights:
+    - "Arquitectura empresarial y SRE con resultados medibles"
+    - "Seguridad primero, FinOps consciente, automatización a escala"
+    - "Uniendo estrategia y tecnología: de la sala de juntas a la línea de comandos"
+    - "Planos para el crecimiento: modular, nativo en la nube, preparado para múltiples regiones"
+    - "TI sostenible: rentable, consciente del medio ambiente y preparada para el futuro"
+
+  sections:
+    - id: "who"
+      title: "Quién soy (y por qué importa)"
+      text: >
+        Soy arquitecto principal enfocado en sistemas fiables, observables y rentables. Conecto la tecnología y el negocio: SLAs/SLOs, seguridad y TCO/ROI. Con más de 22 años en TI, veo la arquitectura como ingeniería y como arte — lo que llamo *Música de Sistemas*.
+      facts:
+        - label: "Con sede en:"
+          text: "Bishkek · UTC+6 (horarios flexibles para EE.UU./UE)"
+        - label: "Idiomas:"
+          items:
+            - "Ruso — completo (conversación, documentos, presentaciones)"
+            - "Inglés — fuerte escrito, básico conversacional"
+            - "Otros idiomas — comunicación escrita con calidad nativa"
+        - label: "Colaboración:"
+          text: "Consultoría, auditorías, ejecución práctica, mentoría"
+
+    - id: "what"
+      title: "Lo que hago"
+      text: "Capacidades centrales alineadas a resultados de negocio. Cada servicio está vinculado a un impacto medible: entrega más rápida, menor coste, menor riesgo."
+      cards:
+        - h: "Arquitectura"
+          p: "On-prem, nube, híbrido; fiabilidad, escalabilidad, control de costes."
+          bullets:
+            - "Diseños multi-región"
+            - "Bases de red y seguridad"
+            - "Migración y modernización"
+        - h: "DevOps y Automatización"
+          p: "CI/CD, IaC (Terraform/Ansible), GitOps, ingeniería de plataformas."
+          bullets:
+            - "Imágenes doradas/capas base"
+            - "Política como código"
+            - "Seguridad en las entregas (entrega progresiva)"
+        - h: "SRE y Observabilidad"
+          p: "SLO/SLI, respuesta a incidentes, buenas prácticas on-call."
+          bullets:
+            - "Métricas/logs/trazas"
+            - "Runbooks y MTTR↓"
+            - "Gestión de capacidad"
+        - h: "Seguridad y Gobernanza"
+          p: "Mínimo privilegio, endurecimiento, prácticas ISO/SOC2/GDPR."
+        - h: "Negocio y Estrategia"
+          p: "FinOps, TCO/ROI, hojas de ruta de modernización alineadas con OKRs."
+
+    - id: "how"
+      title: "Cómo trabajo"
+      steps:
+        - "Descubrir → evaluar riesgos, limitaciones, economía"
+        - "Diseñar → arquitectura, seguridad, observabilidad, controles de costes"
+        - "Piloto → validar SLOs, rendimiento, coste"
+        - "Escalar → automatizar, codificar, documentar"
+        - "Operar → medir, mejorar, transferir"
+      notes: "Las colaboraciones incluyen entregables claros, runbooks y registros de decisiones."
+
+    - id: "proof"
+      title: "Resultados que hablan por sí mismos"
+      cases:
+        - badge: "SRE"
+          title: "MTTR -55% y fatiga de alertas -60%"
+          desc: "Introducción de SLOs, alertas unificadas y flujos de trabajo de incidentes."
+          metrics:
+            - "Runbooks unificados"
+            - "Postmortems = aprendizaje, no culpabilización"
+        - badge: "FinOps"
+          title: "Gasto en la nube -23% sin pérdida de rendimiento"
+          desc: "Dimensionamiento adecuado, autoescalado, niveles de almacenamiento, capacidad reservada."
+          metrics:
+            - "Controles y presupuestos"
+            - "Revisión semanal de costes"
+
+    - id: "industries"
+      title: "Industrias"
+      text: >
+        Trabajo con empresas de cualquier tamaño y sector, desde startups hasta grandes corporaciones. Mis marcos son agnósticos a la industria, pero se aplican con mayor frecuencia en:
+      cards:
+        - h: "Áreas principales"
+          bullets:
+            - "Finanzas y FinTech"
+            - "E-commerce y Retail"
+            - "Telecomunicaciones y Redes"
+            - "Gobierno y GovTech"
+        - h: "Otros sectores"
+          bullets:
+            - "Sanidad"
+            - "Medios y Entretenimiento"
+            - "Educación"
+            - "Logística"
+
+    - id: "cred"
+      title: "Valor único"
+      cards:
+        - h: "Experiencia"
+          bullets:
+            - "22+ años en infraestructura, redes y DevOps"
+            - "Multi-nube (AWS, GCP, Azure) — ejecución práctica"
+            - "Arquitecturas resilientes, automatización pragmática, mentalidad SRE"
+            - "Desde bare-metal y redes hasta Kubernetes y observabilidad"
+            - "Neutralidad de proveedores — lo mejor para el negocio, no la herramienta"
+        - h: "Open Source"
+          bullets:
+            - "GitHub: https://github.com/Hackitect7 — herramientas y scripts"
+            - "DevOps Cheat Sheet (multilingüe, Quarto)"
+            - "Scripts de automatización MikroTik RouterOS"
+        - h: "Comunidad"
+          bullets:
+            - "Compartir conocimiento: posts y notas técnicas"
+            - "Sesiones internas de capacitación, mentoría"
+            - "Marca: Hackitect7 — Música de Sistemas"
+
+    - id: "values"
+      title: "Mis valores (y tu tranquilidad)"
+      text: "Pragmático, seguro por defecto, medible, documentación primero."
+      bullets:
+        - "Privacidad y cumplimiento respetados"
+        - "Transparencia de costes y controles"
+        - "Transferencia de conocimiento por diseño"
+
+    - id: "engagement"
+      title: "Modelos de colaboración"
+      cards:
+        - h: "Evaluación / Auditoría"
+          p: "Colaboración corta para descubrir riesgos y oportunidades."
+          bullets:
+            - "Revisión de arquitectura"
+            - "Postura de seguridad"
+            - "Línea base de costes"
+        - h: "Entrega de Proyectos"
+          p: "Diseño e implementación con resultados medibles."
+          bullets:
+            - "Hoja de ruta e hitos"
+            - "SLOs y KPIs"
+            - "Transferencia"
+        - h: "Arquitecto Fraccional"
+          p: "Orientación estratégica y revisiones continuas."
+          bullets:
+            - "Consejo de arquitectura"
+            - "Control de proveedores"
+            - "Gestión del cambio"
+
+  finalCta:
+    title: "Trabajemos juntos"
+    text: "De la tecnología a los resultados de negocio. Reserva una breve llamada de descubrimiento para ver cómo Hackitect7 puede ayudar a tu equipo."
+    href: "contacts"
+    button: "Contactos"
+
+  schema:
+    person:
+      name: "Hackitect7"
+      title: "Arquitecto Principal"
+      sameAs:
+        - "https://github.com/Hackitect7"
+        - "https://linkedin.com/in/hackitect7"
+
+    organization:
+      name: "Hackitect7"
+      url: "https://hackitect7.github.io/"
+      slogan: "Música de Sistemas"
+      sameAs:
+        - "https://github.com/Hackitect7"
+        - "https://linkedin.com/in/hackitect7"

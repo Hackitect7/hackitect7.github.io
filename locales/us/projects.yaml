@@ -1,39 +1,39 @@
-title: "Projects"
-intro: "Selected work: open source, blueprints, education."
-highlights:
-  - "Real-world architectures"
-  - "Open source & tooling"
+projects:
+  intro: "Selected work: open source, blueprints, education."
+  highlights:
+    - "Real-world architectures"
+    - "Open source & tooling"
 
-sections:
-  - id: "open-source"
-    title: "Open Source"
-    text: "Reusable tools and templates."
-    items:
-      - icon: "🐙"
-        title: "RouterOS Scripts"
-        desc: "Automating MikroTik fleets with idempotent scripts."
-        href: "/us/projects/routeros-scripts/"
-        repo: "https://github.com/Hackitect7/routeros-scripts"
-        badge: "Networking"
+  sections:
+    - id: "open-source"
+      title: "Open Source"
+      text: "Reusable tools and templates."
+      items:
+        - icon: "🐙"
+          title: "RouterOS Scripts"
+          desc: "Automating MikroTik fleets with idempotent scripts."
+          href: "routeros-scripts/"
+          repo: "https://github.com/Hackitect7/routeros-scripts"
+          badge: "Networking"
 
-      - icon: "⚙️"
-        title: "DevOps Cheat Sheet"
-        desc: "My battle-tested DevOps/SRE quick reference."
-        href: "/us/projects/devops-cheat-sheet/"
-        repo: "https://github.com/Hackitect7/devops-cheat-sheet"
-        badge: "DevOps"
+        - icon: "⚙️"
+          title: "DevOps Cheat Sheet"
+          desc: "My battle-tested DevOps/SRE quick reference."
+          href: "devops-cheat-sheet/"
+          repo: "https://github.com/Hackitect7/devops-cheat-sheet"
+          badge: "DevOps"
 
-  - id: "blueprints"
-    title: "Architecture Blueprints"
-    items:
-      - icon: "🏗️"
-        title: "Multi-Region Kubernetes"
-        desc: "Highly-available K8s across regions with GitOps."
-        href: "/us/projects/k8s-multi-region/"
-        badge: "Blueprint"
+    - id: "blueprints"
+      title: "Architecture Blueprints"
+      items:
+        - icon: "🏗️"
+          title: "Multi-Region Kubernetes"
+          desc: "Highly-available K8s across regions with GitOps."
+          href: "k8s-multi-region/"
+          badge: "Blueprint"
 
-cta:
-  title: "Need a similar outcome?"
-  text: "I turn requirements into reliable, observable, secure systems."
-  href: "contacts"
-  button: "Start a project"
+  cta:
+    title: "Need a similar outcome?"
+    text: "I turn requirements into reliable, observable, secure systems."
+    href: "contacts"
+    button: "Start a project"

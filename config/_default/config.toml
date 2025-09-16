@@ -1,13 +1,17 @@
 # ===========================
-# Core: pagination, sitemap, outputs, permalinks, markdown, privacy
+# Core: languages, sitemap, outputs, permalinks, markdown, privacy, performance
 # ===========================
 title = "Hackitect7 — The Music of Systems"
 languageCode = "en-us"
 defaultContentLanguage = "us"
 defaultContentLanguageInSubdir = true
 enableGitInfo = true
+
+# Важно: абсолютные канонические URL (улучшает каноникал/дубликаты)
 relativeURLs = false
-canonifyURLs = false
+canonifyURLs = true
+
+# Точка данных для твоего t.html (кастомная i18n-логика)
 dataDir = "locales"
 
 # Пагинация
@@ -27,14 +31,16 @@ dataDir = "locales"
 
 # Выходные форматы
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]   # JSON пригодится для виджетов/индексов
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
   term = ["HTML"]
+  page = ["HTML"]
 
 # ЧПУ-ссылки
+# БЛОГ без дат — лучше для evergreen/маркетинга и сниппетов; ссылки стабильнее
 [permalinks]
-  blog = "/blog/:year/:month/:slug/"
+  blog = "/blog/:slug/"
   projects = "/projects/:slug/"
   services = "/services/:slug/"
 
@@ -54,3 +60,11 @@ dataDir = "locales"
     anonymizeIP = true
   [privacy.youtube]
     privacyEnhanced = true
+
+# Производительность (Hugo Pipes / изображения)
+[minify]
+  minifyOutput = true
+
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"

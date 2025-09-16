@@ -1,8 +1,10 @@
-title: "ブログ"
-intro: "アーキテクチャ、DevOps、そしてシステムの音楽に関するノート、考察、洞察。"
+blog:
+  title: "ブログ"
+  intro: "アーキテクチャ、DevOps、そしてシステムの音楽に関するノート、考察、洞察。"
 
-cta:
-  title: "特定のテーマをお探しですか？"
-  text: "次に読みたいトピックを教えてください。"
-  href: "contacts"
-  button: "連絡する"
+  cta:
+    enabled: false
+    title: "特定のトピックを探していますか？"
+    text: "次に読みたいトピックを教えてください。"
+    href: "contacts"
+    button: "コンタクト"

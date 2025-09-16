@@ -1,25 +1,44 @@
 {
+  "name": "hackitect7-site",
   "private": true,
-  "scripts": {
-    "lint:css": "stylelint \"**/*.css\"",
-    "fix:css": "stylelint \"**/*.css\" --fix",
-    "format": "prettier . --check",
-    "format:fix": "prettier . --write"
+  "engines": {
+    "node": ">=18"
   },
-  "lint-staged": {
-    "*.{css}": [
-      "stylelint --fix"
-    ],
-    "*.{md,mdx,json,yml,yaml}": [
-      "prettier --write"
-    ]
+  "scripts": {
+    "dev": "concurrently \"npm:css:watch\" \"npm:hugo:serve\"",
+    "build": "npm run css:build && npm run hugo:build",
+    "preview": "npm run build && npm run hugo:preview",
+    "hugo:serve": "hugo-bin server --disableFastRender --buildFuture --cleanDestinationDir --bind 0.0.0.0",
+    "hugo:build": "hugo-bin --minify",
+    "hugo:preview": "hugo-bin server --renderToDisk --minify --buildFuture --bind 0.0.0.0",
+    "css:watch": "lightningcss static/css/src/style.css -o static/css/style.css --bundle --sourcemap --watch --targets \">=0.5%\"",
+    "css:build": "lightningcss static/css/src/style.css -o static/css/style.css --bundle --minify --targets \">=0.5%\"",
+    "lint": "npm run lint:style && npm run lint:md",
+    "lint:style": "stylelint \"**/*.css\"",
+    "lint:md": "markdownlint \"**/*.md\" -i node_modules",
+    "format": "prettier -w \"**/*.{md,html,json,yml,yaml,css,js}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
-    "prettier": "^3.6.2",
-    "prettier-plugin-go-template": "^0.0.15",
-    "stylelint": "^16.24.0",
-    "stylelint-config-standard": "^39.0.0"
+    "concurrently": "^9.0.0",
+    "hugo-bin": "^0.121.0",
+    "husky": "^9.0.0",
+    "lightningcss-cli": "^1.25.1",
+    "lint-staged": "^15.2.9",
+    "markdownlint-cli": "^0.41.0",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.8.1",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "lint-staged": {
+    "**/*.{md,html,json,yml,yaml,css,js}": [
+      "prettier -w"
+    ],
+    "**/*.css": [
+      "stylelint --fix"
+    ],
+    "**/*.md": [
+      "markdownlint --fix"
+    ]
   }
 }

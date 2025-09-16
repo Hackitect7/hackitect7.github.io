@@ -1,0 +1,87 @@
+{{ define "main" }}
+  {{- $p := .Site.Params -}}
+  {{- $lang := .Site.Language.Lang -}}
+  {{- $ctaBase := or $p.ctaBase (printf "/%s/contacts/?utm_source=services&utm_medium=site&utm_campaign=" $lang) -}}
+  {{- $ctaBase = replace $ctaBase "/us/" (print "/" $lang "/") -}}
+  {{- $campaign := or .Params.cta.campaign .Params.slug "service" -}}
+  {{- $ctaHref := printf "%s%s" $ctaBase (urlize $campaign) -}}
+  {{- $ctaText := or .Params.cta.text (partial "t.html" (dict "key" "ui.cta.contact" "ctx" . "default" "Contact me")) -}}
+  {{- $img := or .Params.featuredImage $p.ogimage "/assets/img/favicon.svg" -}}
+
+  <!-- Hero -->
+  <section class="hero section service-hero">
+    <div class="hero-inner">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="tagline">{{ . }}</p>{{ end }}
+      <div class="cta-row">
+        <a class="btn"
+           href="{{ $ctaHref }}"
+           rel="noopener"
+           data-analytics="svc-single-cta-hero"
+           aria-label="{{ printf "Open contacts to discuss '%s'" .Title }}">
+          {{ $ctaText }}
+        </a>
+        <a class="btn secondary" href="{{ "/vcard/hackitect7.vcf" | relURL }}" download>
+          {{ partial "t.html" (dict "key" "home.hero.ctaVcard" "ctx" . "default" "Download vCard") }}
+        </a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="{{ $img | relURL }}" alt="{{ .Title }}" loading="eager" decoding="async" />
+    </div>
+  </section>
+
+  <!-- Content body with structured sections -->
+  <article class="section service-article">
+    {{/* Автоматический ToC, если есть заголовки */}}
+    {{ partial "toc.html" (dict "title" (partial "t.html" (dict "key" "ui.toc" "ctx" . "default" "On this page")) "content" .Content) }}
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    <!-- Mid-page CTA -->
+    <div class="service-cta-mid">
+      <a class="btn"
+         href="{{ $ctaHref }}"
+         rel="noopener"
+         data-analytics="svc-single-cta-mid">
+         {{ $ctaText }}
+      </a>
+    </div>
+
+    {{/* FAQ из front matter (schema.faq) — безопасное извлечение */}}
+    {{- $faq := slice -}}
+    {{- with .Params.schema -}}
+      {{- with .faq -}}
+        {{- $faq = . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if gt (len $faq) 0 -}}
+      <section class="section service-faq" aria-labelledby="svc-faq-h2">
+        <h2 id="svc-faq-h2">{{ partial "t.html" (dict "key" "ui.faq" "ctx" . "default" "FAQ") }}</h2>
+        <div class="faq-list">
+          {{ range $faq }}
+            <details class="faq-item">
+              <summary class="faq-q">{{ .q }}</summary>
+              <div class="faq-a">{{ .a | markdownify }}</div>
+            </details>
+          {{ end }}
+        </div>
+      </section>
+    {{- end }}
+
+    <!-- Final CTA -->
+    <section class="section service-cta-final" style="text-align:center" aria-labelledby="svc-final-h2">
+      <h2 id="svc-final-h2">{{ partial "t.html" (dict "key" "ui.cta.ready" "ctx" . "default" "Ready to talk?") }}</h2>
+      <p class="sub">{{ partial "t.html" (dict "key" "ui.cta.servicePrompt" "ctx" . "default" "Let's discuss your platform and map a concrete path forward.") }}</p>
+      <a class="btn"
+         href="{{ $ctaHref }}"
+         rel="noopener"
+         data-analytics="svc-single-cta-final">
+         {{ $ctaText }}
+      </a>
+    </section>
+  </article>
+{{ end }}

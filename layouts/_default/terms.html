@@ -1,31 +1,121 @@
 {{- define "main" -}}
-  {{- $lang := .Site.Language.Lang -}}
-  <section
-    class="blog-page taxonomy-page taxonomy-terms tax-{{ .Data.Singular }}"
-  >
+  {{- $lang        := .Site.Language.Lang -}}
+  {{- $filterTitle := partial "t.html" (dict "key" "ui.tax.filterTitle"     "ctx" . "default" "Browse") -}}
+  {{- $filterPH    := partial "t.html" (dict "key" "ui.tax.filterPlaceholder" "ctx" . "default" "Filter…") -}}
+  {{- $showMore    := partial "t.html" (dict "key" "ui.tax.showMore"        "ctx" . "default" "Show more") -}}
+  {{- $showLess    := partial "t.html" (dict "key" "ui.tax.showLess"        "ctx" . "default" "Show less") -}}
+  {{- $empty       := partial "t.html" (dict "key" "ui.blog.empty"          "ctx" . "default" "No content yet.") -}}
+  {{- $prefix      := or site.Params.terms.chipPrefix "#" -}}
+  {{- $limit       := or site.Params.terms.limit 200 -}}
+
+
+  <section class="taxonomy-page taxonomy-terms tax-{{ .Data.Singular }}">
     <section class="hero section">
       <h1>{{ .Title }}</h1>
-      {{/* Например: Tags / Categories */}}
-      <p class="sub">Browse all {{ .Data.Plural | title }}</p>
+      <p class="sub">{{ $filterTitle }}</p>
+      <input
+        id="terms-filter"
+        type="search"
+        placeholder="{{ $filterPH }}"
+        aria-label="{{ $filterPH }}"
+        class="chip-filter-input"
+      />
     </section>
 
     <div class="services-layout section">
       <div class="services-content">
-        <article class="card section">
-          <ul class="facts-list">
-            {{- /* .Data.Terms: map (term => Pages) для текущей таксономии */ -}}
-            {{- range $term, $pages := .Data.Terms -}}
-              {{- $langPages := where $pages "Lang" $lang -}}
-              {{- if gt (len $langPages) 0 -}}
-                {{- $href := printf "%s%s/" $.RelPermalink (urlize $term) -}}
-                <li>
-                  <a href="{{ $href }}">#{{ $term }}</a> ({{ len $langPages }})
+        {{- /* Собираем термины только текущего языка */ -}}
+        {{- $terms := slice -}}
+        {{- range $name, $pages := .Data.Terms -}}
+          {{- $langPages := where $pages "Lang" $lang -}}
+          {{- if gt (len $langPages) 0 -}}
+            {{- $terms = $terms | append (dict "name" $name "count" (len $langPages)) -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $terms = sort $terms "name" -}}
+
+        {{ if gt (len $terms) 0 }}
+          <article class="card section">
+            <ul class="chip-list" id="terms-list">
+              {{- range $i, $t := $terms -}}
+                {{- $href := printf "%s%s/" $.RelPermalink (urlize $t.name) -}}
+                <li
+                  class="chip-item{{ if ge $i $limit }}is-hidden{{ end }}"
+                  data-name="{{ lower $t.name }}"
+                >
+                  <a class="chip" href="{{ $href | relLangURL }}"
+                    >{{ $prefix }}{{ $t.name }} ({{ $t.count }})</a
+                  >
                 </li>
               {{- end -}}
-            {{- end -}}
-          </ul>
-        </article>
+            </ul>
+
+            {{ if gt (len $terms) $limit }}
+              <div class="cta-row" style="margin-top:12px">
+                <button
+                  id="toggle-more"
+                  class="btn secondary"
+                  data-more="{{ $showMore }}"
+                  data-less="{{ $showLess }}"
+                >
+                  {{ $showMore }}
+                </button>
+              </div>
+            {{ end }}
+          </article>
+        {{ else }}
+          <p class="sub section">{{ $empty }}</p>
+        {{ end }}
       </div>
     </div>
+
+    <script>
+      (function () {
+        var list = document.getElementById('terms-list');
+        if (!list) return;
+
+        var input = document.getElementById('terms-filter');
+        var toggle = document.getElementById('toggle-more');
+        var LIMIT = {{ $limit }};
+
+        function applyFilter() {
+          var q = (input && input.value ? input.value.toLowerCase() : '').trim();
+          var items = list.querySelectorAll('.chip-item');
+          var shown = 0;
+          items.forEach(function (el) {
+            var name = el.getAttribute('data-name') || '';
+            var match = !q || name.indexOf(q) !== -1;
+            el.classList.toggle('is-filter-hidden', !match);
+          });
+          items.forEach(function (el) {
+            if (el.classList.contains('is-filter-hidden')) return;
+            el.classList.toggle('is-hidden', shown >= LIMIT);
+            shown++;
+          });
+          if (toggle) {
+            toggle.textContent = toggle.getAttribute('data-more');
+            toggle.dataset.state = 'more';
+          }
+        }
+
+        if (input) input.addEventListener('input', applyFilter);
+
+        if (toggle) {
+          toggle.addEventListener('click', function () {
+            var items = list.querySelectorAll('.chip-item:not(.is-filter-hidden)');
+            var more = toggle.getAttribute('data-more');
+            var less = toggle.getAttribute('data-less');
+            var isMore = toggle.dataset.state !== 'less';
+            items.forEach(function (el, idx) {
+              if (idx >= LIMIT) el.classList.toggle('is-hidden', !isMore);
+            });
+            toggle.textContent = isMore ? less : more;
+            toggle.dataset.state = isMore ? 'less' : 'more';
+          });
+        }
+
+        applyFilter();
+      })();
+    </script>
   </section>
 {{- end -}}

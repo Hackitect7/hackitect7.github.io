@@ -1,0 +1,235 @@
+skills:
+  title: "Competencias"
+  intro: "Sistemas de nivel empresarial: diseñar, construir, automatizar y operar. De extremo a extremo — desde redes y SO hasta nube, Kubernetes, seguridad, observabilidad y entrega."
+  highlights:
+    - "22+ años en infraestructura, automatización y operaciones"
+    - "Arquitecturas de nube híbrida y multi-DC"
+    - "Seguridad por defecto, prácticas SRE, conciencia de costes"
+
+  # Leyenda global de niveles
+  levels:
+    expert: "Experto"
+    advanced: "Avanzado"
+    working: "Conocimientos prácticos"
+
+  # Segmentos de la página
+  segments:
+    - id: "platforms"
+      title: "Plataformas y SO"
+      groups:
+        - h: "Sistemas Operativos"
+          level: expert
+          items:
+            [
+              "Linux (Debian/Ubuntu, RHEL)",
+              "Windows Server/Escritorio",
+              "AD/Política de Grupo",
+            ]
+        - h: "Virtualización e Hipervisores"
+          level: advanced
+          items: ["VMware ESXi/vSphere", "Proxmox VE", "Hyper-V", "KVM"]
+        - h: "Almacenamiento y Sistemas de Archivos"
+          level: advanced
+          items: ["Ceph", "ZFS", "NFS", "Compatible con S3 (MinIO)"]
+
+    - id: "networking"
+      title: "Redes"
+      groups:
+        - h: "Fabricantes y Equipos"
+          level: expert
+          items:
+            [
+              "Cisco (R&S, ASA/Firepower)",
+              "Juniper",
+              "MikroTik",
+              "Palo Alto NGFW",
+              "Fortinet (FortiGate)",
+              "pfSense",
+            ]
+        - h: "Protocolos y L4-7"
+          level: expert
+          items:
+            [
+              "BGP, OSPF",
+              "VLAN/VXLAN",
+              "IPsec, WireGuard, OpenVPN",
+              "Nginx, HAProxy, Traefik",
+              "WAF/CDN: Cloudflare",
+              "DNS: Route 53, BIND",
+            ]
+
+    - id: "security"
+      title: "Seguridad e Identidad"
+      groups:
+        - h: "Endurecimiento y Controles"
+          level: advanced
+          items:
+            ["Hardening básico", "SELinux/AppArmor", "Rotación de secretos"]
+        - h: "IAM y SSO"
+          level: advanced
+          items: ["Keycloak (OIDC/OAuth2/SAML)", "AD/LDAP", "RBAC/ABAC"]
+        - h: "Secretos y PKI"
+          level: advanced
+          items: ["HashiCorp Vault", "ACME/Let's Encrypt", "mTLS"]
+
+    - id: "devops"
+      title: "DevOps y Entrega"
+      groups:
+        - h: "CI/CD"
+          level: expert
+          items: ["GitHub Actions", "GitLab CI", "Jenkins"]
+        - h: "IaC y CM"
+          level: expert
+          items: ["Terraform", "Ansible", "Packer", "cloud-init"]
+        - h: "Contenedores"
+          level: advanced
+          items: ["Docker/OCI", "Hardening de imágenes", "SBOM/attestations"]
+
+    - id: "k8s"
+      title: "Kubernetes y GitOps"
+      groups:
+        - h: "Orquestación"
+          level: advanced
+          items: ["Kubernetes", "Helm", "Ingress, HPA, NetworkPolicies"]
+        - h: "GitOps"
+          level: advanced
+          items: ["Argo CD", "Flux", "Entrega progresiva"]
+        - h: "Service Mesh y Políticas"
+          level: working
+          items: ["Istio/Linkerd", "OPA/Gatekeeper"]
+
+    - id: "observability"
+      title: "Observabilidad y SRE"
+      groups:
+        - h: "Métricas y Logs"
+          level: expert
+          items: ["Prometheus/Alertmanager", "Grafana/Loki", "ELK / OpenSearch"]
+        - h: "Fiabilidad"
+          level: advanced
+          items:
+            [
+              "SLO/SLI, presupuestos de error",
+              "Respuesta a incidentes",
+              "Runbooks, post-mortems",
+            ]
+
+    - id: "data"
+      title: "Datos y Mensajería"
+      groups:
+        - h: "Bases de Datos y Cachés"
+          level: advanced
+          items: ["PostgreSQL", "MySQL", "Redis"]
+        - h: "Mensajería/Streaming"
+          level: working
+          items: ["RabbitMQ", "Kafka"]
+        - h: "Backup y DR"
+          level: advanced
+          items: ["Veeam", "restic/Borg", "Snapshots, inmutabilidad"]
+
+    - id: "cloud"
+      title: "Nube"
+      groups:
+        - h: "AWS"
+          level: advanced
+          items: ["EC2, EKS, RDS, S3, IAM, Route53"]
+        - h: "Azure"
+          level: working
+          items: ["VM, AKS, SQL, Storage, AAD"]
+        - h: "GCP"
+          level: working
+          items: ["GKE, Cloud SQL, Storage"]
+
+    - id: "enterprise"
+      title: "Empresa y Cumplimiento"
+      groups:
+        - h: "ITSM y Colaboración"
+          level: working
+          items: ["ServiceNow", "Jira/Confluence", "Slack/MS Teams"]
+        - h: "Normas"
+          level: working
+          items: ["ISO 27001", "SOC 2", "GDPR, NIST"]
+        - h: "Métodos"
+          level: working
+          items:
+            [
+              "Revisiones de arquitectura",
+              "Análisis de costes/riesgos",
+              "Vistas estilo TOGAF",
+            ]
+
+    - id: "code"
+      title: "Lenguajes y Herramientas"
+      groups:
+        - h: "Lenguajes"
+          level: advanced
+          items: ["Bash", "Python", "Go", "PowerShell"]
+        - h: "Herramientas"
+          level: advanced
+          items: ["Git, Make", "Lint/format/scan", "SBOM (Syft/Grype)"]
+
+    - id: "business-economics"
+      kind: "bullets"
+      title: "Economía y FinOps"
+      text: |
+        Haciendo la tecnología económicamente sólida: costes de ciclo de vida completo, valor medible y gobernanza de costes en la nube a escala.
+      bullets:
+        - "Modelos TCO/ROI y business cases"
+        - "FinOps: presupuestos, etiquetado, detección de anomalías, RI/SP, chargeback/showback"
+        - "Economía unitaria: coste por cliente/transacción/entorno"
+        - "Consolidación de licencias y negociación con proveedores"
+        - "Planificación de capacidad vs optimización de costes"
+        - "Previsiones e informes ejecutivos"
+
+    - id: "governance-compliance"
+      kind: "bullets"
+      title: "Gobernanza y Cumplimiento"
+      text: |
+        Guardarraíles adecuados que permiten velocidad sin sacrificar control.
+      bullets:
+        - "Frameworks: ITIL 4, COBIT 2019, TOGAF ADM"
+        - "Seguridad y cumplimiento: ISO 27001/2, SOC 2, PCI DSS, GDPR, NIST CSF"
+        - "Políticas y controles: IAM, gestión de cambios, backup/retención, DLP"
+        - "Preparación para auditoría: evidencias, SoA, registro de riesgos, mapeo de controles"
+        - "Gobernanza de datos: clasificación, linaje, procesamiento legal"
+
+    - id: "business-enablement"
+      kind: "bullets"
+      title: "Habilitación del Negocio"
+      text: |
+        Convirtiendo TI en una palanca para crecimiento, eficiencia y entregas más rápidas.
+      bullets:
+        - "Hojas de ruta de transformación digital"
+        - "Ingeniería de Plataformas / Plataforma Interna de Desarrolladores (IDP)"
+        - "Diseño de SLA/SLO alineado a KPIs de negocio (DORA, MTTR, CFR)"
+        - "Automatización de autoservicio y golden paths"
+        - "Arquitectura de integración: APIs, gateways, event backbones"
+
+    - id: "leadership"
+      kind: "bullets"
+      title: "Liderazgo"
+      text: |
+        Equipos, proveedores y cambios — gestionados con claridad y evidencia.
+      bullets:
+        - "Diseño organizacional para DevOps/SRE y programas de capacitación/mentoría"
+        - "Gestión de incidentes y postmortems sin culpabilización"
+        - "Gestión de proveedores/SLA, RFP/RFI, optimización de contratos"
+        - "Gestión del cambio (ADKAR), alineación con stakeholders"
+        - "Comunicación ejecutiva: QBRs, roadmaps, memos de decisión"
+
+    - id: "strategic-it"
+      kind: "bullets"
+      title: "TI Estratégica"
+      text: |
+        Horizontes de 12–36 meses, postura de riesgos y resiliencia integrada.
+      bullets:
+        - "Hojas de ruta tecnológicas (12–36 meses)"
+        - "Gestión de riesgos y planificación de escenarios"
+        - "Due diligence TI en M&A e integración post-fusión"
+        - "Continuidad de negocio y recuperación ante desastres"
+        - "TI sostenible/verde y compensaciones de costes energéticos"
+
+  cta:
+    title: "¿Tienes un stack complejo?"
+    text: "Alineemos arquitectura, entrega y operaciones — con resultados medibles."
+    buttonText: "Hablar de tu stack"
+    buttonHref: "/es/contacts/?utm_source=skills"

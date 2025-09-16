@@ -1,0 +1,39 @@
+projects:
+  intro: "精选工作：开源、蓝图、教育。"
+  highlights:
+    - "真实世界的架构"
+    - "开源与工具"
+
+  sections:
+    - id: "open-source"
+      title: "开源"
+      text: "可复用的工具和模板。"
+      items:
+        - icon: "🐙"
+          title: "RouterOS 脚本"
+          desc: "使用幂等脚本自动化 MikroTik 集群。"
+          href: "routeros-scripts/"
+          repo: "https://github.com/Hackitect7/routeros-scripts"
+          badge: "网络"
+
+        - icon: "⚙️"
+          title: "DevOps 速查表"
+          desc: "我经过实战考验的 DevOps/SRE 快速参考。"
+          href: "devops-cheat-sheet/"
+          repo: "https://github.com/Hackitect7/devops-cheat-sheet"
+          badge: "DevOps"
+
+    - id: "blueprints"
+      title: "架构蓝图"
+      items:
+        - icon: "🏗️"
+          title: "多区域 Kubernetes"
+          desc: "跨区域的高可用 K8s，结合 GitOps。"
+          href: "k8s-multi-region/"
+          badge: "蓝图"
+
+  cta:
+    title: "需要类似的成果吗？"
+    text: "我将需求转化为可靠、可观测且安全的系统。"
+    href: "contacts"
+    button: "开始项目"

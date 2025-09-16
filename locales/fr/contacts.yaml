@@ -1,0 +1,42 @@
+contacts:
+  title: "Contacts"
+  intro: "Parlons de fiabilité, d’automatisation et d’impact réel sur le business. Choisissez le canal qui vous convient — je réponds rapidement dans mon fuseau horaire."
+
+  person:
+    name: "Aleksei Polovinkin"
+    title: "Architecte d’infrastructure IT • DevOps & Automatisation (Hackitect7)"
+    timezone: "UTC+6 (Asie/Bichkek)"
+    reply_hours: "09:00–22:00"
+    languages: "Russe (parlé), Anglais (+ autres langues) — écrit au niveau natif"
+    availability: "Ouvert au monde entier — projets, partenariats et collaborations à long terme"
+
+  channels:
+    - icon: "📞"
+      label: "Téléphone"
+      href: "tel:+996501141183"
+      display: "+996-501-141-183"
+    - icon: "✈️"
+      label: "Telegram"
+      href: "https://t.me/Manfred251278"
+      display: "@Manfred251278"
+    - icon: "💬"
+      label: "WhatsApp"
+      href: "https://wa.me/996501141183"
+      display: "wa.me/996501141183"
+    - icon: "🔗"
+      label: "LinkedIn"
+      href: "https://www.linkedin.com/in/hackitect7/"
+      display: "linkedin.com/in/hackitect7"
+    - icon: "🐙"
+      label: "GitHub"
+      href: "https://github.com/Hackitect7"
+      display: "github.com/Hackitect7"
+
+  assets:
+    vcard_href: "/vcard/hackitect7.vcf"
+    vcard_text: "Télécharger vCard (.vcf)"
+
+  form:
+    title: "Envoyer un message"
+    lead: "Pour l’instant, veuillez me contacter via Telegram ou WhatsApp."
+    soon: "Le formulaire apparaîtra ici prochainement."

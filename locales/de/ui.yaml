@@ -1,42 +1,67 @@
-brand: "Hackitect7 — Die Musik der Systeme"
+ui:
+  toc: "Auf dieser Seite"
+  faq: "FAQ"
+  learnMore: "Mehr erfahren →"
 
-common:
-  tocToggle: "Abschnitte"
-  backToTop: "Zurück nach oben"
+  blog:
+    title: "Blog"
+    filterTitle: "Durchsuchen"
+    categories: "Kategorien"
+    tags: "Tags"
+    newer: "Neuer"
+    older: "Älter"
+    empty: "Noch keine Beiträge."
+    minRead: "Min. Lesezeit"
+    more: "Mehr zu entdecken"
+    backToList: "Zurück zum Blog"
+    dateFormat: "02. Jan 2006"
+    noPosts: "Noch keine Beiträge."
+    viewAll: "Alle Beiträge anzeigen"
+    min: "Min. Lesezeit"
 
-nav:
-  about: "Über"
-  skills: "Fähigkeiten"
-  services: "Dienstleistungen"
-  projects: "Projekte"
-  blog: "Blog"
-  contacts: "Kontakt"
+  projects:
+    title: "Projekte"
+    tocTitle: "Übersicht"
+    stack: "Stack"
+    linksTitle: "Links"
+    demo: "Live-Demo"
+    more: "Weitere Projekte"
+    backToList: "Zurück zu den Projekten"
 
-services:
-  title: "Dienstleistungen"
-  tocTitle: "Überblick"
+  services:
+    title: "Dienstleistungen"
+    tocTitle: "Übersicht"
 
-about:
-  cred:
-    title: "Einzigartiger Wert"
-    expertise: "Expertise"
-    oss: "Open Source"
-    community: "Community"
+  skills:
+    title: "Fähigkeiten"
+    tocTitle: "Übersicht"
 
-blog:
-  title: "Blog"
-  filterTitle: "Durchsuchen"
-  categories: "Kategorien"
-  tags: "Tags"
-  newer: "Neuer"
-  older: "Älter"
-  empty: "Noch keine Beiträge."
-  minRead: "Min. Lesezeit"
-  more: "Mehr entdecken"
-  backToList: "Zurück zum Blog"
+  common:
+    view: "Ansehen"
+    minRead: "Min. Lesezeit"
+    empty: "Noch kein Inhalt."
+    dateFormat: "02. Jan 2006"
 
-cta:
-  viewAllPosts: "Alle Beiträge ansehen"
+  cta:
+    contact: "Kontakt aufnehmen"
+    primary: "Entdecken"
+    secondary: "Mehr erfahren"
+    tertiary: "In Kontakt treten"
+    ready: "Bereit zum Gespräch?"
+    servicePrompt: "Erzählen Sie mir von Ihren Anforderungen"
 
-footer:
-  made: "Erstellt mit Hugo und ❤️"
+  aria:
+    prevPost: "Vorheriger Beitrag"
+    nextPost: "Nächster Beitrag"
+
+  about:
+    tocTitle: "Übersicht"
+
+  footer:
+    made: "Erstellt mit Hugo und ❤️"
+
+  tax:
+    filterTitle: "Durchsuchen"
+    filterPlaceholder: "Filtern…"
+    showMore: "Mehr anzeigen"
+    showLess: "Weniger anzeigen"

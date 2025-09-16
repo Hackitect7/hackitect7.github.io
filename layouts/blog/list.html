@@ -1,48 +1,52 @@
-{{ define "main" }}
+{{- define "main" -}}
   <section class="blog-page">
-    {{- $lang := .Site.Language.Lang -}}
-    {{- $blog := (index site.Data $lang "blog") | default (index site.Data "us" "blog") -}}
-    {{- $ui := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+    {{- $lang    := .Site.Language.Lang -}}
+    {{- $title   := partial "t.html" (dict "key" "ui.blog.title"       "ctx" . "default" "Blog") -}}
+    {{- $intro   := partial "t.html" (dict "key" "blog.intro"          "ctx" . "default" "") -}}
+    {{- $filter  := partial "t.html" (dict "key" "ui.blog.filterTitle" "ctx" . "default" "Browse") -}}
+    {{- $lblCat  := partial "t.html" (dict "key" "ui.blog.categories"  "ctx" . "default" "Categories") -}}
+    {{- $lblTag  := partial "t.html" (dict "key" "ui.blog.tags"        "ctx" . "default" "Tags") -}}
+    {{- $newer   := partial "t.html" (dict "key" "ui.blog.newer"       "ctx" . "default" "Newer") -}}
+    {{- $older   := partial "t.html" (dict "key" "ui.blog.older"       "ctx" . "default" "Older") -}}
+    {{- $empty   := partial "t.html" (dict "key" "ui.blog.empty"       "ctx" . "default" "No posts yet.") -}}
+    {{- $minRead := partial "t.html" (dict "key" "ui.blog.minRead"     "ctx" . "default" "min read") -}}
+    {{- $dateFmt := printf "%s" (partial "t.html" (dict "key" "ui.blog.dateFormat" "ctx" . "default" "Jan 02, 2006")) -}}
 
 
     <!-- HERO -->
     <section class="hero section">
-      <h1>{{ or $blog.title (or $ui.blog.title "Blog") }}</h1>
-      {{ with $blog.intro }}<p class="tagline">{{ . }}</p>{{ end }}
+      <h1>{{ $title }}</h1>
+      {{ with $intro }}<p class="tagline">{{ . }}</p>{{ end }}
     </section>
 
     <div class="services-layout section">
-      <!-- Сайдбар: категории/теги -->
+      <!-- Sidebar: browse -->
       <aside class="services-toc card">
-        <h3>{{ or $ui.blog.filterTitle "Browse" }}</h3>
+        <h3>{{ $filter }}</h3>
 
-        {{/* Категории текущего языка */}}
-        {{ $cats := dict }}
+        {{/* Categories (только текущего языка) */}}
+        {{- $cats := dict -}}
         {{ with site.Taxonomies.categories }}
-          {{ range $name, $pages := . }}
-            {{ $langPages := where $pages "Lang" $lang }}
-            {{ if gt (len $langPages) 0 }}
-              {{ $cats = merge $cats (dict $name $langPages) }}
-            {{ end }}
-          {{ end }}
+          {{- range $name, $pages := . -}}
+            {{- $langPages := where $pages "Lang" $lang -}}
+            {{- if gt (len $langPages) 0 -}}
+              {{- $cats = merge $cats (dict $name $langPages) -}}
+            {{- end -}}
+          {{- end -}}
         {{ end }}
-
-        {{/* Преобразуем dict -> slice и сортируем по имени */}}
-        {{ $catList := slice }}
-        {{ range $name, $pages := $cats }}
-          {{ $catList = $catList | append (dict "name" $name "pages" $pages) }}
-        {{ end }}
-        {{ $catList = sort $catList "name" }}
+        {{- $catList := slice -}}
+        {{- range $name, $pages := $cats -}}
+          {{- $catList = $catList | append (dict "name" $name "pages" $pages) -}}
+        {{- end -}}
+        {{- $catList = sort $catList "name" -}}
 
         {{ if gt (len $catList) 0 }}
-          <p class="sub">{{ or $ui.blog.categories "Categories" }}</p>
+          <p class="sub">{{ $lblCat }}</p>
           <ul>
             {{ range $catList }}
-              {{ $slug := urlize .name }}
+              {{- $slug := urlize .name -}}
               <li>
-                <a
-                  href="{{ (printf "/%s/categories/%s/" $lang $slug) | relLangURL }}"
-                >
+                <a href="{{ (printf "/categories/%s/" $slug) | relLangURL }}">
                   {{ .name }} ({{ len .pages }})
                 </a>
               </li>
@@ -50,50 +54,44 @@
           </ul>
         {{ end }}
 
-        {{/* Теги текущего языка */}}
-        {{ $tags := dict }}
+        {{/* Tags (только текущего языка) */}}
+        {{- $tags := dict -}}
         {{ with site.Taxonomies.tags }}
-          {{ range $name, $pages := . }}
-            {{ $langPages := where $pages "Lang" $lang }}
-            {{ if gt (len $langPages) 0 }}
-              {{ $tags = merge $tags (dict $name $langPages) }}
-            {{ end }}
-          {{ end }}
+          {{- range $name, $pages := . -}}
+            {{- $langPages := where $pages "Lang" $lang -}}
+            {{- if gt (len $langPages) 0 -}}
+              {{- $tags = merge $tags (dict $name $langPages) -}}
+            {{- end -}}
+          {{- end -}}
         {{ end }}
-
-        {{ $tagList := slice }}
-        {{ range $name, $pages := $tags }}
-          {{ $tagList = $tagList | append (dict "name" $name "pages" $pages) }}
-        {{ end }}
-        {{ $tagList = sort $tagList "name" }}
+        {{- $tagList := slice -}}
+        {{- range $name, $pages := $tags -}}
+          {{- $tagList = $tagList | append (dict "name" $name "pages" $pages) -}}
+        {{- end -}}
+        {{- $tagList = sort $tagList "name" -}}
 
         {{ if gt (len $tagList) 0 }}
-          <p class="sub" style="margin-top:12px">
-            {{ or $ui.blog.tags "Tags" }}
-          </p>
+          <p class="sub" style="margin-top:12px">{{ $lblTag }}</p>
           <ul>
             {{ range $tagList }}
-              {{ $slug := urlize .name }}
+              {{- $slug := urlize .name -}}
               <li>
-                <a
-                  href="{{ (printf "/%s/tags/%s/" $lang $slug) | relLangURL }}"
+                <a href="{{ (printf "/tags/%s/" $slug) | relLangURL }}"
+                  >#{{ .name }} ({{ len .pages }})</a
                 >
-                  #{{ .name }} ({{ len .pages }})
-                </a>
               </li>
             {{ end }}
           </ul>
         {{ end }}
       </aside>
 
-      <!-- Список постов -->
+      <!-- Posts -->
       <div class="services-content">
-        {{/* Только статьи текущего языка */}}
-        {{ $all := where (where site.RegularPages "Type" "blog") "Lang" $lang }}
-        {{ $paginator := .Paginate (sort $all "Date" "desc") }}
+        {{- $all := where (where site.RegularPages "Type" "blog") "Lang" $lang -}}
+        {{- $p := .Paginate (sort $all "Date" "desc") -}}
 
-        {{ if $paginator.Pages }}
-          {{ range $paginator.Pages }}
+        {{ if $p.Pages }}
+          {{ range $p.Pages }}
             <article class="card section">
               <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
               <p>
@@ -104,46 +102,64 @@
                 {{ end }}
               </p>
               <p class="sub">
-                {{ .Date.Format "02 Jan 2006" }}
-                {{ with .ReadingTime }}· {{ . }} min read{{ end }}
-                {{ with .Params.tags }}· {{ delimit . ", " }}{{ end }}
+                {{- $iso := .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+                <time datetime="{{ $iso }}">{{ .Date.Format $dateFmt }}</time>
+                {{- with .ReadingTime -}}· {{ . }} {{ $minRead }}{{- end -}}
+                {{- with .Params.tags -}}
+                  ·
+                  {{- $links := slice -}}
+                  {{- range . -}}
+                    {{- $slug := urlize . -}}
+                    {{- $href := (printf "/tags/%s/" $slug) | relLangURL -}}
+                    {{- $links = $links | append (printf `<a href="%s" rel="tag">#%s</a>` $href .) -}}
+                  {{- end -}}
+                  {{- delimit $links ", " | safeHTML -}}
+                {{- end -}}
               </p>
             </article>
           {{ end }}
 
-
-          <!-- Пагинация -->
-          {{ if gt $paginator.TotalPages 1 }}
+          {{ if gt $p.TotalPages 1 }}
             <nav class="cta-row section" aria-label="Pagination">
-              {{ if $paginator.HasPrev }}
-                <a class="btn secondary" href="{{ $paginator.Prev.URL }}"
-                  >← {{ or $ui.blog.newer "Newer" }}</a
+              {{ if $p.HasPrev }}
+                <a class="btn secondary" href="{{ $p.Prev.URL }}"
+                  >← {{ $newer }}</a
                 >
               {{ end }}
-              {{ if $paginator.HasNext }}
-                <a class="btn secondary" href="{{ $paginator.Next.URL }}"
-                  >{{ or $ui.blog.older "Older" }} →</a
+              {{ if $p.HasNext }}
+                <a class="btn secondary" href="{{ $p.Next.URL }}"
+                  >{{ $older }} →</a
                 >
               {{ end }}
             </nav>
           {{ end }}
         {{ else }}
-          <p class="sub section">{{ or $ui.blog.empty "No posts yet." }}</p>
+          <p class="sub section">{{ $empty }}</p>
         {{ end }}
       </div>
     </div>
 
-    <!-- ФИНАЛЬНЫЙ CTA -->
-    {{ with $blog.cta }}
-      {{- $raw := .href | default "contacts" -}}
-      {{- $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim $raw "/")) | relLangURL) -}}
+    {{/* Optional CTA (из locales/<lang>/blog.yaml) */}}
+    {{- $ctaOn    := partial "t.html" (dict "key" "blog.cta.enabled" "ctx" . "default" "") -}}
+    {{- $ctaTitle := partial "t.html" (dict "key" "blog.cta.title"   "ctx" . "default" "") -}}
+    {{- $ctaText  := partial "t.html" (dict "key" "blog.cta.text"    "ctx" . "default" "") -}}
+    {{- $ctaBtn   := partial "t.html" (dict "key" "blog.cta.button"  "ctx" . "default" "") -}}
+    {{- $rawHref  := partial "t.html" (dict "key" "blog.cta.href"    "ctx" . "default" "") -}}
+    {{- $btnDef   := partial "t.html" (dict "key" "ui.cta.contact"   "ctx" . "default" "Contact me") -}}
+    {{- $hasCTA   := or $ctaOn $ctaTitle -}}
+
+    {{ if $hasCTA }}
+      {{- $href := cond (and $rawHref (hasPrefix $rawHref "http"))
+        $rawHref
+        (cond $rawHref ((printf "/%s/" (trim $rawHref "/")) | relLangURL) "")
+      -}}
       <section class="section card" style="text-align:center">
-        <h2>{{ .title }}</h2>
-        {{ with .text }}<p class="sub">{{ . }}</p>{{ end }}
-        <a class="btn" href="{{ $href }}"
-          >{{ or .button (or $ui.cta.contact "Contact me") }}</a
-        >
+        {{ with $ctaTitle }}<h2>{{ . }}</h2>{{ end }}
+        {{ with $ctaText }}<p class="sub">{{ . }}</p>{{ end }}
+        {{ if $href }}
+          <a class="btn" href="{{ $href }}">{{ or $ctaBtn $btnDef }}</a>
+        {{ end }}
       </section>
     {{ end }}
   </section>
-{{ end }}
+{{- end -}}

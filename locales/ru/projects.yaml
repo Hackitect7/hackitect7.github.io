@@ -1,34 +1,39 @@
-title: "Проекты"
-intro: "Избранные работы: open source, архитектурные шаблоны, образование."
-highlights:
-  - "Архитектуры из реальной практики"
-  - "Open source и инструменты"
-sections:
-  - id: "open-source"
-    title: "Open Source"
-    text: "Многоразовые инструменты и шаблоны."
-    items:
-      - icon: "🐙"
-        title: "RouterOS Scripts"
-        desc: "Автоматизация MikroTik-флотов с помощью идемпотентных скриптов."
-        href: "/ru/projects/routeros-scripts/"
-        repo: "https://github.com/Hackitect7/routeros-scripts"
-        badge: "Networking"
-      - icon: "⚙️"
-        title: "DevOps Cheat Sheet"
-        desc: "Моя проверенная на практике шпаргалка по DevOps/SRE."
-        href: "/ru/projects/devops-cheat-sheet/"
-        repo: "https://github.com/Hackitect7/devops-cheat-sheet"
-        badge: "DevOps"
-  - id: "blueprints"
-    title: "Архитектурные шаблоны"
-    items:
-      - icon: "🏗️"
-        title: "Мульти-региональный Kubernetes"
-        desc: "Высокодоступный Kubernetes между регионами с GitOps."
-        href: "/ru/projects/k8s-multi-region/"
-cta:
-  title: "Нужен похожий результат?"
-  text: "Я превращаю требования в надёжные, наблюдаемые и безопасные системы."
-  href: "contacts"
-  button: "Начать проект"
+projects:
+  intro: "Выбранные работы: open source, архитектурные схемы, образование."
+  highlights:
+    - "Реальные архитектуры"
+    - "Open source и инструменты"
+
+  sections:
+    - id: "open-source"
+      title: "Open Source"
+      text: "Многоразовые инструменты и шаблоны."
+      items:
+        - icon: "🐙"
+          title: "RouterOS скрипты"
+          desc: "Автоматизация парка MikroTik с помощью идемпотентных скриптов."
+          href: "routeros-scripts/"
+          repo: "https://github.com/Hackitect7/routeros-scripts"
+          badge: "Сетевые технологии"
+
+        - icon: "⚙️"
+          title: "Шпаргалка по DevOps"
+          desc: "Моя проверенная временем DevOps/SRE шпаргалка."
+          href: "devops-cheat-sheet/"
+          repo: "https://github.com/Hackitect7/devops-cheat-sheet"
+          badge: "DevOps"
+
+    - id: "blueprints"
+      title: "Архитектурные эталоны (blueprints)"
+      items:
+        - icon: "🏗️"
+          title: "Мультирегиональный Kubernetes"
+          desc: "Высокодоступный Kubernetes в разных регионах с GitOps."
+          href: "k8s-multi-region/"
+          badge: "Эталоны (blueprints)"
+
+  cta:
+    title: "Нужен похожий результат?"
+    text: "Я превращаю требования в надёжные, наблюдаемые и безопасные системы."
+    href: "contacts"
+    button: "Начать проект"

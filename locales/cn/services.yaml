@@ -1,0 +1,130 @@
+services:
+  title: "服务"
+  intro: >
+    我提供全方位的 IT 服务 —— 从基础设施架构和 DevOps，
+    到危机管理和业务对齐。每一项服务都旨在实现可衡量的
+    弹性、可扩展性和效率。
+
+  sections:
+    - id: "infrastructure-architecture"
+      title: "基础设施架构"
+      text: |
+        为本地、云端和混合环境设计稳健且可扩展的基础设施。
+        涉及数据中心布局、网络、容量规划和成本优化。
+      bullets:
+        - "本地与混合云设计"
+        - "多数据中心的弹性与故障切换"
+        - "网络、安全分区、存储策略"
+      cta:
+        text: "讨论基础设施"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
+
+    - id: "devops-automation"
+      title: "DevOps 与自动化"
+      text: |
+        基于基础设施即代码和 GitOps 原则构建现代交付流水线。
+        精简开发与运维，加速交付并减少人为错误。
+      bullets:
+        - "CI/CD 流水线（GitHub Actions、GitLab CI）"
+        - "Terraform 与 Ansible 的 IaC"
+        - "自动化环境与自助式工作流"
+      cta:
+        text: "规划 DevOps 路线图"
+        href: "contacts"
+        utmCampaign: "devops-automation"
+
+    - id: "observability-sre"
+      title: "可观测性与 SRE"
+      text: |
+        实施可见性和可靠性实践，保持系统健康。
+        从监控与告警到 SLO/SLI 定义与事件响应框架。
+      bullets:
+        - "Prometheus、Grafana、ELK 堆栈"
+        - "SLO/SLI 与错误预算"
+        - "事件响应手册"
+      cta:
+        text: "提升可靠性"
+        href: "contacts"
+        utmCampaign: "observability-sre"
+
+    - id: "security"
+      title: "安全与加固"
+      text: |
+        应用务实的安全措施，而不是流行词汇。
+        重点在于减少攻击面、执行最小权限和保护机密。
+      bullets:
+        - "系统与容器加固"
+        - "身份与访问控制"
+        - "机密管理与审计追踪"
+      cta:
+        text: "加强安全"
+        href: "contacts"
+        utmCampaign: "security"
+
+    - id: "crisis-management"
+      title: "危机 IT 管理"
+      text: |
+        在事件、中断和高风险迁移期间帮助组织恢复与适应。
+        将混乱转化为结构化的恢复和长期弹性。
+      bullets:
+        - "紧急事件处理"
+        - "灾难恢复与连续性规划"
+        - "事后复盘与改进"
+      cta:
+        text: "需要危机处理专家？"
+        href: "contacts"
+        utmCampaign: "crisis-management"
+
+    - id: "consulting"
+      title: "咨询与指导"
+      text: |
+        通过有针对性的咨询和实践指导为团队与组织赋能。
+        提供知识转移与架构审查，强化内部能力。
+      bullets:
+        - "架构与流程审查"
+        - "研讨会与技术培训"
+        - "工程师与管理者的指导"
+      cta:
+        text: "预约咨询"
+        href: "contacts"
+        utmCampaign: "consulting"
+
+    - id: "business-alignment"
+      title: "业务对齐"
+      text: |
+        将技术与真实的业务成果相连接。
+        确保 IT 不仅是成本中心，而是效率、可扩展性和增长的驱动力。
+      bullets:
+        - "IT 成本优化策略"
+        - "与业务目标对齐的路线图"
+        - "以弹性和可扩展性为竞争优势"
+      cta:
+        text: "让 IT 与业务对齐"
+        href: "contacts"
+        utmCampaign: "business-alignment"
+
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "从技术到业务成果"
+      text: |
+        我将架构与经济结合，让技术服务于战略。
+        我们量化价值、治理开销，并在影响收入的地方嵌入可靠性。
+      bullets:
+        - "战略转化 → 目标架构与运营模型"
+        - "量化价值：TCO/ROI、单位经济学、可供高管决策的商业案例"
+        - "FinOps 治理：预算、标签、警报及按产品/团队划分的成本 KPI"
+        - "合规即设计：控制措施映射到 ISO/SOC2/PCI/GDPR"
+        - "运营化：SLO、仪表板、运行手册和事件手册"
+        - "供应商与许可证优化，实现可衡量的节省"
+      cta:
+        text: "规划业务/IT 对齐"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
+
+  finalCta:
+    title: "准备好交流了吗？"
+    text: "需要可靠性、自动化和清晰度？让我们一起设计真正有效的系统。"
+    contact: "联系我"
+    href: "contacts"
+    utmCampaign: "services-final"

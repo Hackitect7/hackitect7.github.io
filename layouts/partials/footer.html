@@ -1,13 +1,23 @@
-{{/* Берём brand из языка, иначе из глобального params */}}
-{{ $brand := or
-  .Site.Language.Params.brand .Site.Params.brand
-}}
-{{ $ui := index site.Data
-  (printf "ui.%s" .Site.Language.Lang) | default (index site.Data "ui.us")
-}}
+{{/* Footer: читаем только из locales/<lang>/ui.yaml */}}
+{{- $lang   := .Site.Language.Lang -}}
+{{- $raw    := (index site.Data $lang "ui") | default (index site.Data "us" "ui") | default dict -}}
+
+{{/* поддержка двух форматов:
+  A) footer: {...}
+  B) ui: { footer: {...} }
+*/}}
+{{- $uif := or (index $raw "footer") (index $raw "ui" "footer") | default dict -}}
+
+{{- $brand := or (index $uif "brand") .Site.Title -}}
+{{- $made  := index $uif "made" | default "" -}}
+{{- $copyFmt := index $uif "copyright" | default "© %d %s" -}}
+{{- $year := now.Year -}}
+{{- $copyright := printf $copyFmt $year $brand -}}
 
 
-<div class="container footer-inner">
-  <span>© {{ now.Year }} {{ $brand }}</span>
-  <span class="footer-made">{{ $ui.footer.made }}</span>
-</div>
+<footer class="footer">
+  <div class="container footer-inner" role="contentinfo" aria-label="Site footer">
+    <span>{{ $copyright }}</span>
+    {{- with $made }}<span class="footer-made">{{ . }}</span>{{- end }}
+  </div>
+</footer>

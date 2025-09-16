@@ -1,0 +1,43 @@
+{{/*
+  Usage (в Markdown/контенте):
+  {{< imgset base="assets/img/hero" alt="Hackitect7" widths="320,640,960,1200" ext="jpg" class="hero" sizes="(max-width: 1200px) 100vw, 1200px" width="1200" >}}
+
+  Где лежат файлы:
+    static/assets/img/hero-320.jpg
+    static/assets/img/hero-640.jpg
+    static/assets/img/hero-960.jpg
+    static/assets/img/hero-1200.jpg
+    (и, опционально, соответствующие .webp)
+*/}}
+
+{{- $base := .Get "base" -}}             {{/* без расширения; с каталогом от /static, напр. assets/img/hero */}}
+{{- $alt  := .Get "alt"  | default "" -}}
+{{- $cls  := .Get "class" -}}
+{{- $ext  := .Get "ext"  | default "jpg" -}}
+{{- $wstr := .Get "widths" | default "320,640,960,1200" -}}
+{{- $sizes := .Get "sizes" | default "(max-width: 1200px) 100vw, 1200px" -}}
+{{- $width := .Get "width" | default "1200" -}}
+
+{{- $ws := (split $wstr ",") -}}
+
+{{- /* Собираем srcset для webp и для основного формата */ -}}
+{{- $webp := slice -}}
+{{- $raster := slice -}}
+{{- range $ws -}}
+  {{- $w := trim . " " -}}
+  {{- $webp  = $webp  | append (printf "%s-%s.webp %sw" $base $w $w | relURL) -}}
+  {{- $raster = $raster | append (printf "%s-%s.%s %sw" $base $w $ext $w | relURL) -}}
+{{- end -}}
+
+<picture>
+  {{- /* WebP-источник: если файлов нет — браузер просто проигнорит */ -}}
+  <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+  <img
+    src="{{ printf "%s-%s.%s" $base (index $ws (sub (len $ws) 1) | trim ) $ext | relURL }}"
+    srcset="{{ delimit $raster ", " }}"
+    sizes="{{ $sizes }}"
+    width="{{ $width }}"
+    loading="lazy"
+    decoding="async"
+    alt="{{ $alt }}"{{ with $cls }} class="{{ . }}"{{ end }}>
+</picture>

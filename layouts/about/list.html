@@ -1,155 +1,203 @@
 {{- define "main" -}}
-  {{- $lang  := .Site.Language.Lang -}}
-  {{- $about := (index site.Data $lang "about") | default (index site.Data "us" "about") -}}
-  {{- $ui    := (index site.Data $lang "ui")    | default (index site.Data "us" "ui") -}}
+  {{- $lang := .Site.Language.Lang -}}
+
+  {{/* locales/<lang>/about.yaml -> корень about: */}}
+  {{- $aboutRoot := (index site.Data $lang "about") | default (index site.Data "us" "about") -}}
+  {{- $about := (index $aboutRoot "about") | default dict -}}
+
+  {{/* UI-словарь и лейблы через t.html с безопасными дефолтами */}}
+  {{- $uiRoot := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+  {{- $ui := (index $uiRoot "ui") | default dict -}}
+  {{- $tocTitle := partial "t.html" (dict "key" "ui.about.tocTitle" "ctx" . "default" (partial "t.html" (dict "key" "ui.services.tocTitle" "ctx" . "default" "Overview"))) -}}
+  {{- $ctaDefault := partial "t.html" (dict "key" "ui.cta.contact" "ctx" . "default" "Contact me") -}}
+
+  {{/* UTM/аналитика для CTA (адаптируем /us/ к текущему языку) */}}
+  {{- $ctaBase := .Site.Params.ctaBase | default (printf "/%s/contacts/?utm_source=about&utm_medium=site&utm_campaign=" $lang) -}}
+  {{- $ctaBase = replace $ctaBase "/us/" (print "/" $lang "/") -}}
 
   {{/* HERO */}}
-  <section class="hero">
+  <section class="hero" role="region" aria-label="About hero">
     <h1>{{ or $about.title .Title }}</h1>
     {{- with $about.subtitle -}}<p class="tagline">{{ . }}</p>{{- end -}}
     {{- with $about.highlights -}}
-      <ul class="sub">
-        {{- range . -}}<li>{{ . }}</li>{{- end -}}
-      </ul>
+      {{- if gt (len .) 0 -}}
+        <ul class="sub">
+          {{- range . -}}<li>{{ . }}</li>{{- end -}}
+        </ul>
+      {{- end -}}
     {{- end -}}
   </section>
 
   <div class="services-layout">
-    {{/* Универсальный TOC слева */}}
-    {{- partial "toc.html" (dict "title" (or $ui.about.tocTitle (or $ui.services.tocTitle "Overview")) "items" $about.sections) -}}
+    {{/* TOC слева (безопасный items) */}}
+    {{- $sections := $about.sections | default (slice) -}}
+    {{- partial "toc.html" (dict "title" $tocTitle "items" $sections) -}}
 
     {{/* Контент справа */}}
     <div class="services-content">
-      {{- range $about.sections -}}
-        {{- $sid := .id -}}
+      {{- range $sections -}}
+        {{- $sid := .id | default "" -}}
+        {{- $hid := printf "%s-h2" (cond (ne $sid "") $sid (anchorize .title)) -}}
         <section
           {{ if $sid }}id="{{ $sid }}"{{ end }}
           class="service-block card spy-section"
+          aria-labelledby="{{ $hid }}"
         >
-          <h2>{{ .title }}</h2>
+          <h2 id="{{ $hid }}">{{ .title }}</h2>
 
           {{- with .text -}}
-            {{- $paras := split . "\n\n" -}}
-            {{- range $paras -}}<p>{{ . | markdownify }}</p>{{- end -}}
+            <div class="prose">{{ . | markdownify }}</div>
           {{- end -}}
 
           {{- with .facts -}}
-            <dl class="facts">
-              {{- range . -}}
-                <dt>{{ .label }}</dt>
-                <dd>
-                  {{- if .items -}}
-                    <ul class="facts-list">
-                      {{- range .items -}}<li>{{ . }}</li>{{- end -}}
-                    </ul>
-                  {{- else -}}
-                    {{- with .text -}}{{ . | markdownify }}{{- end -}}
-                  {{- end -}}
-                </dd>
-              {{- end -}}
-            </dl>
+            {{- if gt (len .) 0 -}}
+              <dl class="facts">
+                {{- range . -}}
+                  <dt>{{ .label }}</dt>
+                  <dd>
+                    {{- if .items -}}
+                      {{- if gt (len .items) 0 -}}
+                        <ul class="facts-list">
+                          {{- range .items -}}<li>{{ . }}</li>{{- end -}}
+                        </ul>
+                      {{- end -}}
+                    {{- else -}}
+                      {{- with .text -}}{{ . | markdownify }}{{- end -}}
+                    {{- end -}}
+                  </dd>
+                {{- end -}}
+              </dl>
+            {{- end -}}
           {{- end -}}
 
           {{- with .steps -}}
-            <ol class="sub">
-              {{- range . -}}<li>{{ . }}</li>{{- end -}}
-            </ol>
+            {{- if gt (len .) 0 -}}
+              <ol class="sub">
+                {{- range . -}}<li>{{ . }}</li>{{- end -}}
+              </ol>
+            {{- end -}}
           {{- end -}}
 
           {{- with .notes -}}<p>{{ . | markdownify }}</p>{{- end -}}
 
           {{- with .bullets -}}
-            <ul class="bullets">
-              {{- range . -}}<li>{{ . }}</li>{{- end -}}
-            </ul>
+            {{- if gt (len .) 0 -}}
+              <ul class="bullets">
+                {{- range . -}}<li>{{ . }}</li>{{- end -}}
+              </ul>
+            {{- end -}}
           {{- end -}}
 
           {{/* Карточки сеткой (what/cred/engagement и т.п.) */}}
           {{- with .cards -}}
-            <div class="grid">
-              {{- range . -}}
-                <div class="card">
-                  {{- with .badge -}}<p class="sub">{{ . }}</p>{{- end -}}
-                  {{- with .h -}}<h3>{{ . }}</h3>{{- end -}}
-                  {{- with .p -}}
-                    <p class="sub">{{ . | markdownify }}</p>
-                  {{- end -}}
-                  {{- with .bullets -}}
-                    <ul>
-                      {{- range . -}}<li>{{ . }}</li>{{- end -}}
-                    </ul>
-                  {{- end -}}
-                </div>
-              {{- end -}}
-            </div>
-          {{- end -}}
-
-          {{/* Проекты-кейсы + метрики */}}
-          {{- with .cases -}}
-            <div class="grid">
-              {{- range . -}}
-                <article class="card">
-                  {{- with .badge -}}<p class="sub">{{ . }}</p>{{- end -}}
-                  <h3>{{ .title }}</h3>
-                  {{- with .desc -}}<p>{{ . | markdownify }}</p>{{- end -}}
-                  {{- with .metrics -}}
-                    <ul class="bullets">
-                      {{- range . -}}<li>{{ . }}</li>{{- end -}}
-                    </ul>
-                  {{- end -}}
-                </article>
-              {{- end -}}
-            </div>
-          {{- end -}}
-
-          {{/* Отрасли (если входят в эту секцию) */}}
-          {{- with .industries -}}
-            {{- $iid := .id -}}
-            <section
-              {{ if $iid }}id="{{ $iid }}"{{ end }}
-              class="section card spy-section"
-            >
-              <h2>{{ .title }}</h2>
-              {{- with .text -}}
-                <p class="sub">{{ . | markdownify }}</p>
-              {{- end -}}
+            {{- if gt (len .) 0 -}}
               <div class="grid">
-                {{- range .cards -}}
+                {{- range . -}}
                   <div class="card">
+                    {{- with .badge -}}<p class="sub">{{ . }}</p>{{- end -}}
                     {{- with .h -}}<h3>{{ . }}</h3>{{- end -}}
+                    {{- with .p -}}<p class="sub">{{ . | markdownify }}</p>{{- end -}}
                     {{- with .bullets -}}
-                      <ul>
-                        {{- range . -}}<li>{{ . }}</li>{{- end -}}
-                      </ul>
+                      {{- if gt (len .) 0 -}}
+                        <ul>
+                          {{- range . -}}<li>{{ . }}</li>{{- end -}}
+                        </ul>
+                      {{- end -}}
                     {{- end -}}
                   </div>
                 {{- end -}}
               </div>
+            {{- end -}}
+          {{- end -}}
+
+          {{/* Проекты-кейсы + метрики */}}
+          {{- with .cases -}}
+            {{- if gt (len .) 0 -}}
+              <div class="grid">
+                {{- range . -}}
+                  <article class="card">
+                    {{- with .badge -}}<p class="sub">{{ . }}</p>{{- end -}}
+                    <h3>{{ .title }}</h3>
+                    {{- with .desc -}}<p>{{ . | markdownify }}</p>{{- end -}}
+                    {{- with .metrics -}}
+                      {{- if gt (len .) 0 -}}
+                        <ul class="bullets">
+                          {{- range . -}}<li>{{ . }}</li>{{- end -}}
+                        </ul>
+                      {{- end -}}
+                    {{- end -}}
+                  </article>
+                {{- end -}}
+              </div>
+            {{- end -}}
+          {{- end -}}
+
+          {{/* Отрасли (если входят в эту секцию) */}}
+          {{- with .industries -}}
+            {{- $iid := .id | default "" -}}
+            <section
+              {{ if $iid }}id="{{ $iid }}"{{ end }}
+              class="section card spy-section"
+              aria-labelledby="{{ printf "%s-h2" (cond (ne $iid "") $iid (anchorize .title)) }}"
+            >
+              <h2 id="{{ printf "%s-h2" (cond (ne $iid "") $iid (anchorize .title)) }}">{{ .title }}</h2>
+              {{- with .text -}}<p class="sub">{{ . | markdownify }}</p>{{- end -}}
+              {{- with .cards -}}
+                {{- if gt (len .) 0 -}}
+                  <div class="grid">
+                    {{- range . -}}
+                      <div class="card">
+                        {{- with .h -}}<h3>{{ . }}</h3>{{- end -}}
+                        {{- with .bullets -}}
+                          {{- if gt (len .) 0 -}}
+                            <ul>
+                              {{- range . -}}<li>{{ . }}</li>{{- end -}}
+                            </ul>
+                          {{- end -}}
+                        {{- end -}}
+                      </div>
+                    {{- end -}}
+                  </div>
+                {{- end -}}
+              {{- end -}}
             </section>
           {{- end -}}
 
+          {{/* CTA внутри секции (с UTM и аналитикой) */}}
           {{- with .cta -}}
             {{- $raw := .href | default "contacts" -}}
-            {{- $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim $raw "/")) | relLangURL) -}}
-            <p>
-              <a class="btn" href="{{ $href }}"
-                >{{ or .text (or $ui.cta.contact "Contact me") }}</a
-              >
-            </p>
+            {{- $campaign := .campaign | default (cond (ne $sid "") $sid (anchorize $.Title)) -}}
+            {{- $href := cond (hasPrefix $raw "http") $raw (printf "%s%s" $ctaBase (urlize $campaign)) -}}
+            {{- if $href -}}
+              <p>
+                <a class="btn"
+                   href="{{ $href }}"
+                   rel="noopener"
+                   data-analytics="about-cta-{{ $campaign }}">
+                  {{ .text | default $ctaDefault }}
+                </a>
+              </p>
+            {{- end -}}
           {{- end -}}
         </section>
       {{- end -}}
 
       {{/* Финальный CTA */}}
       {{- with $about.finalCta -}}
-        {{- $raw  := .href | default "contacts" -}}
-        {{- $href := cond (hasPrefix $raw "http") $raw ((printf "/%s/%s/" $lang (trim $raw "/")) | relLangURL) -}}
-        <section class="service-cta-final card" style="text-align:center">
-          <h2>{{ .title }}</h2>
+        {{- $campaign := .campaign | default "about-final" -}}
+        {{- $raw := .href | default "contacts" -}}
+        {{- $href := cond (hasPrefix $raw "http") $raw (printf "%s%s" $ctaBase (urlize $campaign)) -}}
+        <section class="service-cta-final card" style="text-align:center" aria-labelledby="about-final-h2">
+          <h2 id="about-final-h2">{{ .title | default "Ready to talk?" }}</h2>
           {{- with .text -}}<p class="sub">{{ . }}</p>{{- end -}}
-          <a class="btn" href="{{ $href }}"
-            >{{ or .button (or $ui.cta.contact "Contact me") }}</a
-          >
+          {{- if $href -}}
+            <a class="btn"
+               href="{{ $href }}"
+               rel="noopener"
+               data-analytics="about-cta-{{ $campaign }}">
+              {{ .button | default $ctaDefault }}
+            </a>
+          {{- end -}}
         </section>
       {{- end -}}
     </div>

@@ -1,4 +1,14 @@
 {
-  "assets/**/*.css": ["stylelint --fix"],
-  "layouts/**/*.html": ["stylelint --fix"]
+  "**/*.{md,mdx}": ["markdownlint-cli2 --config .markdownlint.jsonc", "prettier --write"],
+
+  "**/*.{yml,yaml,json,toml}": ["prettier --write"],
+
+  "assets/**/*.{css,scss}": ["stylelint --fix --cache", "prettier --write"],
+
+  "layouts/**/*.{html,xml}": ["prettier --write"],
+  "themes/**/layouts/**/*.{html,xml}": ["prettier --write"],
+
+  "static/**/*.svg": ["svgo --multipass"],
+
+  "**/*.{js,ts}": ["eslint --fix", "prettier --write"]
 }

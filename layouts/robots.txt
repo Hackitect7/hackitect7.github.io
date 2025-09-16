@@ -1,0 +1,20 @@
+{{- $env := default "production" (index .Site.Params "env" | default dict | index "name") -}}
+{{- $noindex := or (ne $env "production") .Site.Params.noindex -}}
+
+{{- if $noindex }}
+# robots.txt (dev/staging build)
+User-agent: *
+Disallow: /
+{{ else }}
+# robots.txt (production build)
+User-agent: *
+Allow: /
+
+# Заблокированные системные разделы
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /drafts/
+
+# Sitemap
+Sitemap: {{ .Site.BaseURL }}sitemap.xml
+{{ end }}

@@ -1,20 +1,24 @@
 {{- define "main" -}}
-  {{- $lang := .Site.Language.Lang -}}
-  {{- $ui   := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+  {{- $lang    := .Site.Language.Lang -}}
+  {{- $newer   := partial "t.html" (dict "key" "ui.blog.newer"       "ctx" . "default" "Newer") -}}
+  {{- $older   := partial "t.html" (dict "key" "ui.blog.older"       "ctx" . "default" "Older") -}}
+  {{- $empty   := partial "t.html" (dict "key" "ui.blog.empty"       "ctx" . "default" "No posts yet.") -}}
+  {{- $minRead := partial "t.html" (dict "key" "ui.blog.minRead"     "ctx" . "default" "min read") -}}
+  {{- $dateFmt := printf "%s" (partial "t.html" (dict "key" "ui.blog.dateFormat" "ctx" . "default" "Jan 02, 2006")) -}}
 
-  {{/* Классы для таргетинга CSS: blog-page + taxonomy-page + tax-tag/tax-category */}}
+
   <section class="blog-page taxonomy-page tax-{{ .Data.Singular }}">
+    <!-- HERO -->
     <section class="hero section">
-      <h1>
-        {{- /* Пример: #hackitect7 · Tags */ -}}
-        {{ printf "%s · %s" .Title (title .Data.Plural) }}
-      </h1>
+      {{- $taxPlural := title .Data.Plural -}}
+      <h1>{{ printf "%s · %s" .Title $taxPlural }}</h1>
     </section>
 
     <div class="services-layout section">
-      <!-- Контент (карточки постов с этим тегом/категорией) -->
       <div class="services-content">
-        {{- $pages := sort .Pages "Date" "desc" -}}
+        {{- /* Только текущий язык, свежие сверху */ -}}
+        {{- $src := where .Pages "Lang" $lang -}}
+        {{- $pages := sort $src "Date" "desc" -}}
         {{- $p := .Paginate $pages -}}
 
         {{- if $p.Pages -}}
@@ -29,29 +33,30 @@
                 {{ end }}
               </p>
               <p class="sub">
-                {{ .Date.Format "02 Jan 2006" }}
-                {{ with .ReadingTime }}· {{ . }} min read{{ end }}
-                {{ with .Params.tags }}· {{ delimit . ", " }}{{ end }}
+                {{- $iso := .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+                <time datetime="{{ $iso }}">{{ .Date.Format $dateFmt }}</time>
+                {{- with .ReadingTime -}}· {{ . }} {{ $minRead }}{{- end -}}
+                {{- with .Params.tags -}}· {{ delimit . ", " }}{{- end -}}
               </p>
             </article>
           {{- end -}}
 
           {{- if gt $p.TotalPages 1 -}}
             <nav class="cta-row section" aria-label="Pagination">
-              {{ if $p.HasPrev }}
+              {{- if $p.HasPrev -}}
                 <a class="btn secondary" href="{{ $p.Prev.URL }}"
-                  >← {{ or $ui.blog.newer "Newer" }}</a
+                  >← {{ $newer }}</a
                 >
-              {{ end }}
-              {{ if $p.HasNext }}
+              {{- end -}}
+              {{- if $p.HasNext -}}
                 <a class="btn secondary" href="{{ $p.Next.URL }}"
-                  >{{ or $ui.blog.older "Older" }} →</a
+                  >{{ $older }} →</a
                 >
-              {{ end }}
+              {{- end -}}
             </nav>
           {{- end -}}
         {{- else -}}
-          <p class="sub section">{{ or $ui.blog.empty "No posts yet." }}</p>
+          <p class="sub section">{{ $empty }}</p>
         {{- end -}}
       </div>
     </div>

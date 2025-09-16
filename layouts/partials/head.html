@@ -1,67 +1,135 @@
-{{ $meta := index site.Data (printf "meta.%s" .Site.Language.Lang) | default
-  (index site.Data "meta.us")
-}}
+{{/* ===== Head: SEO, assets, analytics ===== */}}
+{{- $p := .Site.Params -}}
+{{- $env := index $p "env" -}}
+{{- $noindex := or (and $env (ne $env.name "production")) $p.noindex .Params.noindex -}}
+
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{{ if .Title }}{{ .Title }} —{{ end }}{{ .Site.Title }}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+{{- if $noindex }}<meta name="robots" content="noindex,nofollow" />{{ end }}
+
+{{/* --- Title & Description --- */}}
+{{- $pageTitle := cond (ne .Title "") .Title .Site.Title -}}
+{{- $desc := or .Params.description (partial "t.html" (dict "key" "meta.description" "ctx" . "default" "")) -}}
+<title>{{ if .Title }}{{ $pageTitle }} —{{ end }}{{ .Site.Title }}</title>
+{{- with $desc }}<meta name="description" content="{{ . | plainify }}" />{{ end -}}
+{{- with (partial "t.html" (dict "key" "meta.keywords" "ctx" . "default" "")) }}
+  <meta name="keywords" content="{{ . }}" />
+{{ end -}}
+{{- with (partial "t.html" (dict "key" "meta.author" "ctx" . "default" "")) }}
+  <meta name="author" content="{{ . }}" />
+{{ end -}}
+
+{{/* --- Canonical & hreflang --- */}}
+{{- if $p.enable_canonical }}<link rel="canonical" href="{{ .Permalink }}" />{{ end -}}
+{{- if $p.enable_hreflang }}{{ partial "seo-hreflang.html" . }}{{ end -}}
+
+{{/* --- Favicons --- */}}
+<link rel="icon" href="{{ ($p.favicon | default "/assets/img/favicon.svg") | relURL }}" />
 <link
-  rel="icon"
-  href="{{ with .Site.Params.favicon }}
-    {{ . }}
+  rel="apple-touch-icon"
+  href="{{ ($p.favicon | default "/assets/img/favicon.svg") | relURL }}"
+/>
+
+{{/* --- CSS: Hugo Pipes (если включено) или статика --- */}}
+{{- $cssHref := "" -}}
+{{- $usePipeline := and .Site.Params.assets .Site.Params.assets.cssPipeline -}}
+{{- if $usePipeline -}}
+  {{- $raw := resources.Get "css/style.css" -}}
+  {{- if $raw -}}
+    {{- /* Безопасно формируем пайплайн: если Minify/FP недоступны — graceful fallback */ -}}
+    {{- $built := $raw -}}
+    {{- with ($raw | resources.Minify) -}}
+      {{- $built = . -}}
+    {{- end -}}
+    {{- $fp := $built | resources.Fingerprint -}}
+    {{- if $fp -}}
+      <link rel="stylesheet" href="{{ $fp.RelPermalink }}" integrity="{{ $fp.Data.Integrity }}" />
+    {{- else -}}
+      <link rel="stylesheet" href="{{ $built.RelPermalink }}" />
+    {{- end -}}
+  {{- else -}}
+    {{- /* Если в /assets/ нет файла — используем статику */ -}}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relURL }}" />
+  {{- end -}}
+{{- else -}}
+  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relURL }}" />
+{{- end -}}
+
+{{/* --- Flags CDN (если задан) --- */}}
+{{- with $p.flagCssCdn }}<link rel="stylesheet" href="{{ . }}" />{{ end -}}
+
+{{/* --- Preconnect/Preload (минимум полезного) --- */}}
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+{{- with (or .Params.featuredImage $p.ogimage) -}}
+  <link rel="preload" as="image" href="{{ . | absURL }}" />
+{{- end -}}
+
+{{/* --- OpenGraph / Twitter --- */}}
+{{- $brand := or (partial "t.html" (dict "key" "meta.brand" "ctx" . "default" "")) .Site.Title -}}
+{{- $ogFromLocales := or (partial "t.html" (dict "key" "meta.ogImage" "ctx" . "default" "")) (partial "t.html" (dict "key" "meta.ogimage" "ctx" . "default" "")) -}}
+{{- $ogImage := or .Params.ogImage .Params.featuredImage $ogFromLocales $p.ogimage "/assets/img/favicon.svg" -}}
+<meta property="og:site_name" content="{{ $brand }}" />
+<meta
+  property="og:type"
+  content="{{ if .IsHome }}
+    website
   {{ else }}
-    /assets/img/favicon.svg
+    {{ if eq .Section "blog" }}article{{ else }}website{{ end }}
   {{ end }}"
 />
-<link rel="stylesheet" href="/assets/css/style.css" />
-{{ $sitejs := resources.Get "js/site.js" | minify | fingerprint }}
-<script src="{{ $sitejs.RelPermalink }}" defer></script>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.5.0/css/flag-icons.min.css"
-/>
+<meta property="og:title" content="{{ $pageTitle }}" />
+<meta property="og:description" content="{{ $desc | plainify }}" />
+<meta property="og:image" content="{{ $ogImage | absURL }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{- with .Site.Language.Lang }}<meta property="og:locale" content="{{ . }}" />{{ end -}}
+
 
 <meta
-  name="description"
-  content="{{ with .Params.description }}
-    {{ . }}
-  {{ else }}
-    {{ $meta.description }}
-  {{ end }}"
+  name="twitter:card"
+  content="{{ or (partial "t.html" (dict "key" "meta.twitterCard" "ctx" . "default" "")) "summary_large_image" }}"
 />
-<meta name="keywords" content="{{ $meta.keywords }}" />
-<meta name="author" content="{{ $meta.author }}" />
+{{- with $p.twitter }}<meta name="twitter:site" content="{{ . }}" />{{ end -}}
+<meta name="twitter:title" content="{{ $pageTitle }}" />
+<meta name="twitter:description" content="{{ $desc | plainify }}" />
+<meta name="twitter:image" content="{{ $ogImage | absURL }}" />
 
-<meta property="og:site_name" content="{{ $meta.brand }}" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="{{ .Title }}" />
-<meta
-  property="og:description"
-  content="{{ with .Params.description }}
-    {{ . }}
-  {{ else }}
-    {{ $meta.description }}
-  {{ end }}"
-/>
-<meta property="og:image" content="{{ $meta.ogImage }}" />
-<meta property="og:url" content="{{ $meta.siteUrl }}{{ .RelPermalink }}" />
+{{/* --- RSS alternate (дом и разделы) --- */}}
+{{- if .IsHome }}
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="{{ .Site.Title }} RSS"
+    href="{{ .Site.BaseURL }}index.xml"
+  />
+{{ end -}}
+{{- if .IsSection }}
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="{{ .Title }} RSS"
+    href="{{ .RelPermalink }}index.xml"
+  />
+{{ end -}}
 
-<meta name="twitter:card" content="{{ $meta.twitterCard }}" />
-<meta name="twitter:title" content="{{ .Title }}" />
-<meta name="twitter:description" content="{{ $meta.description }}" />
-<meta name="twitter:image" content="{{ $meta.ogImage }}" />
+{{/* --- JS (дефер по умолчанию) --- */}}
+<script src="{{ "/assets/js/site.js" | relURL }}" defer></script>
+<script src="{{ "/assets/js/ui.js" | relURL }}" defer></script>
+<script src="{{ "/assets/js/scrollspy.js" | relURL }}" defer></script>
+<script src="{{ "/assets/js/header-autohide.js" | relURL }}" defer></script>
 
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "{{ .Site.Params.author.name }}",
-    "jobTitle": "IT Infrastructure Architect, DevOps & Automation Engineer",
-    "email": "mailto:{{ .Site.Params.author.email }}",
-    "url": "{{ .Site.BaseURL }}",
-    "sameAs": [
-      "https://linkedin.com/in/hackitect7",
-      "https://github.com/Hackitect7",
-      "https://t.me/Manfred251278"
-    ]
-  }
+{{/* --- JSON-LD --- */}}
+{{- if $p.enable_schema }}{{ partial "seo-jsonld.html" . }}{{ end -}}
+
+{{/* --- Analytics (gtag/umami) — подключаем только в production --- */}}
+{{- if and (eq (default "development" $env.name) "production") $p.gtag_id }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ $p.gtag_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); gtag('config', '{{ $p.gtag_id }}', { 'anonymize_ip': true });
 </script>
+{{- end -}}

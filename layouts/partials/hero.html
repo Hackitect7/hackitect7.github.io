@@ -1,15 +1,50 @@
-<div class="hero-inner">
-  <h1>Hackitect7</h1>
-  <p class="tagline">{{ .Site.Params.tagline }}</p>
-  <p class="sub">
-    Aleksei — IT Infrastructure Architect | System & Network Administrator |
-    DevOps & Automation Engineer • 22+ years • Crisis IT Manager • Hybrid Cloud
-    (CIS + Global)
-  </p>
-  <div class="cta-row">
-    <a class="btn" href="/{{ .Site.Language.Lang }}/contacts/">
-      Contact & Links
-    </a>
-    <a class="btn secondary" href="/vcard/aleksei.vcf">Download vCard</a>
+{{/* Hero: локализуем заголовок/подзаголовок/кнопки, правильные ссылки, UTM, a11y */}}
+{{- $lang := .Site.Language.Lang -}}
+
+{{/* Заголовки из словарей, с безопасными дефолтами */}}
+{{- $title   := partial "t.html" (dict "key" "home.hero.title"    "ctx" . "default" "Hackitect7") -}}
+{{- $tagline := or .Site.Params.tagline (partial "t.html" (dict "key" "home.hero.tagline" "ctx" . "default" "IT Architecture • DevOps • Automation")) -}}
+{{- $sub     := partial "t.html" (dict "key" "home.hero.sub"      "ctx" . "default" "Aleksei — IT Infrastructure Architect · Systems & Network Engineer · DevOps & Automation · 22+ years") -}}
+
+{{/* Контакты по текущей локали */}}
+{{- $contactsRel := (print "/contacts/") -}}
+{{- $contactsURL := relLangURL $contactsRel -}}
+
+{{/* UTM: пытаемся адаптировать params.ctaBase (если в нём зашит /us/, заменим на текущий язык) */}}
+{{- $ctaBase := .Site.Params.ctaBase | default (print "/" $lang "/contacts/?utm_source=site&utm_medium=hero&utm_campaign=") -}}
+{{- $ctaBase = replace $ctaBase "/us/" (print "/" $lang "/") -}}
+{{- $ctaHref := print $ctaBase "hero-primary" -}}
+
+{{/* vCard из /static/vcard/hackitect7.vcf */}}
+{{- $vcardHref := "/vcard/hackitect7.vcf" | relURL -}}
+
+<section class="hero" role="region" aria-label="Intro section">
+  <div class="hero-inner">
+    <h1 class="hero-title">{{ $title }}</h1>
+    <p class="tagline">{{ $tagline }}</p>
+    <p class="sub">{{ $sub }}</p>
+
+    <div class="cta-row">
+      <a
+        class="btn"
+        href="{{ $ctaHref }}"
+        rel="noopener"
+        aria-label="{{ partial "t.html" (dict "key" "home.hero.ctaPrimary.aria" "ctx" . "default" "Open contacts and links") }}"
+        data-analytics="cta-hero-primary"
+      >
+        {{ partial "t.html" (dict "key" "home.hero.ctaPrimary" "ctx" . "default" "Contact & Links") }}
+      </a>
+
+      <a
+        class="btn secondary"
+        href="{{ $vcardHref }}"
+        rel="noopener"
+        download
+        aria-label="{{ partial "t.html" (dict "key" "home.hero.ctaVcard.aria" "ctx" . "default" "Download vCard") }}"
+        data-analytics="cta-hero-vcard"
+      >
+        {{ partial "t.html" (dict "key" "home.hero.ctaVcard" "ctx" . "default" "Download vCard") }}
+      </a>
+    </div>
   </div>
-</div>
+</section>

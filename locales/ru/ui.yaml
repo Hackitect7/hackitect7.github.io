@@ -1,42 +1,69 @@
-brand: "Hackitect7 — Музыка систем"
+ui:
+  toc: "На этой странице"
+  faq: "Частые вопросы"
+  learnMore: "Подробнее →"
 
-common:
-  tocToggle: "Разделы"
-  backToTop: "Наверх"
+  blog:
+    title: "Блог"
+    filterTitle: "Просмотр"
+    categories: "Категории"
+    tags: "Теги"
+    newer: "Новее"
+    older: "Старее"
+    empty: "Постов пока нет."
+    minRead: "мин. чтения"
+    more: "Больше материалов"
+    backToList: "Назад в блог"
+    dateFormat: "02 Jan 2006"
+    noPosts: "Постов пока нет."
+    viewAll: "Все посты"
+    min: "мин. чтения"
 
-nav:
-  about: "О проекте"
-  skills: "Навыки"
-  services: "Услуги"
-  projects: "Проекты"
-  blog: "Блог"
-  contacts: "Контакты"
+  projects:
+    title: "Проекты"
+    tocTitle: "Обзор"
+    stack: "Стек"
+    linksTitle: "Ссылки"
+    demo: "Демо"
+    more: "Больше проектов"
+    backToList: "Назад к проектам"
 
-services:
-  title: "Услуги"
-  tocTitle: "Обзор"
+  services:
+    title: "Услуги"
+    tocTitle: "Обзор"
 
-about:
-  cred:
-    title: "Уникальная ценность"
-    expertise: "Экспертиза"
-    oss: "Open Source"
-    community: "Сообщество"
+  skills:
+    title: "Навыки"
+    tocTitle: "Обзор"
 
-blog:
-  title: "Блог"
-  filterTitle: "Категории и теги"
-  categories: "Категории"
-  tags: "Теги"
-  newer: "Новее"
-  older: "Старее"
-  empty: "Постов пока нет."
-  minRead: "мин чтения"
-  more: "Другие материалы"
-  backToList: "Назад к блогу"
+  common:
+    view: "Посмотреть"
+    minRead: "мин. чтения"
+    empty: "Контент пока отсутствует."
+    dateFormat: "02 Jan 2006"
 
-cta:
-  viewAllPosts: "Все публикации"
+  cta:
+    contact: "Связаться со мной"
+    primary: "Изучить"
+    secondary: "Подробнее"
+    tertiary: "Связаться"
+    ready: "Готовы обсудить?"
+    servicePrompt: "Расскажите о ваших потребностях"
 
-footer:
-  made: "Сделано на Hugo и ❤️"
+  aria:
+    prevPost: "Предыдущий пост"
+    nextPost: "Следующий пост"
+
+  about:
+    tocTitle: "Обзор"
+
+  footer:
+    made: "Создано с Hugo и ❤️"
+    brand: "Hackitect7 — Музыка систем"
+    copyright: "© %d %s"
+
+  tax:
+    filterTitle: "Просмотр"
+    filterPlaceholder: "Фильтр…"
+    showMore: "Показать больше"
+    showLess: "Показать меньше"

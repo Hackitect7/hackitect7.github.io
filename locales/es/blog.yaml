@@ -1,0 +1,10 @@
+blog:
+  title: "Blog"
+  intro: "Notas, reflexiones e ideas sobre arquitectura, DevOps y la música de sistemas."
+
+  cta:
+    enabled: false
+    title: "¿Buscas algo en específico?"
+    text: "Dime sobre qué tema quieres leer a continuación."
+    href: "contacts"
+    button: "Contacto"

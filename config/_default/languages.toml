@@ -1,4 +1,4 @@
-# вся мультиязычность, включая меню для каждого языка
+# Полная мультиязычность + локальные меню и параметры
 
 [us]
   languageName = "English"
@@ -177,5 +177,185 @@
     [[jp.menus.main]]
       identifier = "contacts"
       name = "連絡先"
+      url = "/contacts/"
+      weight = 60
+
+[es]
+  languageName = "Español"
+  weight = 5
+  contentDir = "content/es"
+  title = "Hackitect7 — Música de Sistemas"
+  languageCode = "es-ES"
+
+  [es.params]
+    flag    = "es"
+    tagline = "Arquitectura IT • DevOps • Automatización"
+    logo    = "/assets/img/es/hackitect7-logo-dark-es.svg"
+    ogimage = "/assets/img/es/hackitect7-logo-dark-es.svg"
+
+  [es.menus]
+    [[es.menus.main]]
+      identifier = "about"
+      name = "Acerca de"
+      url = "/about/"
+      weight = 10
+    [[es.menus.main]]
+      identifier = "services"
+      name = "Servicios"
+      url = "/services/"
+      weight = 20
+    [[es.menus.main]]
+      identifier = "projects"
+      name = "Proyectos"
+      url = "/projects/"
+      weight = 30
+    [[es.menus.main]]
+      identifier = "blog"
+      name = "Blog"
+      url = "/blog/"
+      weight = 40
+    [[es.menus.main]]
+      identifier = "skills"
+      name = "Competencias"
+      url = "/skills/"
+      weight = 50
+    [[es.menus.main]]
+      identifier = "contacts"
+      name = "Contactos"
+      url = "/contacts/"
+      weight = 60
+
+[fr]
+  languageName = "Français"
+  weight = 6
+  contentDir = "content/fr"
+  title = "Hackitect7 — La Musique des Systèmes"
+  languageCode = "fr-FR"
+
+  [fr.params]
+    flag    = "fr"
+    tagline = "Architecture IT • DevOps • Automatisation"
+    logo    = "/assets/img/fr/hackitect7-logo-dark-fr.svg"
+    ogimage = "/assets/img/fr/hackitect7-logo-dark-fr.svg"
+
+  [fr.menus]
+    [[fr.menus.main]]
+      identifier = "about"
+      name = "À propos"
+      url = "/about/"
+      weight = 10
+    [[fr.menus.main]]
+      identifier = "services"
+      name = "Services"
+      url = "/services/"
+      weight = 20
+    [[fr.menus.main]]
+      identifier = "projects"
+      name = "Projets"
+      url = "/projects/"
+      weight = 30
+    [[fr.menus.main]]
+      identifier = "blog"
+      name = "Blog"
+      url = "/blog/"
+      weight = 40
+    [[fr.menus.main]]
+      identifier = "skills"
+      name = "Compétences"
+      url = "/skills/"
+      weight = 50
+    [[fr.menus.main]]
+      identifier = "contacts"
+      name = "Contacts"
+      url = "/contacts/"
+      weight = 60
+
+[br]
+  languageName = "Português"
+  weight = 7
+  contentDir = "content/br"
+  title = "Hackitect7 — A Música dos Sistemas"
+  languageCode = "pt-BR"
+
+  [br.params]
+    flag    = "br"
+    tagline = "Arquitetura de TI • DevOps • Automação"
+    logo    = "/assets/img/br/hackitect7-logo-dark-br.svg"
+    ogimage = "/assets/img/br/hackitect7-logo-dark-br.svg"
+
+  [br.menus]
+    [[br.menus.main]]
+      identifier = "about"
+      name = "Sobre"
+      url = "/about/"
+      weight = 10
+    [[br.menus.main]]
+      identifier = "services"
+      name = "Serviços"
+      url = "/services/"
+      weight = 20
+    [[br.menus.main]]
+      identifier = "projects"
+      name = "Projetos"
+      url = "/projects/"
+      weight = 30
+    [[br.menus.main]]
+      identifier = "blog"
+      name = "Blog"
+      url = "/blog/"
+      weight = 40
+    [[br.menus.main]]
+      identifier = "skills"
+      name = "Competências"
+      url = "/skills/"
+      weight = 50
+    [[br.menus.main]]
+      identifier = "contacts"
+      name = "Contatos"
+      url = "/contacts/"
+      weight = 60
+
+[cn]
+  languageName = "简体中文"
+  weight = 8
+  contentDir = "content/cn"
+  title = "Hackitect7 — 系统交响"
+  languageCode = "zh-CN"
+
+  [cn.params]
+    flag    = "cn"
+    tagline = "IT 架构 • DevOps • 自动化"
+    logo    = "/assets/img/cn/hackitect7-logo-dark-cn.svg"
+    ogimage = "/assets/img/cn/hackitect7-logo-dark-cn.svg"
+
+  [cn.menus]
+    [[cn.menus.main]]
+      identifier = "about"
+      name = "关于"
+      url = "/about/"
+      weight = 10
+    [[cn.menus.main]]
+      identifier = "services"
+      name = "服务"
+      url = "/services/"
+      weight = 20
+    [[cn.menus.main]]
+      identifier = "projects"
+      name = "项目"
+      url = "/projects/"
+      weight = 30
+    [[cn.menus.main]]
+      identifier = "blog"
+      name = "博客"
+      url = "/blog/"
+      weight = 40
+    [[cn.menus.main]]
+      identifier = "skills"
+      name = "技能"
+      url = "/skills/"
+      weight = 50
+    [[cn.menus.main]]
+      identifier = "contacts"
+      name = "联系方式"
       url = "/contacts/"
       weight = 60

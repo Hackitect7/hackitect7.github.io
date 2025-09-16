@@ -1,0 +1,176 @@
+{{/* ===== JSON-LD: Organization + Website + PageType + Breadcrumbs + FAQ ===== */}}
+{{- $p := .Site.Params -}}
+{{- $siteURL := .Site.BaseURL -}}
+{{- $logo := (or $p.ogimage "/assets/img/favicon.svg") | absURL -}}
+{{- $lang := cond (ne .Site.LanguageCode "") .Site.LanguageCode .Site.Language.Lang -}}
+
+{{/* sameAs из data/social.yml и params.* если заданы */}}
+{{- $sameAs := slice -}}
+{{- with (index site.Data "social") -}}
+  {{- range $k, $v := . -}}
+    {{- if $v }}{{ $sameAs = $sameAs | append $v }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $p.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with $p.github   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with $p.twitter  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with $p.telegram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+
+{{/* Organization */}}
+{{- $org := dict
+  "@context" "https://schema.org"
+  "@type" "Organization"
+  "@id" (printf "%s#org" $siteURL)
+  "name" (or $p.org_name .Site.Title)
+  "url"  (or $p.org_url  $siteURL)
+  "logo" (dict "@type" "ImageObject" "url" $logo)
+  "sameAs" $sameAs
+  "contactPoint" (slice (dict
+    "@type" "ContactPoint"
+    "email" (or $p.contact_email "")
+    "contactType" "sales"
+    "areaServed" "Global"
+    "availableLanguage" (slice "en" "ru" "de" "ja")
+  ))
+-}}
+
+{{/* Website */}}
+{{- $site := dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "@id" (printf "%s#website" $siteURL)
+  "url" $siteURL
+  "name" .Site.Title
+  "inLanguage" $lang
+  "publisher" (dict "@id" (printf "%s#org" $siteURL))
+-}}
+
+{{/* Page Type: from front matter or by section */}}
+{{- $ptype := or .Params.schema.type (cond (eq .Section "services") "Service" (cond (eq .Section "blog") "BlogPosting" (cond (eq .Section "projects") "CreativeWork" "WebPage"))) -}}
+{{- $headline := .Title -}}
+{{- $desc := or .Params.description .Summary -}}
+{{- $img := or .Params.ogImage .Params.featuredImage $p.ogimage "/assets/img/favicon.svg" -}}
+
+{{- $page := dict
+  "@context" "https://schema.org"
+  "@type" $ptype
+  "inLanguage" $lang
+  "url" .Permalink
+  "headline" $headline
+  "description" (plainify $desc)
+  "image" (slice (absURL $img))
+  "isPartOf" (dict "@id" (printf "%s#website" $siteURL))
+-}}
+{{- with .Date }}{{ $page = merge $page (dict "datePublished" (.Format "2006-01-02")) }}{{ end -}}
+{{- with .Lastmod }}{{ $page = merge $page (dict "dateModified" (.Format "2006-01-02")) }}{{ end -}}
+
+{{/* Дополнения по типам */}}
+{{- if eq $ptype "BlogPosting" -}}
+  {{- $author := or .Params.author $p.org_name -}}
+  {{- $page = merge $page (dict
+    "author" (dict "@type" "Person" "name" $author)
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  ) -}}
+{{- else if eq $ptype "Service" -}}
+  {{- $price := "" -}}
+  {{- with .Params.price -}}
+    {{- $price = . -}}
+  {{- end -}}
+  {{- with .Params.schema -}}
+    {{- with .price -}}
+      {{- $price = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $page = merge $page (dict
+    "provider" (dict "@type" "Organization" "name" (or $p.org_name .Site.Title) "url" $siteURL)
+    "areaServed" "Global"
+  ) -}}
+  {{- if $price -}}
+    {{- $page = merge $page (dict "offers" (dict "@type" "Offer" "price" (string $price))) -}}
+  {{- end -}}
+{{- else if eq $ptype "CreativeWork" -}}
+  {{- with .Params.client -}}
+    {{- $page = merge $page (dict "creator" (dict "@type" "Organization" "name" .)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* FAQ (безопасное извлечение без index) */}}
+{{- $faq := slice -}}
+{{- with .Params.schema -}}
+  {{- with .faq -}}
+    {{- /* ожидаем срез [{q:..., a:...}] */ -}}
+    {{- $faq = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $faq) 0 -}}
+  {{- $faqItems := slice -}}
+  {{- range $i, $it := $faq -}}
+    {{- $q := (cond (isset $it "q") $it.q "" ) -}}
+    {{- $a := (cond (isset $it "a") $it.a "" ) -}}
+    {{- if $q -}}
+      {{- $faqItems = $faqItems | append (dict
+        "@type" "Question"
+        "name" ($q | plainify)
+        "acceptedAnswer" (dict "@type" "Answer" "text" ($a | plainify))
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $faqItems) 0 -}}
+    <script type="application/ld+json">{{ dict
+      "@context" "https://schema.org"
+      "@type"    "FAQPage"
+      "mainEntity" $faqItems
+    | jsonify }}</script>
+  {{- end -}}
+{{- end -}}
+
+{{/* Breadcrumbs (без .Breadcrumb; совместимо везде) */}}
+{{- $crumbs := slice -}}
+{{- $pos := 1 -}}
+
+{{- /* Home всегда первый */ -}}
+{{- $crumbs = $crumbs | append (dict
+  "@type" "ListItem"
+  "position" $pos
+  "name" "Home"
+  "item" .Site.BaseURL
+) -}}
+{{- $pos = add $pos 1 -}}
+
+{{- /* Родители (Ancestors) в правильном порядке */ -}}
+{{- with .Page.Ancestors -}}
+  {{- range .Reverse -}}
+    {{- if ne .Title "" -}}
+      {{- $crumbs = $crumbs | append (dict
+        "@type" "ListItem"
+        "position" $pos
+        "name" .Title
+        "item" .Permalink
+      ) -}}
+      {{- $pos = add $pos 1 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Текущая страница (кроме Home) */ -}}
+{{- if and (not .IsHome) (ne .Title "") -}}
+  {{- $crumbs = $crumbs | append (dict
+    "@type" "ListItem"
+    "position" $pos
+    "name" .Title
+    "item" .Permalink
+  ) -}}
+{{- end -}}
+
+{{- if gt (len $crumbs) 1 -}}
+  <script type="application/ld+json">{{ dict
+    "@context" "https://schema.org"
+    "@type" "BreadcrumbList"
+    "itemListElement" $crumbs
+  | jsonify }}</script>
+{{- end -}}
+
+<script type="application/ld+json">{{ $org  | jsonify }}</script>
+<script type="application/ld+json">{{ $site | jsonify }}</script>
+<script type="application/ld+json">{{ $page | jsonify }}</script>

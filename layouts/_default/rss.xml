@@ -1,0 +1,20 @@
+{{- $pages := where .Site.RegularPages "Type" "in" (slice "blog" "posts") -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ .Site.BaseURL }}</link>
+    <description>{{ .Site.Params.tagline }}</description>
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml"/>
+    {{- range first 20 (sort $pages "Date" "desc") -}}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <pubDate>{{ .Date.UTC.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</pubDate>
+      {{- $desc := cond (ne .Params.description "") .Params.description (.Summary | plainify) -}}
+      <description>{{ $desc | html }}</description>
+    </item>
+    {{- end -}}
+  </channel>
+</rss>

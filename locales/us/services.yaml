@@ -1,117 +1,130 @@
-title: "Services"
-intro: "I provide a full spectrum of IT services — from infrastructure architecture and DevOps to crisis management and business alignment. Each service is designed to deliver measurable resilience, scalability, and efficiency."
+services:
+  title: "Services"
+  intro: >
+    I provide a full spectrum of IT services — from infrastructure architecture and DevOps
+    to crisis management and business alignment. Each service is designed to deliver measurable
+    resilience, scalability, and efficiency.
 
-sections:
-  - id: "infrastructure-architecture"
-    title: "Infrastructure Architecture"
-    text: |
-      Designing robust and scalable infrastructures for on-prem, cloud, and hybrid environments.
-      From datacenter layouts and networking to capacity planning and cost optimization.
-    bullets:
-      - "On-prem & hybrid cloud designs"
-      - "Multi-DC resilience & failover"
-      - "Networking, security zones, storage strategies"
-    cta:
-      text: "Discuss infrastructure"
-      href: "contacts"
+  sections:
+    - id: "infrastructure-architecture"
+      title: "Infrastructure Architecture"
+      text: |
+        Designing robust and scalable infrastructures for on-prem, cloud, and hybrid environments.
+        From datacenter layouts and networking to capacity planning and cost optimization.
+      bullets:
+        - "On-prem & hybrid cloud designs"
+        - "Multi-DC resilience & failover"
+        - "Networking, security zones, storage strategies"
+      cta:
+        text: "Discuss infrastructure"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
 
-  - id: "devops-automation"
-    title: "DevOps & Automation"
-    text: |
-      Building modern delivery pipelines with Infrastructure as Code and GitOps principles.
-      Streamlining development and operations to accelerate delivery and reduce human error.
-    bullets:
-      - "CI/CD pipelines (GitHub Actions, GitLab CI)"
-      - "IaC with Terraform & Ansible"
-      - "Automated environments and self-service workflows"
-    cta:
-      text: "Plan DevOps roadmap"
-      href: "contacts"
+    - id: "devops-automation"
+      title: "DevOps & Automation"
+      text: |
+        Building modern delivery pipelines with Infrastructure as Code and GitOps principles.
+        Streamlining development and operations to accelerate delivery and reduce human error.
+      bullets:
+        - "CI/CD pipelines (GitHub Actions, GitLab CI)"
+        - "IaC with Terraform & Ansible"
+        - "Automated environments and self-service workflows"
+      cta:
+        text: "Plan DevOps roadmap"
+        href: "contacts"
+        utmCampaign: "devops-automation"
 
-  - id: "observability-sre"
-    title: "Observability & SRE"
-    text: |
-      Implementing visibility and reliability practices to keep systems healthy.
-      From monitoring and alerting to SLO/SLI definitions and incident response frameworks.
-    bullets:
-      - "Prometheus, Grafana, ELK stack"
-      - "SLO/SLI & error budgets"
-      - "Incident response playbooks"
-    cta:
-      text: "Improve reliability"
-      href: "contacts"
+    - id: "observability-sre"
+      title: "Observability & SRE"
+      text: |
+        Implementing visibility and reliability practices to keep systems healthy.
+        From monitoring and alerting to SLO/SLI definitions and incident response frameworks.
+      bullets:
+        - "Prometheus, Grafana, ELK stack"
+        - "SLO/SLI & error budgets"
+        - "Incident response playbooks"
+      cta:
+        text: "Improve reliability"
+        href: "contacts"
+        utmCampaign: "observability-sre"
 
-  - id: "security"
-    title: "Security & Hardening"
-    text: |
-      Applying practical security measures without buzzwords.
-      Focus on reducing attack surface, enforcing least privilege, and protecting secrets.
-    bullets:
-      - "System & container hardening"
-      - "Identity & access controls"
-      - "Secrets management and audit trails"
-    cta:
-      text: "Strengthen security"
-      href: "contacts"
+    - id: "security"
+      title: "Security & Hardening"
+      text: |
+        Applying practical security measures without buzzwords.
+        Focus on reducing attack surface, enforcing least privilege, and protecting secrets.
+      bullets:
+        - "System & container hardening"
+        - "Identity & access controls"
+        - "Secrets management and audit trails"
+      cta:
+        text: "Strengthen security"
+        href: "contacts"
+        utmCampaign: "security"
 
-  - id: "crisis-management"
-    title: "Crisis IT Management"
-    text: |
-      Helping organizations recover and adapt during incidents, outages, and high-risk migrations.
-      Turning chaos into structured recovery and long-term resilience.
-    bullets:
-      - "Emergency incident handling"
-      - "Disaster recovery & continuity planning"
-      - "Post-mortem reviews & improvements"
-    cta:
-      text: "Need crisis expertise?"
-      href: "contacts"
+    - id: "crisis-management"
+      title: "Crisis IT Management"
+      text: |
+        Helping organizations recover and adapt during incidents, outages, and high-risk migrations.
+        Turning chaos into structured recovery and long-term resilience.
+      bullets:
+        - "Emergency incident handling"
+        - "Disaster recovery & continuity planning"
+        - "Post-mortem reviews & improvements"
+      cta:
+        text: "Need crisis expertise?"
+        href: "contacts"
+        utmCampaign: "crisis-management"
 
-  - id: "consulting"
-    title: "Consulting & Mentoring"
-    text: |
-      Guiding teams and organizations with targeted consulting and hands-on mentoring.
-      Knowledge transfer and architecture reviews that empower internal expertise.
-    bullets:
-      - "Architecture & process reviews"
-      - "Workshops & technical trainings"
-      - "Mentorship for engineers & managers"
-    cta:
-      text: "Book a consultation"
-      href: "contacts"
+    - id: "consulting"
+      title: "Consulting & Mentoring"
+      text: |
+        Guiding teams and organizations with targeted consulting and hands-on mentoring.
+        Knowledge transfer and architecture reviews that empower internal expertise.
+      bullets:
+        - "Architecture & process reviews"
+        - "Workshops & technical trainings"
+        - "Mentorship for engineers & managers"
+      cta:
+        text: "Book a consultation"
+        href: "contacts"
+        utmCampaign: "consulting"
 
-  - id: "business-alignment"
-    title: "Business Alignment"
-    text: |
-      Connecting technology with real business outcomes.
-      Ensuring IT is not just a cost center, but a driver of efficiency, scalability, and growth.
-    bullets:
-      - "IT cost optimization strategies"
-      - "Roadmaps aligned with business goals"
-      - "Resilience and scalability as competitive advantage"
-    cta:
-      text: "Align IT with business"
-      href: "contacts"
+    - id: "business-alignment"
+      title: "Business Alignment"
+      text: |
+        Connecting technology with real business outcomes.
+        Ensuring IT is not just a cost center, but a driver of efficiency, scalability, and growth.
+      bullets:
+        - "IT cost optimization strategies"
+        - "Roadmaps aligned with business goals"
+        - "Resilience and scalability as competitive advantage"
+      cta:
+        text: "Align IT with business"
+        href: "contacts"
+        utmCampaign: "business-alignment"
 
-  - id: "business-outcomes"
-    kind: "bullets"
-    title: "From technology to business outcomes"
-    text: |
-      I bridge architecture and economics so technology serves strategy.
-      We quantify value, govern spend, and embed reliability where it impacts revenue.
-    bullets:
-      - "Translate strategy → target architecture & operating model"
-      - "Quantify value: TCO/ROI, unit economics, exec-ready business cases"
-      - "FinOps governance: budgets, tags, alerts, & cost KPIs by product/team"
-      - "Compliance by design: controls mapped to ISO/SOC2/PCI/GDPR"
-      - "Operationalization: SLOs, dashboards, runbooks, and incident playbooks"
-      - "Vendor & license optimization with measurable savings"
-    cta:
-      text: "Plan Business/IT alignment"
-      href: "/contacts/?utm_source=services&utm_medium=site&utm_campaign=business-outcomes"
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "From technology to business outcomes"
+      text: |
+        I bridge architecture and economics so technology serves strategy.
+        We quantify value, govern spend, and embed reliability where it impacts revenue.
+      bullets:
+        - "Translate strategy → target architecture & operating model"
+        - "Quantify value: TCO/ROI, unit economics, exec-ready business cases"
+        - "FinOps governance: budgets, tags, alerts, & cost KPIs by product/team"
+        - "Compliance by design: controls mapped to ISO/SOC2/PCI/GDPR"
+        - "Operationalization: SLOs, dashboards, runbooks, and incident playbooks"
+        - "Vendor & license optimization with measurable savings"
+      cta:
+        text: "Plan Business/IT alignment"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
 
-finalCta:
-  title: "Ready to talk?"
-  text: "Need reliability, automation, and clarity? Let’s design systems that work."
-  contact: "Contact me"
-  href: "contacts"
+  finalCta:
+    title: "Ready to talk?"
+    text: "Need reliability, automation, and clarity? Let’s design systems that work."
+    contact: "Contact me"
+    href: "contacts"
+    utmCampaign: "services-final"

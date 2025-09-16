@@ -1,77 +1,44 @@
 {{- $title := .title | default "Overview" -}}
-{{- $items := .items | default
-  (slice)
--}}
+{{- $items := .items | default (slice) -}}
 
 {{- if gt (len $items) 0 -}}
-  <div class="toc-wrap" data-toc>
-    <!-- Mobile TOC drawer -->
+  <div class="toc-wrap">
+    <!-- Mobile TOC -->
     <details class="toc-mobile">
       <summary class="toc-toggle">{{ $title }}</summary>
-      <nav class="toc-drawer" role="menu">
+      <nav class="toc-drawer toc-spy" aria-label="{{ $title }}">
         <ul>
-          {{ range $items }}
-            <li><a href="#{{ .id }}">{{ .title }}</a></li>
-          {{ end }}
+          {{- range $items -}}
+            {{- $id := .id | default "" -}}
+            {{- $txt := .title | default "" -}}
+            {{- if and $id $txt -}}
+              <li>
+                <a class="toc-link" href="{{ printf "#%s" $id | safeURL }}" data-target="{{ $id }}">
+                  {{ $txt | plainify }}
+                </a>
+              </li>
+            {{- end -}}
+          {{- end -}}
         </ul>
       </nav>
     </details>
 
     <!-- Sidebar TOC (desktop) -->
-    <aside class="services-toc card toc-spy">
+    <aside class="services-toc card toc-spy" aria-label="{{ $title }}">
       <h3>{{ $title }}</h3>
       <ul>
-        {{ range $items }}
-          <li><a href="#{{ .id }}">{{ .title }}</a></li>
-        {{ end }}
+        {{- range $items -}}
+          {{- $id := .id | default "" -}}
+          {{- $txt := .title | default "" -}}
+          {{- if and $id $txt -}}
+            <li>
+              <a class="toc-link" href="{{ printf "#%s" $id | safeURL }}" data-target="{{ $id }}">
+                {{ $txt | plainify }}
+              </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
       </ul>
     </aside>
-
-    <script>
-      (function () {
-        var root =
-          document.currentScript &&
-          document.currentScript.closest("[data-toc]");
-        if (!root) return;
-
-        var details = root.querySelector(".toc-mobile");
-        if (!details) return;
-
-        var summary = details.querySelector(".toc-toggle");
-        var drawer = details.querySelector(".toc-drawer");
-
-        // Клик/тап вне: закрыть. Capture, чтобы сработать раньше других.
-        document.addEventListener(
-          "pointerdown",
-          function (e) {
-            if (!details.open) return;
-            var t = e.target;
-            // Если клик НЕ по кнопке и НЕ по самому выпадающему списку — закрываем
-            if (!(summary.contains(t) || drawer.contains(t))) {
-              details.open = false;
-            }
-          },
-          true,
-        );
-
-        // Escape — закрыть
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && details.open) details.open = false;
-        });
-
-        // Клик по пункту — закрыть
-        root.querySelectorAll(".toc-drawer a").forEach(function (a) {
-          a.addEventListener("click", function () {
-            details.open = false;
-          });
-        });
-
-        // Если вышли из мобильного режима — закрыть
-        function closeIfDesktop() {
-          if (window.innerWidth > 660 && details.open) details.open = false;
-        }
-        window.addEventListener("resize", closeIfDesktop);
-      })();
-    </script>
   </div>
 {{- end -}}

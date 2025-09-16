@@ -1,42 +1,67 @@
-brand: "Hackitect7 — システムの音楽"
+ui:
+  toc: "このページの内容"
+  faq: "よくある質問"
+  learnMore: "もっと見る →"
 
-common:
-  tocToggle: "セクション"
-  backToTop: "トップに戻る"
+  blog:
+    title: "ブログ"
+    filterTitle: "閲覧"
+    categories: "カテゴリー"
+    tags: "タグ"
+    newer: "新しい投稿"
+    older: "過去の投稿"
+    empty: "まだ投稿はありません。"
+    minRead: "分で読めます"
+    more: "さらに探す"
+    backToList: "ブログ一覧に戻る"
+    dateFormat: "2006年01月02日"
+    noPosts: "まだ投稿はありません。"
+    viewAll: "すべての投稿を見る"
+    min: "分で読めます"
 
-nav:
-  about: "概要"
-  skills: "スキル"
-  services: "サービス"
-  projects: "プロジェクト"
-  blog: "ブログ"
-  contacts: "連絡先"
+  projects:
+    title: "プロジェクト"
+    tocTitle: "概要"
+    stack: "スタック"
+    linksTitle: "リンク"
+    demo: "ライブデモ"
+    more: "その他のプロジェクト"
+    backToList: "プロジェクト一覧に戻る"
 
-services:
-  title: "サービス"
-  tocTitle: "概要"
+  services:
+    title: "サービス"
+    tocTitle: "概要"
 
-about:
-  cred:
-    title: "ユニークな価値"
-    expertise: "専門知識"
-    oss: "オープンソース"
-    community: "コミュニティ"
+  skills:
+    title: "スキル"
+    tocTitle: "概要"
 
-blog:
-  title: "ブログ"
-  filterTitle: "閲覧"
-  categories: "カテゴリー"
-  tags: "タグ"
-  newer: "新しい投稿"
-  older: "古い投稿"
-  empty: "まだ投稿がありません。"
-  minRead: "分で読める"
-  more: "さらに読む"
-  backToList: "ブログに戻る"
+  common:
+    view: "表示"
+    minRead: "分で読めます"
+    empty: "まだコンテンツはありません。"
+    dateFormat: "2006年01月02日"
 
-cta:
-  viewAllPosts: "すべての投稿を見る"
+  cta:
+    contact: "お問い合わせ"
+    primary: "探す"
+    secondary: "もっと知る"
+    tertiary: "連絡を取る"
+    ready: "お話しする準備はできていますか？"
+    servicePrompt: "ご要望をお聞かせください"
 
-footer:
-  made: "Hugo と ❤️ で構築"
+  aria:
+    prevPost: "前の記事"
+    nextPost: "次の記事"
+
+  about:
+    tocTitle: "概要"
+
+  footer:
+    made: "Hugo と ❤️ で作成"
+
+  tax:
+    filterTitle: "閲覧"
+    filterPlaceholder: "フィルター…"
+    showMore: "もっと見る"
+    showLess: "折りたたむ"

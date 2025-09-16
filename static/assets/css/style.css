@@ -1,3 +1,6 @@
+/* =========================
+   Theme variables
+========================= */
 :root {
   --bg: #0b0f14;
   --card: #121823;
@@ -5,15 +8,15 @@
   --accent2: #60a5fa;
   --text: #e6edf3;
   --muted: #a1a9b3;
-
-  /* ссылки (для контентных областей) */
   --link: #5eead4;
   --link-visited: #93c5fd;
   --link-hover: #22d3ee;
   --link-active: #34d399;
 }
 
-/* ========== Base ========== */
+/* =========================
+   Base
+========================= */
 * {
   box-sizing: border-box;
 }
@@ -44,19 +47,18 @@ body {
   line-height: 1.6;
 }
 
-/* Контейнеры */
+/* Containers */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px 24px;
 }
 
-/* Только для хедера — вернуть верхний отступ */
 .site-header .container {
   padding-top: 24px;
 }
 
-/* Текстовые утилиты */
+/* Text utils */
 .link {
   color: var(--accent);
 }
@@ -66,7 +68,7 @@ body {
   margin: 14px 0 18px;
 }
 
-/* Карточки/сетка/кнопки */
+/* Card / Grid / Buttons */
 .card {
   background: var(--card);
   padding: 20px;
@@ -127,13 +129,23 @@ body {
   font-style: italic;
 }
 
-/* ========== Header ========== */
+/* =========================
+   Header / Navigation
+========================= */
 .header-inner.header-grid {
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-areas: "brand nav actions";
   align-items: center;
   gap: 16px;
+}
+
+.header-inner.header-grid.nav-collapsed .nav {
+  display: none;
+}
+
+.header-inner.header-grid.nav-collapsed .hamburger {
+  display: inline-flex;
 }
 
 .brand {
@@ -161,38 +173,82 @@ body {
   gap: 12px;
   justify-self: end;
   margin-left: auto;
-  position: relative; /* якорь для выпадений */
+  position: relative;
 }
 
-/* === Hamburger === */
-
-/* База: всегда скрыт (десктоп) */
+/* Hamburger */
 .hamburger {
   display: none;
   width: 40px;
   height: 40px;
-  padding: 8px;
   border: 1px solid #2b3647;
   border-radius: 10px;
   background: #1f2937;
   cursor: pointer;
-  line-height: 0;
-  overflow: visible;
+  position: relative;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+  will-change: transform;
 }
 
-/* Полоски: задаём универсально (на случай переопределений где-то ещё) */
+.hamburger:hover {
+  background: #222d3f;
+  border-color: #33465f;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+}
+
 .hamburger span {
-  display: block;
-  width: 100%;
+  position: absolute;
+  left: 8px;
+  right: 8px;
   height: 2px;
-  background: #e6edf3;
+  background: var(--text);
   border-radius: 1px;
-  pointer-events: none;
+  transform-origin: center;
+  transition:
+    transform 0.22s,
+    opacity 0.18s,
+    top 0.22s,
+    background-color 0.22s;
 }
 
-/* отступ между полосками */
-.hamburger span + span {
-  margin-top: 6px;
+.hamburger span:nth-child(1) {
+  top: 12px;
+}
+
+.hamburger span:nth-child(2) {
+  top: 19px;
+}
+
+.hamburger span:nth-child(3) {
+  top: 26px;
+}
+
+.hamburger[aria-expanded="true"] {
+  background: #1b2433;
+  border-color: #3a4c66;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+  top: 19px;
+  transform: rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.5);
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+  top: 19px;
+  transform: rotate(-45deg);
+}
+
+.hamburger:active {
+  transform: translateY(1px);
 }
 
 .hamburger:focus-visible {
@@ -200,12 +256,11 @@ body {
   outline-offset: 2px;
 }
 
-/* Показывать на любых экранах, если JS решил, что меню не влезло */
 .nav-force .hamburger {
   display: inline-flex;
 }
 
-/* Навигация (desktop) */
+/* Nav links */
 .nav ul {
   display: flex;
   gap: 16px;
@@ -217,27 +272,61 @@ body {
 .nav a {
   color: var(--text);
   text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 }
 
-/* Активный пункт меню */
-.nav a.is-current,
-.nav a[aria-current="page"] {
-  color: var(--accent);
-  background: rgb(96 165 250 / 10%);
-  border: 1px solid #2b3647;
-  padding: 6px 10px;
+.header-grid .nav a:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0b0f14;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 40%);
+  transform: translateY(-1px);
+}
+
+.header-grid .nav a.is-current,
+.header-grid .nav a[aria-current="page"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0b0f14;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 45%);
+}
+
+.header-grid .nav a.is-current:hover,
+.header-grid .nav a[aria-current="page"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 50%);
+}
+
+.header-grid .nav a:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Mobile nav */
+.nav.nav-mobile a {
   border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.nav.nav-mobile a:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0b0f14;
+}
+
+.nav.nav-mobile a.is-current,
+.nav.nav-mobile a[aria-current="page"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0b0f14;
   font-weight: 700;
 }
 
-/* Hover для меню и языка */
-.nav a:hover,
-.dropdown .dropdown-content a:hover {
-  background: #1e2633;
-  color: var(--text);
+.nav.nav-mobile a:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
 }
 
-/* ========== Language dropdown ========== */
+/* Language dropdown */
 .dropdown {
   flex: 0 0 auto;
   position: relative;
@@ -260,7 +349,8 @@ body {
 .dropbtn .fi {
   font-size: 20px;
   line-height: 1;
-} /* увеличить флаг */
+}
+
 .fi {
   border-radius: 3px;
 }
@@ -269,9 +359,8 @@ body {
   display: none;
   position: absolute;
   left: 0;
-  right: auto;
   top: calc(100% + 8px);
-  background-color: #121823;
+  background: #121823;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgb(0 0 0 / 40%);
   z-index: 2000;
@@ -293,6 +382,11 @@ body {
   text-decoration: none;
 }
 
+.dropdown .dropdown-content a:hover {
+  background: #1e2633;
+  color: var(--text);
+}
+
 .dropdown .dropdown-content a.active {
   background: #1e2633;
   color: var(--accent);
@@ -304,7 +398,9 @@ body {
   display: block;
 }
 
-/* ========== Hero + CTA ========== */
+/* =========================
+   Hero / CTA
+========================= */
 .hero .tagline {
   color: var(--accent);
   margin-top: 8px;
@@ -314,7 +410,6 @@ body {
   margin-top: 0;
 }
 
-/* Базово: слева, без растягивания */
 .cta-row {
   display: flex;
   gap: 12px;
@@ -328,18 +423,18 @@ body {
   flex: 0 0 auto;
 }
 
-/* Плейсхолдеры в старой разметке не влияют */
 .cta-row span {
   display: none;
 }
 
-/* Только для навигации/пагинации растягиваем по краям */
 .cta-row[aria-label="Post navigation"],
 .cta-row[aria-label="Pagination"] {
   justify-content: space-between;
 }
 
-/* ========== Services / Skills layout ========== */
+/* =========================
+   Services / Skills
+========================= */
 .services-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -367,7 +462,6 @@ body {
   text-align: center;
 }
 
-/* TOC (левый сайдбар) */
 .services-toc {
   position: sticky;
   top: 96px;
@@ -387,7 +481,7 @@ body {
 .services-toc li + li {
   margin-top: 6px;
 }
-/* stylelint-disable-next-line no-descending-specificity */
+
 .services-toc a {
   color: var(--muted);
   text-decoration: none;
@@ -397,7 +491,6 @@ body {
   color: var(--accent);
 }
 
-/* CTA-кнопки внутри секций */
 .service-block .btn {
   margin-top: 8px;
   background: transparent;
@@ -413,7 +506,6 @@ body {
   color: #0b0f14;
 }
 
-/* Scroll-spy */
 .toc-spy a.active {
   color: var(--accent);
   font-weight: 700;
@@ -423,7 +515,9 @@ body {
   scroll-margin-top: 96px;
 }
 
-/* ========== Contacts page ========== */
+/* =========================
+   Contacts
+========================= */
 .contacts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -498,10 +592,13 @@ body {
   flex-wrap: wrap;
 }
 
-/* ========== Mobile TOC (details/summary) ========== */
+/* =========================
+   Mobile TOC (Overview)
+========================= */
 .toc-mobile {
   display: none;
-} /* desktop — скрыт */
+  position: relative;
+}
 
 .toc-toggle {
   background: #1f2937;
@@ -534,7 +631,7 @@ body {
 .toc-drawer li + li {
   margin-top: 6px;
 }
-/* stylelint-disable-next-line no-descending-specificity */
+
 .toc-drawer a {
   color: var(--muted);
   text-decoration: none;
@@ -544,7 +641,9 @@ body {
   color: var(--accent);
 }
 
-/* ========== Facts / helpers ========== */
+/* =========================
+   Facts / helpers
+========================= */
 .facts {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -571,21 +670,20 @@ body {
   margin: 2px 0;
 }
 
-/* Унифицированные отступы между блоками секций */
 .section + .section {
   margin-top: 16px;
 }
 
-/* ========== Link styling by page types ========== */
-
-/* Projects: ссылки только в контенте справа */
+/* =========================
+   Link styling by page types
+========================= */
 .projects-page .services-content a:not(.btn),
 .projects-page .section a:not(.btn),
-/* Blog list/cards + single article */
 .blog-page .services-content .card a:not(.btn),
 .blog-page article.card a:not(.btn),
-/* Taxonomy term pages content */
-.taxonomy-page .services-content .card a:not(.btn) {
+.taxonomy-page .services-content .card a:not(.btn),
+.home-page .card a:not(.btn),
+.home-page .section a:not(.btn) {
   color: var(--link);
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -596,7 +694,9 @@ body {
 .projects-page .section a:not(.btn):visited,
 .blog-page .services-content .card a:not(.btn):visited,
 .blog-page article.card a:not(.btn):visited,
-.taxonomy-page .services-content .card a:not(.btn):visited {
+.taxonomy-page .services-content .card a:not(.btn):visited,
+.home-page .card a:not(.btn):visited,
+.home-page .section a:not(.btn):visited {
   color: var(--link-visited);
 }
 
@@ -604,7 +704,9 @@ body {
 .projects-page .section a:not(.btn):hover,
 .blog-page .services-content .card a:not(.btn):hover,
 .blog-page article.card a:not(.btn):hover,
-.taxonomy-page .services-content .card a:not(.btn):hover {
+.taxonomy-page .services-content .card a:not(.btn):hover,
+.home-page .card a:not(.btn):hover,
+.home-page .section a:not(.btn):hover {
   color: var(--link-hover);
 }
 
@@ -612,36 +714,13 @@ body {
 .projects-page .section a:not(.btn):active,
 .blog-page .services-content .card a:not(.btn):active,
 .blog-page article.card a:not(.btn):active,
-.taxonomy-page .services-content .card a:not(.btn):active {
+.taxonomy-page .services-content .card a:not(.btn):active,
+.home-page .card a:not(.btn):active,
+.home-page .section a:not(.btn):active {
   color: var(--link-active);
 }
 
-/* Доступность: focus видим, без фиолетового visited */
-.blog-page .services-content .card a:not(.btn):focus-visible,
-.blog-page article.card a:not(.btn):focus-visible,
-.taxonomy-page .services-content .card a:not(.btn):focus-visible {
-  outline: 2px solid currentcolor;
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* Browse (сайдбар блога) — нейтральные ссылки */
-.blog-page .services-toc a {
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.blog-page .services-toc a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
-
-.blog-page .services-toc a:visited {
-  color: var(--muted);
-}
-
-/* В мета-строках не подсвечиваем таксономии (и на single, и на taxonomy) */
+/* не подсвечиваем таксономии внутри меты */
 .blog-page article.card .sub a[href*="/tags/"],
 .blog-page article.card .sub a[href*="/categories/"],
 .taxonomy-page .card .sub a[href*="/tags/"],
@@ -658,38 +737,10 @@ body {
   text-underline-offset: 0.15em;
 }
 
-.blog-page article.card .sub a[href*="/tags/"]:visited,
-.blog-page article.card .sub a[href*="/categories/"]:visited,
-.taxonomy-page .card .sub a[href*="/tags/"]:visited,
-.taxonomy-page .card .sub a[href*="/categories/"]:visited {
-  color: var(--text);
-}
-
-/* === Home: ссылки внутри карточек/секций — как в Blog/Projects === */
-.home-page .card a:not(.btn),
-.home-page .section a:not(.btn) {
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 0.08em;
-}
-
-.home-page .card a:not(.btn):visited,
-.home-page .section a:not(.btn):visited {
-  color: var(--link-visited);
-}
-
-.home-page .card a:not(.btn):hover,
-.home-page .section a:not(.btn):hover {
-  color: var(--link-hover);
-}
-
-.home-page .card a:not(.btn):active,
-.home-page .section a:not(.btn):active {
-  color: var(--link-active);
-}
-
-/* Доступность */
+/* Accessibility focus */
+.blog-page .services-content .card a:not(.btn):focus-visible,
+.blog-page article.card a:not(.btn):focus-visible,
+.taxonomy-page .services-content .card a:not(.btn):focus-visible,
 .home-page .card a:not(.btn):focus-visible,
 .home-page .section a:not(.btn):focus-visible {
   outline: 2px solid currentcolor;
@@ -697,7 +748,9 @@ body {
   border-radius: 2px;
 }
 
-/* ========== Responsive ========== */
+/* =========================
+   Responsive
+========================= */
 
 /* ≤ 860px */
 @media (width <= 53.75em) {
@@ -717,7 +770,6 @@ body {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    right: auto;
     display: none;
     z-index: 900;
     background: var(--card);
@@ -755,18 +807,12 @@ body {
     background: #1e2633;
   }
 
-  .nav.nav-mobile a.is-current,
-  .nav.nav-mobile a[aria-current="page"] {
-    background: #1e2633;
-    border-color: transparent;
-  }
-
   .contacts-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* ≤ 660px — mobile Overview поверх контента */
+/* ≤ 660px */
 @media (width <= 41.25em) {
   .toc-mobile {
     display: inline-block;
@@ -782,7 +828,7 @@ body {
     min-width: 260px;
     max-width: calc(100vw - 32px);
     white-space: nowrap;
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: auto;
     display: none;
   }
@@ -800,7 +846,7 @@ body {
   }
 }
 
-/* ≤ 500px — в кнопке языка скрыть код, открыть меню вправо */
+/* ≤ 500px */
 @media (width <= 500px) {
   .dropbtn .code {
     display: none;
@@ -810,5 +856,50 @@ body {
     left: auto;
     right: 0;
     text-align: left;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hamburger,
+  .hamburger span,
+  .nav a {
+    transition: none !important;
+  }
+}
+
+/* ==== Auto-hide header ==== */
+.site-header {
+  position: sticky; /* сохраняет место в потоке — контент не «прыгает» */
+  top: 0;
+  z-index: 2000;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: color-mix(in oklab, #0b0f14 80%, transparent);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+  will-change: transform;
+}
+
+.site-header.header-hidden {
+  transform: translateY(-110%);
+  box-shadow: none;
+}
+
+.site-header.header-shown {
+  transform: translateY(0);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 28%);
+}
+
+/* при самом верху — без тени */
+.site-header.at-top {
+  box-shadow: none;
+}
+
+/* уважение к reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none !important;
   }
 }

@@ -4,9 +4,17 @@
     {{ partial "head.html" . }}
   </head>
   <body>
-    <header>{{ partial "header.html" . }}</header>
-    <main class="container">{{ block "main" . }}{{ end }}</main>
-    <footer class="site-footer container">{{ partial "footer.html" . }}</footer>
-    {{ partial "scrollspy.html" . }}
+
+    <header id="site-header" class="site-header">
+      {{ partial "header.html" . }}
+    </header>
+
+    <main id="content" class="container">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer container">
+      {{ partial "footer.html" . }}
+    </footer>
   </body>
 </html>

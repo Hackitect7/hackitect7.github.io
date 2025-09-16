@@ -1,0 +1,130 @@
+services:
+  title: "Services"
+  intro: >
+    Je propose un spectre complet de services IT — de l’architecture d’infrastructure et du DevOps
+    à la gestion de crise et à l’alignement business. Chaque service est conçu pour apporter
+    résilience, évolutivité et efficacité mesurables.
+
+  sections:
+    - id: "infrastructure-architecture"
+      title: "Architecture d’Infrastructure"
+      text: |
+        Conception d’infrastructures robustes et évolutives pour environnements on-prem, cloud et hybrides.
+        De la disposition des datacenters et du réseau à la planification de capacité et à l’optimisation des coûts.
+      bullets:
+        - "Conceptions on-prem & cloud hybride"
+        - "Résilience multi-DC & bascule"
+        - "Réseau, zones de sécurité, stratégies de stockage"
+      cta:
+        text: "Discuter d’infrastructure"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
+
+    - id: "devops-automation"
+      title: "DevOps & Automatisation"
+      text: |
+        Création de pipelines de livraison modernes avec Infrastructure as Code et principes GitOps.
+        Rationaliser développement et opérations pour accélérer la livraison et réduire les erreurs humaines.
+      bullets:
+        - "Pipelines CI/CD (GitHub Actions, GitLab CI)"
+        - "IaC avec Terraform & Ansible"
+        - "Environnements automatisés et workflows en libre-service"
+      cta:
+        text: "Planifier une feuille de route DevOps"
+        href: "contacts"
+        utmCampaign: "devops-automation"
+
+    - id: "observability-sre"
+      title: "Observabilité & SRE"
+      text: |
+        Mise en place de pratiques de visibilité et de fiabilité pour garder les systèmes en bonne santé.
+        De la supervision et des alertes aux définitions SLO/SLI et cadres de réponse aux incidents.
+      bullets:
+        - "Prometheus, Grafana, ELK stack"
+        - "SLO/SLI & budgets d’erreur"
+        - "Playbooks de réponse aux incidents"
+      cta:
+        text: "Améliorer la fiabilité"
+        href: "contacts"
+        utmCampaign: "observability-sre"
+
+    - id: "security"
+      title: "Sécurité & Renforcement"
+      text: |
+        Application de mesures de sécurité pratiques sans mots à la mode.
+        Accent mis sur la réduction de la surface d’attaque, le moindre privilège et la protection des secrets.
+      bullets:
+        - "Renforcement des systèmes & conteneurs"
+        - "Contrôles d’identité & d’accès"
+        - "Gestion des secrets et pistes d’audit"
+      cta:
+        text: "Renforcer la sécurité"
+        href: "contacts"
+        utmCampaign: "security"
+
+    - id: "crisis-management"
+      title: "Gestion de Crise IT"
+      text: |
+        Aider les organisations à se remettre et à s’adapter lors d’incidents, pannes et migrations à haut risque.
+        Transformer le chaos en reprise structurée et en résilience à long terme.
+      bullets:
+        - "Gestion d’incidents d’urgence"
+        - "Planification de reprise & continuité"
+        - "Analyses post-mortem & améliorations"
+      cta:
+        text: "Besoin d’expertise en crise ?"
+        href: "contacts"
+        utmCampaign: "crisis-management"
+
+    - id: "consulting"
+      title: "Consulting & Mentorat"
+      text: |
+        Accompagner équipes et organisations avec du conseil ciblé et du mentorat pratique.
+        Transfert de connaissances et revues d’architecture qui renforcent l’expertise interne.
+      bullets:
+        - "Revue d’architecture & de processus"
+        - "Ateliers & formations techniques"
+        - "Mentorat pour ingénieurs & managers"
+      cta:
+        text: "Réserver une consultation"
+        href: "contacts"
+        utmCampaign: "consulting"
+
+    - id: "business-alignment"
+      title: "Alignement Business"
+      text: |
+        Relier la technologie aux résultats concrets de l’entreprise.
+        S’assurer que l’IT n’est pas seulement un centre de coûts, mais un moteur d’efficacité, de scalabilité et de croissance.
+      bullets:
+        - "Stratégies d’optimisation des coûts IT"
+        - "Feuilles de route alignées aux objectifs business"
+        - "Résilience et scalabilité comme avantage compétitif"
+      cta:
+        text: "Aligner l’IT au business"
+        href: "contacts"
+        utmCampaign: "business-alignment"
+
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "De la technologie aux résultats business"
+      text: |
+        Je relie architecture et économie pour que la technologie serve la stratégie.
+        Nous quantifions la valeur, gouvernons les dépenses et intégrons la fiabilité là où elle impacte les revenus.
+      bullets:
+        - "Traduire stratégie → architecture cible & modèle opérationnel"
+        - "Quantifier la valeur : TCO/ROI, unit economics, business cases prêts pour la direction"
+        - "Gouvernance FinOps : budgets, tags, alertes & KPIs de coûts par produit/équipe"
+        - "Conformité by design : contrôles mappés à ISO/SOC2/PCI/GDPR"
+        - "Opérationnalisation : SLOs, dashboards, runbooks & playbooks d’incidents"
+        - "Optimisation des fournisseurs & licences avec économies mesurables"
+      cta:
+        text: "Planifier l’alignement Business/IT"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
+
+  finalCta:
+    title: "Prêt à discuter ?"
+    text: "Besoin de fiabilité, d’automatisation et de clarté ? Concevons des systèmes qui fonctionnent."
+    contact: "Me contacter"
+    href: "contacts"
+    utmCampaign: "services-final"

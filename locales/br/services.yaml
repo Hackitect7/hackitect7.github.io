@@ -1,0 +1,130 @@
+services:
+  title: "Serviços"
+  intro: >
+    Ofereço um espectro completo de serviços de TI — desde arquitetura de infraestrutura e DevOps
+    até gerenciamento de crises e alinhamento de negócios. Cada serviço é projetado para entregar
+    resiliência, escalabilidade e eficiência mensuráveis.
+
+  sections:
+    - id: "infrastructure-architecture"
+      title: "Arquitetura de Infraestrutura"
+      text: |
+        Projetando infraestruturas robustas e escaláveis para ambientes on-premises, cloud e híbridos.
+        Desde layouts de datacenter e redes até planejamento de capacidade e otimização de custos.
+      bullets:
+        - "Designs on-premises e cloud híbrida"
+        - "Resiliência multi-DC e failover"
+        - "Redes, zonas de segurança, estratégias de armazenamento"
+      cta:
+        text: "Discutir infraestrutura"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
+
+    - id: "devops-automation"
+      title: "DevOps & Automação"
+      text: |
+        Construindo pipelines modernos de entrega com princípios de Infrastructure as Code e GitOps.
+        Otimizando o desenvolvimento e operações para acelerar a entrega e reduzir erros humanos.
+      bullets:
+        - "Pipelines CI/CD (GitHub Actions, GitLab CI)"
+        - "IaC com Terraform & Ansible"
+        - "Ambientes automatizados e fluxos de trabalho self-service"
+      cta:
+        text: "Planejar roadmap de DevOps"
+        href: "contacts"
+        utmCampaign: "devops-automation"
+
+    - id: "observability-sre"
+      title: "Observabilidade & SRE"
+      text: |
+        Implementando práticas de visibilidade e confiabilidade para manter sistemas saudáveis.
+        De monitoramento e alertas até definições de SLO/SLI e frameworks de resposta a incidentes.
+      bullets:
+        - "Prometheus, Grafana, ELK stack"
+        - "SLO/SLI & orçamentos de erro"
+        - "Runbooks de resposta a incidentes"
+      cta:
+        text: "Melhorar confiabilidade"
+        href: "contacts"
+        utmCampaign: "observability-sre"
+
+    - id: "security"
+      title: "Segurança & Hardening"
+      text: |
+        Aplicando medidas práticas de segurança sem buzzwords.
+        Foco em reduzir a superfície de ataque, reforçar privilégio mínimo e proteger segredos.
+      bullets:
+        - "Hardening de sistemas & contêineres"
+        - "Controles de identidade & acesso"
+        - "Gestão de segredos e trilhas de auditoria"
+      cta:
+        text: "Reforçar segurança"
+        href: "contacts"
+        utmCampaign: "security"
+
+    - id: "crisis-management"
+      title: "Gerenciamento de Crises em TI"
+      text: |
+        Ajudando organizações a se recuperar e se adaptar durante incidentes, falhas e migrações de alto risco.
+        Transformando caos em recuperação estruturada e resiliência de longo prazo.
+      bullets:
+        - "Atendimento emergencial a incidentes"
+        - "Recuperação de desastres & planejamento de continuidade"
+        - "Revisões pós-mortem & melhorias"
+      cta:
+        text: "Precisa de expertise em crises?"
+        href: "contacts"
+        utmCampaign: "crisis-management"
+
+    - id: "consulting"
+      title: "Consultoria & Mentoria"
+      text: |
+        Orientando equipes e organizações com consultoria direcionada e mentoria prática.
+        Transferência de conhecimento e revisões de arquitetura que fortalecem a expertise interna.
+      bullets:
+        - "Revisões de arquitetura & processos"
+        - "Workshops & treinamentos técnicos"
+        - "Mentoria para engenheiros & gestores"
+      cta:
+        text: "Agendar uma consultoria"
+        href: "contacts"
+        utmCampaign: "consulting"
+
+    - id: "business-alignment"
+      title: "Alinhamento com o Negócio"
+      text: |
+        Conectando tecnologia com resultados reais de negócios.
+        Garantindo que TI não seja apenas um centro de custos, mas um motor de eficiência, escalabilidade e crescimento.
+      bullets:
+        - "Estratégias de otimização de custos de TI"
+        - "Roadmaps alinhados com objetivos de negócio"
+        - "Resiliência e escalabilidade como vantagem competitiva"
+      cta:
+        text: "Alinhar TI ao negócio"
+        href: "contacts"
+        utmCampaign: "business-alignment"
+
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "De tecnologia a resultados de negócio"
+      text: |
+        Faço a ponte entre arquitetura e economia para que a tecnologia sirva à estratégia.
+        Quantificamos valor, governamos gastos e incorporamos confiabilidade onde impacta a receita.
+      bullets:
+        - "Traduzir estratégia → arquitetura alvo & modelo operacional"
+        - "Quantificar valor: TCO/ROI, economia unitária, business cases prontos para executivos"
+        - "Governança FinOps: orçamentos, tags, alertas & KPIs de custo por produto/equipe"
+        - "Conformidade by design: controles mapeados para ISO/SOC2/PCI/GDPR"
+        - "Operacionalização: SLOs, dashboards, runbooks e playbooks de incidentes"
+        - "Otimização de fornecedores & licenças com economia mensurável"
+      cta:
+        text: "Planejar alinhamento Negócio/TI"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
+
+  finalCta:
+    title: "Pronto para conversar?"
+    text: "Precisa de confiabilidade, automação e clareza? Vamos projetar sistemas que funcionam."
+    contact: "Fale comigo"
+    href: "contacts"
+    utmCampaign: "services-final"

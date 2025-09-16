@@ -2,7 +2,9 @@ name: Deploy Hugo site to Pages (prod)
 
 on:
   push:
-    branches: [main] # деплой только с main
+    branches: ["main"] # деплой только с main
+  pull_request:
+    branches: ["main"] # сборка-проверка на PR
   workflow_dispatch: # ручной запуск
 
 permissions:
@@ -25,16 +27,41 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Setup Hugo (match local)
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.149.1"
           extended: true
 
-      # ВАЖНО: сборка именно в прод-режиме, без draft/future
-      # Если у тебя есть отдельный прод-конфиг, укажи его в --config.
-      - name: Build (production)
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          path: |
+            resources/_gen
+            .hugo_cache
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/*.html','**/*.md','**/*.toml','**/*.yaml','**/*.yml','static/assets/**/*') }}
+
+      # Вычисляем корректный baseURL для GitHub Pages (user/org vs project)
+      - name: Compute baseURL for GitHub Pages
+        id: pages
+        shell: bash
         run: |
-          hugo --minify --gc --environment production --config config/production/config.toml
+          OWNER_LC="$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [ "$REPO" = "${OWNER_LC}.github.io" ]; then
+            BASE="https://${OWNER_LC}.github.io/"
+          else
+            BASE="https://${OWNER_LC}.github.io/${REPO}/"
+          fi
+          echo "baseurl=${BASE}" >> "$GITHUB_OUTPUT"
+          echo "Resolved baseURL: ${BASE}"
+
+      # Прод-сборка: берём твой production-конфиг и подставляем корректный baseURL
+      - name: Build (production)
+        run: >
+          hugo --minify --gc
+          --environment production
+          --config config/production/config.toml
+          --baseURL "${{ steps.pages.outputs.baseurl }}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -43,6 +70,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

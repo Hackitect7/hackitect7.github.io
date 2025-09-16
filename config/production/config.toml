@@ -4,9 +4,13 @@ languageCode = "en-us"
 defaultContentLanguage = "us"
 defaultContentLanguageInSubdir = true
 enableGitInfo = true
+
+# В проде — строгая канонификация URL
 relativeURLs = false
-canonifyURLs = false
+canonifyURLs = true
+
 dataDir = "locales"
+enableRobotsTXT = true
 
 [pagination]
   pagerSize = 10
@@ -21,13 +25,14 @@ dataDir = "locales"
   filename = "sitemap.xml"
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
   term = ["HTML"]
+  page = ["HTML"]
 
 [permalinks]
-  blog = "/blog/:year/:month/:slug/"
+  blog = "/blog/:slug/"
   projects = "/projects/:slug/"
   services = "/services/:slug/"
 
@@ -45,3 +50,14 @@ dataDir = "locales"
     anonymizeIP = true
   [privacy.youtube]
     privacyEnhanced = true
+
+[minify]
+  minifyOutput = true
+
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+
+[params]
+  [params.env]
+    name = "production"

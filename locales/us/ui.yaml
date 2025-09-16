@@ -1,42 +1,69 @@
-brand: "Hackitect7 — The Music of Systems"
+ui:
+  toc: "On this page"
+  faq: "FAQ"
+  learnMore: "Learn more →"
 
-common:
-  tocToggle: "Sections"
-  backToTop: "Back to top"
+  blog:
+    title: "Blog"
+    filterTitle: "Browse"
+    categories: "Categories"
+    tags: "Tags"
+    newer: "Newer"
+    older: "Older"
+    empty: "No posts yet."
+    minRead: "min read"
+    more: "More to explore"
+    backToList: "Back to blog"
+    dateFormat: "Jan 02, 2006"
+    noPosts: "No posts yet."
+    viewAll: "View all posts"
+    min: "min read"
 
-nav:
-  about: "About"
-  skills: "Skills"
-  services: "Services"
-  projects: "Projects"
-  blog: "Blog"
-  contacts: "Contacts"
+  projects:
+    title: "Projects"
+    tocTitle: "Overview"
+    stack: "Stack"
+    linksTitle: "Links"
+    demo: "Live demo"
+    more: "More projects"
+    backToList: "Back to projects"
 
-services:
-  title: "Services"
-  tocTitle: "Overview"
+  services:
+    title: "Services"
+    tocTitle: "Overview"
 
-about:
-  cred:
-    title: "Unique Value"
-    expertise: "Expertise"
-    oss: "Open Source"
-    community: "Community"
+  skills:
+    title: "Skills"
+    tocTitle: "Overview"
 
-blog:
-  title: "Blog"
-  filterTitle: "Browse"
-  categories: "Categories"
-  tags: "Tags"
-  newer: "Newer"
-  older: "Older"
-  empty: "No posts yet."
-  minRead: "min read"
-  more: "More to explore"
-  backToList: "Back to blog"
+  common:
+    view: "View"
+    minRead: "min read"
+    empty: "No content yet."
+    dateFormat: "Jan 02, 2006"
 
-cta:
-  viewAllPosts: "View all posts"
+  cta:
+    contact: "Contact me"
+    primary: "Explore"
+    secondary: "Learn more"
+    tertiary: "Get in touch"
+    ready: "Ready to talk?"
+    servicePrompt: "Tell me about your needs"
 
-footer:
-  made: "Built with Hugo and ❤️"
+  aria:
+    prevPost: "Previous post"
+    nextPost: "Next post"
+
+  about:
+    tocTitle: "Overview"
+
+  footer:
+    made: "Created with Hugo and ❤️"
+    brand: "Hackitect7 — The Music of Systems"
+    copyright: "© %d %s"
+
+  tax:
+    filterTitle: "Browse"
+    filterPlaceholder: "Filter…"
+    showMore: "Show more"
+    showLess: "Show less"

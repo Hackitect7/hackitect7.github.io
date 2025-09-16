@@ -1,15 +1,19 @@
 {{- define "main" -}}
   <section class="home-page">
     {{- $lang := .Site.Language.Lang -}}
-    {{- $home := (index site.Data $lang "home") | default (index site.Data "us" "home") -}}
-    {{- $ui   := (index site.Data $lang "ui")   | default (index site.Data "us" "ui") -}}
 
-    {{- /* hero: читаем заголовок с фоллбеком */ -}}
-    {{- $hero := $home.hero -}}
-    {{- $hTitle := or $hero.title $home.title -}}
+    {{/* locales/<lang>/home.yaml -> корень home: */}}
+    {{- $homeRoot := (index site.Data $lang "home") | default (index site.Data "us" "home") -}}
+    {{- $home := (index $homeRoot "home") | default dict -}}
 
+    {{/* UI-словарь (для learnMore, noPosts и т.д.) */}}
+    {{- $uiRoot := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+    {{- $ui := (index $uiRoot "ui") | default dict -}}
 
-    <section class="hero">
+    {{/* --- HERO --- */}}
+    {{- $hero := $home.hero | default dict -}}
+    {{- $hTitle := or $hero.title $home.title "Hackitect7" -}}
+    <section class="hero" role="region" aria-label="Home hero">
       <h1>{{ $hTitle }}</h1>
 
       {{- with $hero.subtitle -}}
@@ -17,134 +21,223 @@
       {{- end -}}
 
       {{- with $hero.highlights -}}
-        <ul class="sub">
-          {{- range . -}}<li>{{ . }}</li>{{- end -}}
-        </ul>
+        {{- if gt (len .) 0 -}}
+          <ul class="sub">
+            {{- range . -}}<li>{{ . }}</li>{{- end -}}
+          </ul>
+        {{- end -}}
       {{- end -}}
 
 
       <div class="cta-row">
         {{- with $hero.primaryHref -}}
-          <a class="btn" href="{{ . }}">{{ $hero.primaryText }}</a>
+          <a
+            class="btn"
+            href="{{ . | relLangURL }}"
+            rel="noopener"
+            data-analytics="home-cta-primary"
+          >
+            {{ $hero.primaryText | default (partial "t.html" (dict "key" "ui.cta.primary" "ctx" $ "default" "Explore")) }}
+          </a>
         {{- end -}}
         {{- with $hero.secondaryHref -}}
-          <a class="btn secondary" href="{{ . }}">{{ $hero.secondaryText }}</a>
+          <a
+            class="btn secondary"
+            href="{{ . | relLangURL }}"
+            rel="noopener"
+            data-analytics="home-cta-secondary"
+          >
+            {{ $hero.secondaryText | default (partial "t.html" (dict "key" "ui.cta.secondary" "ctx" $ "default" "Learn more")) }}
+          </a>
         {{- end -}}
         {{- with $hero.tertiaryHref -}}
-          <a class="btn tertiary" href="{{ . }}">{{ $hero.tertiaryText }}</a>
+          <a
+            class="btn tertiary"
+            href="{{ . | relLangURL }}"
+            rel="noopener"
+            data-analytics="home-cta-tertiary"
+          >
+            {{ $hero.tertiaryText | default (partial "t.html" (dict "key" "ui.cta.tertiary" "ctx" $ "default" "Get in touch")) }}
+          </a>
         {{- end -}}
       </div>
     </section>
 
-    {{/* SECTIONS */}}
-    {{- range $home.sections -}}
+    {{/* --- SECTIONS --- */}}
+    {{- $sections := $home.sections | default (slice) -}}
+    {{- range $sections -}}
       {{- $sec := . -}}
-      {{- $secId := $sec.id -}}
+      {{- $secId := $sec.id | default "" -}}
+      {{- $hid := printf "%s-h2" (cond (ne $secId "") $secId (anchorize $sec.title)) -}}
 
       {{- if eq $sec.kind "cards" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          <div class="grid">
-            {{- range $sec.items -}}
-              <div class="card">
-                <h3>
-                  {{- with (index . "icon") -}}
-                    <span>{{ . }}</span>
-                  {{- end -}}{{ index . "h" }}
-                </h3>
-                <p>{{ index . "p" }}</p>
-                {{- with (index . "href") -}}
-                  <a class="link" href="{{ . }}">Learn more →</a>
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- with $sec.items -}}
+            {{- if gt (len .) 0 -}}
+              <div class="grid">
+                {{- range . -}}
+                  <div class="card">
+                    <h3>
+                      {{- with (index . "icon") -}}<span>{{ . }}</span>{{- end -}}
+                      {{- index . "h" -}}
+                    </h3>
+                    {{- with (index . "p") -}}<p>{{ . }}</p>{{- end -}}
+                    {{- with (index . "href") -}}
+                      <a
+                        class="link"
+                        href="{{ . | relLangURL }}"
+                        rel="noopener"
+                        data-analytics="home-cards-link"
+                      >
+                        {{ partial "t.html" (dict "key" "ui.learnMore" "ctx" $ "default" "Learn more →") }}
+                      </a>
+                    {{- end -}}
+                  </div>
                 {{- end -}}
               </div>
             {{- end -}}
-          </div>
+          {{- end -}}
         </section>
       {{- end -}}
 
       {{- if eq $sec.kind "bullets" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          <ul>
-            {{- range $sec.bullets -}}<li>{{ . }}</li>{{- end -}}
-          </ul>
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- with $sec.bullets -}}
+            {{- if gt (len .) 0 -}}
+              <ul>
+                {{- range . -}}<li>{{ . }}</li>{{- end -}}
+              </ul>
+            {{- end -}}
+          {{- end -}}
         </section>
       {{- end -}}
 
       {{- if eq $sec.kind "projects" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          <div class="grid">
-            {{- range $sec.items -}}
-              {{- $title := index . "title" -}}
-              {{- $desc  := index . "desc" -}}
-              {{- $href  := index . "href" -}}
-              <div class="card">
-                {{- with (index . "badge") -}}
-                  <p class="sub">{{ . }}</p>
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- with $sec.items -}}
+            {{- if gt (len .) 0 -}}
+              <div class="grid">
+                {{- range . -}}
+                  {{- $title := index . "title" -}}
+                  {{- $desc  := index . "desc" -}}
+                  {{- $href  := index . "href" -}}
+                  <div class="card">
+                    {{- with (index . "badge") -}}<p class="sub">{{ . }}</p>{{- end -}}
+                    <h3>
+                      {{- if $href -}}
+                        <a href="{{ $href | relLangURL }}" rel="noopener">{{ $title }}</a>
+                      {{- else -}}
+                        {{ $title }}
+                      {{- end -}}
+                    </h3>
+                    {{- with $desc -}}<p>{{ . }}</p>{{- end -}}
+                  </div>
                 {{- end -}}
-                <h3>
-                  {{- if $href -}}
-                    <a href="{{ $href }}">{{ $title }}</a>
-                  {{- else -}}
-                    {{ $title }}
-                  {{- end -}}
-                </h3>
-                <p>{{ $desc }}</p>
               </div>
             {{- end -}}
-          </div>
+          {{- end -}}
         </section>
       {{- end -}}
 
       {{- if eq $sec.kind "vision" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          <p>{{ $sec.text }}</p>
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- with $sec.text -}}<p>{{ . }}</p>{{- end -}}
         </section>
       {{- end -}}
 
       {{- if eq $sec.kind "blog" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          {{- $cnt := 3 -}}
-          {{- with $sec.count }}{{- $cnt = . -}}{{- end -}}
-          {{- $pages := first $cnt (where (where site.RegularPages "Type" "blog") "Lang" $.Site.Language.Lang) -}}
-          {{- if $pages -}}
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- $cnt := cond (isset $sec "count") ($sec.count) 3 -}}
+          {{- $posts := where site.RegularPages "Type" "blog" -}}
+          {{- $posts = where $posts "Lang" $.Site.Language.Lang -}}
+          {{- $pages := first $cnt $posts -}}
+          {{- if gt (len $pages) 0 -}}
             {{- range $pages -}}
               <section class="section">
                 <article class="card">
-                  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  <h3><a href="{{ .RelPermalink }}" rel="noopener">{{ .Title }}</a></h3>
                   <p>
-                    {{ with .Params.description }}
+                    {{- with .Params.description -}}
                       {{ . }}
-                    {{ else }}
+                    {{- else -}}
                       {{ .Summary }}
-                    {{ end }}
+                    {{- end -}}
                   </p>
                   <p class="sub">
                     {{ .Date.Format "02 Jan 2006" }}
-                    {{ with .ReadingTime }}· {{ . }} min read{{ end }}
+                    {{ with .ReadingTime }}
+                      ·
+                      {{ . }}
+                      {{ partial "t.html" (dict "key" "ui.blog.min" "ctx" $ "default" "min read") }}
+                    {{ end }}
                     {{ with .Params.tags }}· {{ delimit . ", " }}{{ end }}
                   </p>
                 </article>
               </section>
             {{- end -}}
           {{- else -}}
-            <p class="sub">No posts yet.</p>
+            <p class="sub">
+              {{ partial "t.html" (dict "key" "ui.blog.noPosts" "ctx" $ "default" "No posts yet.") }}
+            </p>
           {{- end -}}
           {{- with $sec.ctaHref -}}
-            <p><a class="link" href="{{ . }}">{{ $sec.ctaText }} →</a></p>
+            <p>
+              <a
+                class="link"
+                href="{{ . | relLangURL }}"
+                rel="noopener"
+                data-analytics="home-blog-viewall"
+              >
+                {{ $sec.ctaText | default (partial "t.html" (dict "key" "ui.blog.viewAll" "ctx" $ "default" "View all posts")) }}
+                →
+              </a>
+            </p>
           {{- end -}}
         </section>
       {{- end -}}
 
       {{- if eq $sec.kind "cta" -}}
-        <section {{ if $secId }}id="{{ $secId }}"{{ end }} class="section">
-          <h2>{{ $sec.title }}</h2>
-          <p>{{ $sec.text }}</p>
+        <section
+          {{ if $secId }}id="{{ $secId }}"{{ end }}
+          class="section"
+          aria-labelledby="{{ $hid }}"
+        >
+          <h2 id="{{ $hid }}">{{ $sec.title }}</h2>
+          {{- with $sec.text -}}<p>{{ . }}</p>{{- end -}}
           {{- with $sec.primaryHref -}}
-            <a class="btn" href="{{ . }}">{{ $sec.primaryText }}</a>
+            <a
+              class="btn"
+              href="{{ . | relLangURL }}"
+              rel="noopener"
+              data-analytics="home-cta-final"
+            >
+              {{ $sec.primaryText | default (partial "t.html" (dict "key" "ui.cta.primary" "ctx" $ "default" "Contact me")) }}
+            </a>
           {{- end -}}
         </section>
       {{- end -}}

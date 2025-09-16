@@ -1,7 +1,12 @@
-{{ define "main" }}
+{{- define "main" -}}
   {{- $lang := .Site.Language.Lang -}}
-  {{- $ui := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
 
+  {{/* UI-строки */}}
+  {{- $stackLbl     := partial "t.html" (dict "key" "ui.projects.stack"     "ctx" .) -}}
+  {{- $linksTitle   := partial "t.html" (dict "key" "ui.projects.linksTitle" "ctx" .) -}}
+  {{- $demoLbl      := partial "t.html" (dict "key" "ui.projects.demo"       "ctx" .) -}}
+  {{- $moreLbl      := partial "t.html" (dict "key" "ui.projects.more"       "ctx" .) -}}
+  {{- $backToList   := partial "t.html" (dict "key" "ui.projects.backToList" "ctx" .) -}}
 
   <!-- HERO -->
   <section class="hero section">
@@ -13,14 +18,9 @@
   <!-- COVER (optional) -->
   {{ with .Params.cover }}
     <figure class="section card" style="padding:0; overflow:hidden">
-      <img
-        src="{{ . | relURL }}"
-        alt="{{ $.Title }}"
-        style="display:block; width:100%; height:auto"
-      />
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}" style="display:block; width:100%; height:auto" loading="lazy" decoding="async" />
     </figure>
   {{ end }}
-
 
   <!-- META: stack + quick links (optional) -->
   {{ if or .Params.stack (or .Params.repo (or .Params.demo .Params.links)) }}
@@ -28,7 +28,7 @@
       <div class="grid">
         {{ with .Params.stack }}
           <div class="card">
-            <h3>{{ or $ui.projects.stack "Stack" }}</h3>
+            <h3>{{ $stackLbl }}</h3>
             <ul>
               {{ range . }}<li>{{ . }}</li>{{ end }}
             </ul>
@@ -37,28 +37,16 @@
 
         {{ if or .Params.repo (or .Params.demo .Params.links) }}
           <div class="card">
-            <h3>{{ or $ui.projects.linksTitle "Links" }}</h3>
+            <h3>{{ $linksTitle }}</h3>
             <div class="cta-row">
-              {{ with .Params.demo }}
-                <a class="btn" href="{{ . }}"
-                  >{{ or $ui.projects.demo "Live demo" }}</a
-                >
-              {{ end }}
-              {{ with .Params.repo }}
-                <a class="btn secondary" href="{{ . }}">GitHub</a>
-              {{ end }}
-
-              {{/* произвольные ссылки: links: [{text: "...", href: "...", kind: "secondary|tertiary"}] */}}
+              {{ with .Params.demo }}<a class="btn"          href="{{ . }}">{{ $demoLbl }}</a>{{ end }}
+              {{ with .Params.repo }}<a class="btn secondary" href="{{ . }}">GitHub</a>{{ end }}
               {{ with .Params.links }}
                 {{ range . }}
                   {{- $text := .text | default "Link" -}}
                   {{- $href := .href -}}
                   {{- $kind := .kind | default "tertiary" -}}
-                  {{ if $href }}
-                    <a class="btn {{ $kind }}" href="{{ $href }}"
-                      >{{ $text }}</a
-                    >
-                  {{ end }}
+                  {{ if $href }}<a class="btn {{ $kind }}" href="{{ $href }}">{{ $text }}</a>{{ end }}
                 {{ end }}
               {{ end }}
             </div>
@@ -68,11 +56,9 @@
     </section>
   {{ end }}
 
-
   <!-- CONTENT -->
   <article class="section card">
     {{ .Content }}
-
     {{ with .Params.highlights }}
       <ul class="bullets" style="margin-top:12px">
         {{ range . }}<li>{{ . }}</li>{{ end }}
@@ -80,7 +66,7 @@
     {{ end }}
   </article>
 
-  <!-- GALLERY (optional): images: ["/img1.jpg", {src:"/img2.jpg", alt:"..."}] -->
+  <!-- GALLERY (optional) -->
   {{ with .Params.images }}
     <section class="section">
       <div class="grid">
@@ -89,11 +75,7 @@
           {{- $alt := (cond (reflect.IsMap .) ((or .alt $.Title)) $.Title) -}}
           {{ if $src }}
             <figure class="card" style="padding:0; overflow:hidden">
-              <img
-                src="{{ $src | relURL }}"
-                alt="{{ $alt }}"
-                style="display:block; width:100%; height:auto"
-              />
+              <img src="{{ $src | relURL }}" alt="{{ $alt }}" style="display:block; width:100%; height:auto" loading="lazy" decoding="async" />
             </figure>
           {{ end }}
         {{ end }}
@@ -101,32 +83,9 @@
     </section>
   {{ end }}
 
-
-  <!-- PREV/NEXT -->
-  <section class="section">
-    <nav
-      class="cta-row"
-      aria-label="Project navigation"
-      style="justify-content:space-between"
-    >
-      {{ if .PrevInSection }}
-        <a class="btn secondary" href="{{ .PrevInSection.RelPermalink }}"
-          >← {{ .PrevInSection.Title }}</a
-        >
-      {{ else }}
-        <span></span>
-      {{ end }}
-      {{ with .NextInSection }}
-        <a class="btn secondary" href="{{ .RelPermalink }}">{{ .Title }} →</a>
-      {{ end }}
-    </nav>
-  </section>
-
   <!-- BACK TO LIST -->
   <section class="section card" style="text-align:center">
-    <h2>{{ or $ui.projects.more "More projects" }}</h2>
-    <a class="btn" href="{{ (printf "/%s/projects/" $lang) | relLangURL }}">
-      {{ or $ui.projects.backToList "Back to projects" }}
-    </a>
+    <h2>{{ $moreLbl }}</h2>
+    <a class="btn" href="{{ "/projects/" | relLangURL }}">{{ $backToList }}</a>
   </section>
-{{ end }}
+{{- end -}}

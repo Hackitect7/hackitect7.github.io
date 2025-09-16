@@ -1,0 +1,39 @@
+projects:
+  intro: "Trabajo seleccionado: open source, planos, educación."
+  highlights:
+    - "Arquitecturas del mundo real"
+    - "Open source y herramientas"
+
+  sections:
+    - id: "open-source"
+      title: "Open Source"
+      text: "Herramientas y plantillas reutilizables."
+      items:
+        - icon: "🐙"
+          title: "RouterOS Scripts"
+          desc: "Automatización de flotas MikroTik con scripts idempotentes."
+          href: "routeros-scripts/"
+          repo: "https://github.com/Hackitect7/routeros-scripts"
+          badge: "Redes"
+
+        - icon: "⚙️"
+          title: "DevOps Cheat Sheet"
+          desc: "Mi referencia rápida de DevOps/SRE probada en batalla."
+          href: "devops-cheat-sheet/"
+          repo: "https://github.com/Hackitect7/devops-cheat-sheet"
+          badge: "DevOps"
+
+    - id: "blueprints"
+      title: "Planos de Arquitectura"
+      items:
+        - icon: "🏗️"
+          title: "Kubernetes Multi-Región"
+          desc: "K8s altamente disponible en múltiples regiones con GitOps."
+          href: "k8s-multi-region/"
+          badge: "Plano"
+
+  cta:
+    title: "¿Necesitas un resultado similar?"
+    text: "Transformo requisitos en sistemas fiables, observables y seguros."
+    href: "contacts"
+    button: "Iniciar un proyecto"

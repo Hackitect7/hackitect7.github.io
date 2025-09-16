@@ -1,0 +1,69 @@
+ui:
+  toc: "本页内容"
+  faq: "常见问题"
+  learnMore: "了解更多 →"
+
+  blog:
+    title: "博客"
+    filterTitle: "浏览"
+    categories: "分类"
+    tags: "标签"
+    newer: "较新"
+    older: "较旧"
+    empty: "暂无文章。"
+    minRead: "分钟阅读"
+    more: "更多探索"
+    backToList: "返回博客"
+    dateFormat: "2006年01月02日"
+    noPosts: "暂无文章。"
+    viewAll: "查看全部文章"
+    min: "分钟阅读"
+
+  projects:
+    title: "项目"
+    tocTitle: "概览"
+    stack: "技术栈"
+    linksTitle: "链接"
+    demo: "在线演示"
+    more: "更多项目"
+    backToList: "返回项目"
+
+  services:
+    title: "服务"
+    tocTitle: "概览"
+
+  skills:
+    title: "技能"
+    tocTitle: "概览"
+
+  common:
+    view: "查看"
+    minRead: "分钟阅读"
+    empty: "暂无内容。"
+    dateFormat: "2006年01月02日"
+
+  cta:
+    contact: "联系我"
+    primary: "探索"
+    secondary: "了解更多"
+    tertiary: "保持联系"
+    ready: "准备好交流了吗？"
+    servicePrompt: "告诉我你的需求"
+
+  aria:
+    prevPost: "上一篇"
+    nextPost: "下一篇"
+
+  about:
+    tocTitle: "概览"
+
+  footer:
+    made: "由 Hugo ❤️ 驱动"
+    brand: "Hackitect7 — 系统之乐"
+    copyright: "© %d %s"
+
+  tax:
+    filterTitle: "浏览"
+    filterPlaceholder: "筛选…"
+    showMore: "显示更多"
+    showLess: "显示更少"

@@ -1,117 +1,131 @@
-title: "Dienstleistungen"
-intro: "Ich biete ein komplettes Spektrum an IT-Dienstleistungen — von Infrastrukturarchitektur und DevOps bis hin zu Krisenmanagement und Business Alignment. Jeder Service ist darauf ausgelegt, messbare Resilienz, Skalierbarkeit und Effizienz zu liefern."
+services:
+  title: "Dienstleistungen"
+  intro: >
+    Ich biete ein vollständiges Spektrum an IT-Dienstleistungen – von Infrastrukturarchitektur und DevOps
+    bis hin zu Krisenmanagement und Business-Alignment. Jede Dienstleistung ist darauf ausgelegt,
+    messbare Resilienz, Skalierbarkeit und Effizienz zu liefern.
 
-sections:
-  - id: "infrastructure-architecture"
-    title: "Infrastrukturarchitektur"
-    text: |
-      Entwurf robuster und skalierbarer Infrastrukturen für On-Prem, Cloud und hybride Umgebungen.
-      Von Rechenzentrums-Layouts und Netzwerken bis hin zu Kapazitätsplanung und Kostenoptimierung.
-    bullets:
-      - "On-Prem- & Hybrid-Cloud-Designs"
-      - "Multi-DC-Resilienz & Failover"
-      - "Netzwerke, Sicherheitszonen, Speicherstrategien"
-    cta:
-      text: "Infrastruktur besprechen"
-      href: "contacts"
+  sections:
+    - id: "infrastructure-architecture"
+      title: "Infrastrukturarchitektur"
+      text: |
+        Entwicklung robuster und skalierbarer Infrastrukturen für On-Prem, Cloud- und Hybrid-Umgebungen.
+        Von Rechenzentrums-Layouts und Netzwerken bis hin zu Kapazitätsplanung und Kostenoptimierung.
+      bullets:
+        - "On-Prem- & Hybrid-Cloud-Designs"
+        - "Multi-DC-Resilienz & Failover"
+        - "Netzwerke, Sicherheitszonen, Speicherstrategien"
+      cta:
+        text: "Infrastruktur besprechen"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
 
-  - id: "devops-automation"
-    title: "DevOps & Automatisierung"
-    text: |
-      Aufbau moderner Delivery-Pipelines mit Infrastructure-as-Code- und GitOps-Prinzipien.
-      Optimierung von Entwicklung und Betrieb zur Beschleunigung der Bereitstellung und Reduzierung menschlicher Fehler.
-    bullets:
-      - "CI/CD-Pipelines (GitHub Actions, GitLab CI)"
-      - "IaC mit Terraform & Ansible"
-      - "Automatisierte Umgebungen und Self-Service-Workflows"
-    cta:
-      text: "DevOps-Roadmap planen"
-      href: "contacts"
+    - id: "devops-automation"
+      title: "DevOps & Automatisierung"
+      text: |
+        Aufbau moderner Delivery-Pipelines mit Infrastructure as Code und GitOps-Prinzipien.
+        Straffung von Entwicklung und Betrieb, um die Lieferung zu beschleunigen und menschliche Fehler zu reduzieren.
+      bullets:
+        - "CI/CD-Pipelines (GitHub Actions, GitLab CI)"
+        - "IaC mit Terraform & Ansible"
+        - "Automatisierte Umgebungen und Self-Service-Workflows"
+      cta:
+        text: "DevOps-Roadmap planen"
+        href: "contacts"
+        utmCampaign: "devops-automation"
 
-  - id: "observability-sre"
-    title: "Observability & SRE"
-    text: |
-      Implementierung von Sichtbarkeit und Zuverlässigkeitspraktiken, um Systeme gesund zu halten.
-      Von Monitoring und Alerting bis hin zu SLO/SLI-Definitionen und Incident-Response-Frameworks.
-    bullets:
-      - "Prometheus, Grafana, ELK-Stack"
-      - "SLO/SLI & Fehlerbudgets"
-      - "Incident-Response-Playbooks"
-    cta:
-      text: "Zuverlässigkeit verbessern"
-      href: "contacts"
+    - id: "observability-sre"
+      title: "Observability & SRE"
+      text: |
+        Einführung von Sichtbarkeit und Zuverlässigkeitspraktiken, um Systeme gesund zu halten.
+        Von Monitoring und Alerting bis hin zu SLO/SLI-Definitionen und Incident-Response-Frameworks.
+      bullets:
+        - "Prometheus, Grafana, ELK-Stack"
+        - "SLO/SLI & Fehlerbudgets"
+        - "Incident-Response-Playbooks"
+      cta:
+        text: "Zuverlässigkeit verbessern"
+        href: "contacts"
+        utmCampaign: "observability-sre"
 
-  - id: "security"
-    title: "Sicherheit & Hardening"
-    text: |
-      Anwendung praktischer Sicherheitsmaßnahmen ohne Buzzwords.
-      Fokus auf Reduzierung der Angriffsfläche, Durchsetzung von Least Privilege und Schutz von Secrets.
-    bullets:
-      - "System- & Container-Hardening"
-      - "Identitäts- & Zugriffskontrollen"
-      - "Secrets-Management und Audit-Trails"
-    cta:
-      text: "Sicherheit stärken"
-      href: "contacts"
+    - id: "security"
+      title: "Sicherheit & Härtung"
+      text: |
+        Anwendung praktischer Sicherheitsmaßnahmen ohne Schlagworte.
+        Fokus auf Reduzierung der Angriffsfläche, Durchsetzung des Least-Privilege-Prinzips und Schutz von Geheimnissen.
+      bullets:
+        - "System- & Container-Härtung"
+        - "Identitäts- & Zugriffskontrollen"
+        - "Secrets-Management und Audit-Trails"
+      cta:
+        text: "Sicherheit stärken"
+        href: "contacts"
+        utmCampaign: "security"
 
-  - id: "crisis-management"
-    title: "Krisen-IT-Management"
-    text: |
-      Unterstützung von Organisationen bei der Wiederherstellung und Anpassung während Incidents, Ausfällen und risikoreichen Migrationen.
-      Chaos in strukturierte Wiederherstellung und langfristige Resilienz verwandeln.
-    bullets:
-      - "Notfall-Incident-Handling"
-      - "Disaster-Recovery- & Continuity-Planung"
-      - "Post-Mortem-Reviews & Verbesserungen"
-    cta:
-      text: "Krisenexpertise benötigt?"
-      href: "contacts"
+    - id: "crisis-management"
+      title: "Krisen-IT-Management"
+      text: |
+        Unterstützung von Organisationen bei der Wiederherstellung und Anpassung während Vorfällen,
+        Ausfällen und risikoreichen Migrationen.
+        Chaos wird in strukturierte Wiederherstellung und langfristige Resilienz verwandelt.
+      bullets:
+        - "Notfall-Incident-Handling"
+        - "Disaster-Recovery & Continuity-Planung"
+        - "Post-Mortem-Reviews & Verbesserungen"
+      cta:
+        text: "Krisenexpertise benötigt?"
+        href: "contacts"
+        utmCampaign: "crisis-management"
 
-  - id: "consulting"
-    title: "Beratung & Mentoring"
-    text: |
-      Begleitung von Teams und Organisationen durch gezielte Beratung und praktisches Mentoring.
-      Wissenstransfer und Architektur-Reviews, die interne Expertise stärken.
-    bullets:
-      - "Architektur- & Prozess-Reviews"
-      - "Workshops & technische Schulungen"
-      - "Mentoring für Ingenieure & Manager"
-    cta:
-      text: "Beratung buchen"
-      href: "contacts"
+    - id: "consulting"
+      title: "Beratung & Mentoring"
+      text: |
+        Begleitung von Teams und Organisationen mit gezielter Beratung und praxisnahem Mentoring.
+        Wissenstransfer und Architektur-Reviews, die interne Expertise stärken.
+      bullets:
+        - "Architektur- & Prozessreviews"
+        - "Workshops & technische Schulungen"
+        - "Mentoring für Ingenieure & Manager"
+      cta:
+        text: "Beratung buchen"
+        href: "contacts"
+        utmCampaign: "consulting"
 
-  - id: "business-alignment"
-    title: "Business Alignment"
-    text: |
-      Verbindung von Technologie mit realen Geschäftsergebnissen.
-      Sicherstellen, dass IT nicht nur ein Kostenfaktor ist, sondern ein Treiber für Effizienz, Skalierbarkeit und Wachstum.
-    bullets:
-      - "Strategien zur IT-Kostenoptimierung"
-      - "Roadmaps im Einklang mit Geschäftszielen"
-      - "Resilienz und Skalierbarkeit als Wettbewerbsvorteil"
-    cta:
-      text: "IT mit Business ausrichten"
-      href: "contacts"
+    - id: "business-alignment"
+      title: "Business-Alignment"
+      text: |
+        Verbindung von Technologie mit realen Geschäftsergebnissen.
+        Sicherstellung, dass IT nicht nur ein Kostenfaktor ist, sondern ein Treiber für Effizienz, Skalierbarkeit und Wachstum.
+      bullets:
+        - "Strategien zur IT-Kostenoptimierung"
+        - "Roadmaps im Einklang mit Geschäftszielen"
+        - "Resilienz und Skalierbarkeit als Wettbewerbsvorteil"
+      cta:
+        text: "IT mit Business abstimmen"
+        href: "contacts"
+        utmCampaign: "business-alignment"
 
-  - id: "business-outcomes"
-    kind: "bullets"
-    title: "Von Technologie zu Geschäftsergebnissen"
-    text: |
-      Ich verbinde Architektur und Wirtschaft, damit Technologie der Strategie dient.
-      Wir quantifizieren Wert, steuern Ausgaben und verankern Zuverlässigkeit dort, wo sie den Umsatz beeinflusst.
-    bullets:
-      - "Strategie übersetzen → Zielarchitektur & Operating Model"
-      - "Wert quantifizieren: TCO/ROI, Unit Economics, Executive-geeignete Business Cases"
-      - "FinOps-Governance: Budgets, Tags, Alerts & Kosten-KPIs pro Produkt/Team"
-      - "Compliance by Design: Kontrollen nach ISO/SOC2/PCI/GDPR"
-      - "Operationalisierung: SLOs, Dashboards, Runbooks und Incident-Playbooks"
-      - "Optimierung von Anbietern & Lizenzen mit messbaren Einsparungen"
-    cta:
-      text: "Business/IT-Alignment planen"
-      href: "/contacts/?utm_source=services&utm_medium=site&utm_campaign=business-outcomes"
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "Von Technologie zu Geschäftsergebnissen"
+      text: |
+        Ich verbinde Architektur und Wirtschaft, damit Technologie der Strategie dient.
+        Wir quantifizieren Wert, steuern Ausgaben und verankern Zuverlässigkeit dort, wo sie den Umsatz beeinflusst.
+      bullets:
+        - "Strategie übersetzen → Zielarchitektur & Betriebsmodell"
+        - "Wert quantifizieren: TCO/ROI, Unit Economics, präsentationsfertige Business Cases"
+        - "FinOps-Governance: Budgets, Tags, Alarme & Kosten-KPIs nach Produkt/Team"
+        - "Compliance by Design: Kontrollen gemäß ISO/SOC2/PCI/GDPR"
+        - "Operationalisierung: SLOs, Dashboards, Runbooks und Incident-Playbooks"
+        - "Vendor- & Lizenzoptimierung mit messbaren Einsparungen"
+      cta:
+        text: "Business/IT-Alignment planen"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
 
-finalCta:
-  title: "Bereit zum Gespräch?"
-  text: "Brauchen Sie Zuverlässigkeit, Automatisierung und Klarheit? Lassen Sie uns Systeme entwerfen, die funktionieren."
-  contact: "Kontakt aufnehmen"
-  href: "contacts"
+  finalCta:
+    title: "Bereit zum Gespräch?"
+    text: "Benötigen Sie Zuverlässigkeit, Automatisierung und Klarheit? Lassen Sie uns Systeme entwerfen, die funktionieren."
+    contact: "Kontakt aufnehmen"
+    href: "contacts"
+    utmCampaign: "services-final"

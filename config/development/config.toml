@@ -1,2 +1,16 @@
 baseURL = "http://localhost:1313/"
 enableGitInfo = false
+
+# Dev: не индексируем (будет учтено в <head> через params.noindex)
+[params]
+  [params.env]
+    name = "development"
+  noindex = true
+
+# Выходы: без JSON (не обязательно в dev)
+[outputs]
+  home = ["HTML", "RSS"]
+
+# Dev-удобство
+[minify]
+  minifyOutput = false

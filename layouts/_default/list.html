@@ -1,16 +1,22 @@
 {{ define "main" }}
+  {{- $ctx := . -}}
+
+  {{/* Универсальные локализуемые лейблы (НЕ blog.*) */}}
+  {{- $minRead := partial "t.html" (dict "key" "ui.common.minRead"    "ctx" $ctx "default" "min read") -}}
+  {{- $empty   := partial "t.html" (dict "key" "ui.common.empty"      "ctx" $ctx "default" "No content yet.") -}}
+  {{- $dateFmt := partial "t.html" (dict "key" "ui.common.dateFormat" "ctx" $ctx "default" "Jan 02, 2006") -}}
+
+
   <section class="hero">
     <h1>{{ .Title }}</h1>
-    {{ with .Params.description }}
-      <p class="sub">{{ . }}</p>
-    {{ end }}
+    {{ with .Params.description }}<p class="sub">{{ . }}</p>{{ end }}
   </section>
 
   <div class="services-layout">
     <div class="services-content">
-      {{ $pages := .Pages }}
-      {{ if $pages }}
-        {{ range $pages }}
+      {{- $pages := .Pages -}}
+      {{- if $pages }}
+        {{- range $pages }}
           <article class="card">
             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <p>
@@ -21,22 +27,16 @@
               {{ end }}
             </p>
             <p class="sub">
-              {{ with .Date }}{{ .Format "02 Jan 2006" }}{{ end }}
-              {{ with
-                .ReadingTime
-              }}
-                · {{ . }} min read
-              {{ end }}
-              {{ $tags := .Params.tags |
-                default (slice)
-              }}
-              {{ if gt (len $tags) 0 }}· {{ delimit $tags ", " }}{{ end }}
+              {{ with .Date }}{{ .Format $dateFmt }}{{ end }}
+              {{ with .ReadingTime }}· {{ . }} {{ $minRead }}{{ end }}
+              {{- $tags := .Params.tags | default (slice) -}}
+              {{- if gt (len $tags) 0 }}· {{ delimit $tags ", " }}{{ end }}
             </p>
           </article>
-        {{ end }}
-      {{ else }}
-        <p class="sub">No content yet.</p>
-      {{ end }}
+        {{- end }}
+      {{- else }}
+        <p class="sub">{{ $empty }}</p>
+      {{- end }}
     </div>
   </div>
 {{ end }}

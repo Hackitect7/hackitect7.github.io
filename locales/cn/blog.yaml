@@ -1,0 +1,10 @@
+blog:
+  title: "博客"
+  intro: "关于架构、DevOps 与系统交响的笔记、思考与洞见。"
+
+  cta:
+    enabled: false
+    title: "在寻找特定内容吗？"
+    text: "告诉我你希望下一个阅读的主题。"
+    href: "contacts"
+    button: "联系方式"

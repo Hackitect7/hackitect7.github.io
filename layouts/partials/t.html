@@ -1,0 +1,64 @@
+{{/*  Strict i18n resolver
+    Usage:
+      {{ partial "t.html" (dict "key" "ui.blog.title" "ctx" .) }}
+      {{ partial "t.html" (dict "key" "ui.blog.dateFormat" "ctx" . "default" "Jan 02, 2006") }}
+      {{ partial "t.html" (dict "key" "ui.hero.heading" "ctx" . "args" (dict "name" "Aleksei")) }}
+      {{ partial "t.html" (dict "key" "ui.hero.html"    "ctx" . "safe" true) }}
+*/}}
+
+{{- $ctx     := .ctx -}}
+{{- $key     := .key -}}
+{{- $hasDef  := isset . "default" -}}
+{{- $def     := .default | default "" -}}
+{{- $args    := .args | default dict -}}
+{{- $asHTML  := .safe | default false -}}
+
+{{- $lang    := $ctx.Site.Language.Lang | default "us" -}}
+{{- $data    := $ctx.Site.Data -}}
+{{- $parts   := split $key "." -}}
+
+{{- if lt (len $parts) 2 -}}
+  {{ warnf "i18n: invalid key=%q (expected <file>.<path>)" $key }}
+  {{- if $hasDef -}}{{ $def }}{{- else -}}[i18n missing: {{ $lang }}.{{ $key }}]{{- end -}}
+{{- else -}}
+  {{- $file := index $parts 0 -}}
+  {{- $tail := after 1 $parts -}}
+
+  {{- $root := index $data $lang $file $file -}}
+  {{- if not $root -}}
+    {{ warnf "i18n: root missing for lang=%q file=%q. Ensure locales/%s/%s.yaml starts with '%s:'." $lang $file $lang $file $file }}
+    {{- if $hasDef -}}{{ $def }}{{- else -}}[i18n missing: {{ $lang }}.{{ $key }}]{{- end -}}
+  {{- else -}}
+    {{- $node := $root -}}
+    {{- $ok   := true -}}
+
+    {{- range $seg := $tail -}}
+      {{- if and $ok (reflect.IsMap $node) (isset $node $seg) -}}
+        {{- $node = index $node $seg -}}
+      {{- else -}}
+        {{- $ok = false -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if not $ok -}}
+      {{ warnf "i18n: key not found: %q in lang=%q (file=%q)" $key $lang $file }}
+      {{- if $hasDef -}}{{ $def }}{{- else -}}[i18n missing: {{ $lang }}.{{ $key }}]{{- end -}}
+    {{- else -}}
+      {{- $type := printf "%T" $node -}}
+      {{- if eq $type "string" -}}
+        {{- $out := $node -}}
+        {{- range $k, $v := $args -}}
+          {{- $ph := printf "{{%s}}" $k -}}
+          {{- $out = replace $out $ph (printf "%v" $v) -}}
+        {{- end -}}
+        {{- if $asHTML -}}
+          {{ $out | safeHTML }}
+        {{- else -}}
+          {{ $out }}
+        {{- end -}}
+      {{- else -}}
+        {{- $node -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

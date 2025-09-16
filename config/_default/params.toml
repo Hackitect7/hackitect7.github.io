@@ -1,4 +1,4 @@
-# глобальные параметры темы и автора
+# Глобальные параметры темы и автора (SEO/маркетинг)
 
 brand   = "Hackitect7 — The Music of Systems"
 tagline = "IT Architecture • DevOps • Automation"
@@ -14,7 +14,35 @@ logo    = "/assets/img/hackitect7-banner-dark-us.svg"
 # CDN флагов
 flagCssCdn = "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.5.0/css/flag-icons.min.css"
 
+# SEO-флаги для partials
+enable_canonical = true
+enable_hreflang  = true
+enable_schema    = true
+enable_breadcrumbs = true
+
+# Аналитика (заполни при необходимости)
+gtag_id  = ""
+umami_id = ""
+consent_mode = true
+
+# Организация/контакты (для JSON-LD)
+org_name = "Hackitect7"
+org_url  = "https://hackitect7.github.io/"
+contact_email = "hackitect7@gmail.com"
+twitter = ""  # @handle если будет
+
 [author]
   name     = "Hackitect7"
-  email    = "papulya2012@gmail.com"
-  timezone = "UTC+6 Asia/Bishkek"
+  email    = "hackitect7@gmail.com"
+  timezone = "Asia/Bishkek"
+
+# Резерв под пайплайн ассетов (если решим задействовать в partials)
+[assets]
+  cssPipeline = true
+  jsDefer     = true
+
+[terms]
+  # Сколько «чипов» показывать изначально (остальные — по кнопке)
+  limit = 200
+  # Префикс перед названием термина (для тегов обычно "#")
+  chipPrefix = "#"

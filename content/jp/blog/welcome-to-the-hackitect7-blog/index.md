@@ -1,17 +1,33 @@
 ---
 title: "Hackitect7 ブログへようこそ"
-date: 2025-09-10
 slug: "welcome-to-the-hackitect7-blog"
-description: "最初の投稿 — アイデア、実験、そして学んだ教訓を共有する場所。"
-tags: ["イントロ", "hackitect7"]
-categories: ["一般"]
+date: 2025-09-10
+lastmod: 2025-09-10
+description: "最初の投稿 — アイデア、実験、学んだことを共有する場所。"
+tags: ["intro", "hackitect7"]
+categories: ["General"]
 draft: false
+layout: "blog/single"
 type: "blog"
+translationKey: "welcome-to-the-hackitect7-blog"
+robots: "index,follow"
+
+# featuredImage: "/assets/img/blog/welcome-cover.png"
+# coverAlt: "Hackitect7 ブログカバー"
+
+schema:
+  type: "BlogPosting"
+  author: "Aleksei Polovinkin"
+  image: "/assets/img/blog/welcome-cover.png"
+  headline: "Hackitect7 ブログへようこそ"
+  datePublished: "2025-09-10"
+  dateModified: "2025-09-10"
+  keywords: ["intro", "hackitect7", "DevOps", "automation", "architecture"]
 ---
 
-**Hackitect7 ブログ** へようこそ！ 🎉
+**Hackitect7 ブログ** へようこそ! 🎉
 
-ここでは、アーキテクチャ、DevOps、自動化、そしてテクノロジーとビジネス成果を結びつける広い旅路についてのメモを共有していきます。
-実践的なヒント、舞台裏の洞察、そして「レジリエントで、スケーラブルで、コスト意識のあるシステム」を設計する本当の意味についての考察をお届けします。
+ここではアーキテクチャ、DevOps、オートメーション、そしてテクノロジーをビジネス成果につなげる幅広い旅についてのノートを共有していきます。
+実践的なヒント、舞台裏のインサイト、そして「強靭で、スケーラブルで、コストを意識したシステム」を設計する本当の意味についての考察が含まれます。
 
-これからも続々と投稿していくのでお楽しみに。
+ぜひご期待ください — これからさらに多くのコンテンツをお届けします。

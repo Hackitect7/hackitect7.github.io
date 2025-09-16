@@ -1,63 +1,75 @@
 {{- define "main" -}}
   {{- $lang := .Site.Language.Lang -}}
-  {{- $cont := (index site.Data $lang "contacts") | default (index site.Data "us" "contacts") -}}
-  {{- $ui   := (index site.Data $lang "ui")       | default (index site.Data "us" "ui") -}}
 
+  {{/* locales/<lang>/contacts.yaml -> корень contacts: */}}
+  {{- $contRoot := (index site.Data $lang "contacts") | default (index site.Data "us" "contacts") -}}
+  {{- $cont := (index $contRoot "contacts") | default dict -}}
+
+  {{/* UI (не критично; используем только для дефолтов при наличии) */}}
+  {{- $uiRoot := (index site.Data $lang "ui") | default (index site.Data "us" "ui") -}}
+  {{- $ui := (index $uiRoot "ui") | default dict -}}
 
   <section class="contacts-page">
     {{/* HERO */}}
     <section class="hero">
-      <h1>{{ or $cont.title (or $ui.contacts.title "Contacts") }}</h1>
-      {{- with $cont.intro -}}<p class="tagline">{{ . }}</p>{{- end -}}
-
+      <h1>{{ or (index $cont "title") (index $ui "contacts" "title") "Contacts" }}</h1>
+      {{- with (index $cont "intro") -}}<p class="tagline">{{ . }}</p>{{- end -}}
 
       <div class="contacts-grid">
         {{/* ЛЕВАЯ колонка: профиль + каналы */}}
         <div class="card">
-          <h2>{{ $cont.person.name }}</h2>
-          <p class="sub">{{ $cont.person.title }}</p>
+          {{- $person := (index $cont "person") | default dict -}}
+          {{- with (index $person "name")  }}<h2>{{ . }}</h2>{{- end -}}
+          {{- with (index $person "title") }}<p class="sub">{{ . }}</p>{{- end -}}
 
           <ul class="contact-meta">
-            <li>
-              ⏰ {{ $cont.person.timezone }} ·
-              {{ $cont.person.reply_hours }}
-            </li>
-            <li>🗣️ {{ $cont.person.languages }}</li>
-            <li>🟢 {{ $cont.person.availability }}</li>
+            {{- $tz := (index $person "timezone") -}}
+            {{- $rh := (index $person "reply_hours") -}}
+            {{- if or $tz $rh -}}
+              <li>
+                {{- with $tz -}}⏰ {{ . }}{{- end -}}
+                {{- if and $tz $rh -}} · {{- end -}}
+                {{- with $rh -}}{{ . }}{{- end -}}
+              </li>
+            {{- end -}}
+            {{- with (index $person "languages")    -}}<li>🗣️ {{ . }}</li>{{- end -}}
+            {{- with (index $person "availability") -}}<li>🟢 {{ . }}</li>{{- end -}}
           </ul>
 
           <div class="contact-channels">
-            {{- range $cont.channels -}}
-              <a
-                class="contact-item"
-                href="{{ .href }}"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <span class="ci-ico">{{ .icon }}</span>
-                <span class="ci-label">{{ .label }}</span>
-                <span class="ci-value">{{ .display }}</span>
-              </a>
+            {{- with (index $cont "channels") -}}
+              {{- range . -}}
+                <a
+                  class="contact-item"
+                  href="{{ .href }}"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {{- with .icon    -}}<span class="ci-ico">{{ . }}</span>{{- end -}}
+                  {{- with .label   -}}<span class="ci-label">{{ . }}</span>{{- end -}}
+                  {{- with .display -}}<span class="ci-value">{{ . }}</span>{{- end -}}
+                </a>
+              {{- end -}}
             {{- end -}}
           </div>
 
           <div class="contact-actions">
-            {{- with $cont.assets.vcard_href -}}
-              <a class="btn secondary" href="{{ . }}"
-                >{{ $cont.assets.vcard_text }}</a
-              >
-            {{- end -}}
+            {{- $assets := (index $cont "assets") | default dict -}}
+            {{- $vHref := or (index $assets "vcard_href") "/vcard/hackitect7.vcf" -}}
+            {{- $vText := or (index $assets "vcard_text") "Download vCard (.vcf)" -}}
+            <a class="btn secondary" href="{{ $vHref | relURL }}">{{ $vText }}</a>
           </div>
         </div>
 
         {{/* ПРАВАЯ колонка: форма (плейсхолдер) */}}
         <div class="card" id="contact-form">
-          <h2>{{ $cont.form.title }}</h2>
-          <p class="sub">{{ $cont.form.lead }}</p>
+          {{- $form := (index $cont "form") | default dict -}}
+          <h2>{{ or (index $form "title") "Send a message" }}</h2>
+          {{- with (index $form "lead") -}}<p class="sub">{{ . }}</p>{{- end -}}
 
           <div class="form-placeholder">
             <div class="form-placeholder-inner">
-              <p style="margin:0">{{ $cont.form.soon }}</p>
+              <p style="margin:0">{{ or (index $form "soon") "Form will appear here shortly." }}</p>
             </div>
           </div>
         </div>
@@ -65,20 +77,18 @@
     </section>
 
     {{/* JSON-LD */}}
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "{{ $cont.person.name }}",
-        "jobTitle": "{{ $cont.person.title }}",
-        "telephone": "+996501141183",
-        "url": "{{ $.Site.BaseURL }}",
-        "sameAs": [
-          "https://linkedin.com/in/hackitect7",
-          "https://github.com/Hackitect7",
-          "https://t.me/Manfred251278"
-        ]
-      }
-    </script>
+    {{- with (index $cont "person") -}}
+      <script type="application/ld+json">
+        {{- dict
+          "@context" "https://schema.org"
+          "@type"    "Person"
+          "name"     (or .name  "Aleksei Polovinkin")
+          "jobTitle" (or .title "IT Infrastructure Architect • DevOps & Automation")
+          "telephone" "+996501141183"
+          "url"       $.Site.BaseURL
+          "sameAs"    (slice "https://linkedin.com/in/hackitect7" "https://github.com/Hackitect7" "https://t.me/Manfred251278")
+        | jsonify -}}
+      </script>
+    {{- end -}}
   </section>
 {{- end -}}

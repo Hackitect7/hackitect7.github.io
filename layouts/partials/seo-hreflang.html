@@ -1,0 +1,16 @@
+{{/* ===== hreflang & canonical ===== */}}
+{{- $enableCanonical := .Site.Params.enable_canonical | default true -}}
+{{- if $enableCanonical -}}<link rel="canonical" href="{{ .Permalink }}">{{- end -}}
+
+{{/* Альтернативы для всех переводов */}}
+{{- $translations := .AllTranslations -}}
+{{- if gt (len $translations) 0 -}}
+  {{- range $t := $translations -}}
+    <link rel="alternate" hreflang="{{ $t.Language.Lang }}" href="{{ $t.Permalink }}">
+  {{- end -}}
+  {{/* x-default: на домашнюю по умолчанию */}}
+  <link rel="alternate" hreflang="x-default" href="{{ .Site.Home.Permalink }}">
+{{- else -}}
+  {{/* Даже если нет переводов, добавим x-default на текущую */}}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end -}}

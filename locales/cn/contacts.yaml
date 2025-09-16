@@ -1,0 +1,42 @@
+contacts:
+  title: "联系方式"
+  intro: "让我们聊聊可靠性、自动化以及真正的业务影响。选择适合你的沟通渠道 —— 我会在我的时区内快速回复。"
+
+  person:
+    name: "Aleksei Polovinkin"
+    title: "IT 基础架构架构师 • DevOps 与自动化 (Hackitect7)"
+    timezone: "UTC+6 (亚洲/比什凯克)"
+    reply_hours: "09:00–22:00"
+    languages: "俄语（口语）、英语（+ 其他语言）—— 书面达到母语水平"
+    availability: "全球开放 —— 项目、合作伙伴关系和长期协作"
+
+  channels:
+    - icon: "📞"
+      label: "电话"
+      href: "tel:+996501141183"
+      display: "+996-501-141-183"
+    - icon: "✈️"
+      label: "Telegram"
+      href: "https://t.me/Manfred251278"
+      display: "@Manfred251278"
+    - icon: "💬"
+      label: "WhatsApp"
+      href: "https://wa.me/996501141183"
+      display: "wa.me/996501141183"
+    - icon: "🔗"
+      label: "领英"
+      href: "https://www.linkedin.com/in/hackitect7/"
+      display: "linkedin.com/in/hackitect7"
+    - icon: "🐙"
+      label: "GitHub"
+      href: "https://github.com/Hackitect7"
+      display: "github.com/Hackitect7"
+
+  assets:
+    vcard_href: "/vcard/hackitect7.vcf"
+    vcard_text: "下载 vCard (.vcf)"
+
+  form:
+    title: "发送消息"
+    lead: "目前，请通过 Telegram 或 WhatsApp 联系我。"
+    soon: "表单将很快出现在这里。"

@@ -1,0 +1,69 @@
+ui:
+  toc: "Sur cette page"
+  faq: "FAQ"
+  learnMore: "En savoir plus →"
+
+  blog:
+    title: "Blog"
+    filterTitle: "Parcourir"
+    categories: "Catégories"
+    tags: "Étiquettes"
+    newer: "Plus récent"
+    older: "Plus ancien"
+    empty: "Aucun article pour le moment."
+    minRead: "min de lecture"
+    more: "Plus à explorer"
+    backToList: "Retour au blog"
+    dateFormat: "02 Jan 2006"
+    noPosts: "Aucun article pour le moment."
+    viewAll: "Voir tous les articles"
+    min: "min de lecture"
+
+  projects:
+    title: "Projets"
+    tocTitle: "Aperçu"
+    stack: "Stack"
+    linksTitle: "Liens"
+    demo: "Démo en direct"
+    more: "Plus de projets"
+    backToList: "Retour aux projets"
+
+  services:
+    title: "Services"
+    tocTitle: "Aperçu"
+
+  skills:
+    title: "Compétences"
+    tocTitle: "Aperçu"
+
+  common:
+    view: "Voir"
+    minRead: "min de lecture"
+    empty: "Aucun contenu pour le moment."
+    dateFormat: "02 Jan 2006"
+
+  cta:
+    contact: "Contactez-moi"
+    primary: "Explorer"
+    secondary: "En savoir plus"
+    tertiary: "Entrer en contact"
+    ready: "Prêt à discuter ?"
+    servicePrompt: "Parlez-moi de vos besoins"
+
+  aria:
+    prevPost: "Article précédent"
+    nextPost: "Article suivant"
+
+  about:
+    tocTitle: "Aperçu"
+
+  footer:
+    made: "Créé avec Hugo et ❤️"
+    brand: "Hackitect7 — La Musique des Systèmes"
+    copyright: "© %d %s"
+
+  tax:
+    filterTitle: "Parcourir"
+    filterPlaceholder: "Filtrer…"
+    showMore: "Afficher plus"
+    showLess: "Afficher moins"

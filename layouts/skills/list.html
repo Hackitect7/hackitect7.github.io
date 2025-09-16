@@ -1,76 +1,124 @@
 {{- define "main" -}}
-  {{- $lang   := .Site.Language.Lang -}}
-  {{- $skills := (index site.Data $lang "skills") | default (index site.Data "us" "skills") -}}
-  {{- $ui     := (index site.Data $lang "ui")     | default (index site.Data "us" "ui") -}}
+  {{- $lang := .Site.Language.Lang -}}
 
+  {{/* locales/<lang>/skills.yaml -> корень skills: */}}
+  {{- $skillsRoot := (index site.Data $lang "skills") | default (index site.Data "us" "skills") -}}
+  {{- $skills := (index $skillsRoot "skills") | default dict -}}
+
+  {{/* Короткие лейблы через t.html с дефолтами */}}
+  {{- $tocTitle   := partial "t.html" (dict "key" "ui.skills.tocTitle" "ctx" . "default" "Overview") -}}
+  {{- $ctaDefault := partial "t.html" (dict "key" "ui.cta.contact"     "ctx" . "default" "Contact me") -}}
+
+  {{/* UTM/аналитика для финального CTA (адаптируем /us/ к текущему языку) */}}
+  {{- $ctaBase := .Site.Params.ctaBase | default (printf "/%s/contacts/?utm_source=skills&utm_medium=site&utm_campaign=" $lang) -}}
+  {{- $ctaBase = replace $ctaBase "/us/" (print "/" $lang "/") -}}
 
   <!-- HERO -->
-  <section class="hero">
-    <h1>{{ or $skills.title "Skills" }}</h1>
-    {{- with $skills.intro -}}<p class="tagline">{{ . }}</p>{{- end -}}
-    {{- with $skills.highlights -}}
-      <ul class="sub">
-        {{- range . -}}<li>{{ . }}</li>{{- end -}}
-      </ul>
+  <section class="hero" role="region" aria-label="Skills hero">
+    <h1>{{ or (index $skills "title") "Skills" }}</h1>
+    {{- with (index $skills "intro") -}}<p class="tagline">{{ . }}</p>{{- end -}}
+    {{- with (index $skills "highlights") -}}
+      {{- if gt (len .) 0 -}}
+        <ul class="sub">
+          {{- range . -}}<li>{{ . }}</li>{{- end -}}
+        </ul>
+      {{- end -}}
     {{- end -}}
   </section>
 
-  <div class="services-layout">
-    <!-- УНИВЕРСАЛЬНЫЙ TOC -->
-    {{- partial "toc.html" (dict "title" (or $ui.skills.tocTitle "Overview") "items" $skills.segments) -}}
+  <div class="services-layout section">
+    <!-- TOC -->
+    {{- $segments := (index $skills "segments") | default (slice) -}}
+    {{- partial "toc.html" (dict "title" $tocTitle "items" $segments) -}}
 
-
-    <!-- Контент -->
+    <!-- Content -->
     <div class="services-content">
-      {{- $levels := $skills.levels -}}
-      {{- range $skills.segments -}}
-        {{- $sid := .id -}}
+      {{- $levels := (index $skills "levels") | default dict -}}
+      {{- range $segments -}}
+        {{- $sid := .id | default "" -}}
+        {{- $hid := printf "%s-h2" (cond (ne $sid "") $sid (anchorize .title)) -}}
         <section
           {{ if $sid }}id="{{ $sid }}"{{ end }}
           class="service-block card spy-section"
+          aria-labelledby="{{ $hid }}"
         >
-          <h2>{{ .title }}</h2>
+          <h2 id="{{ $hid }}">{{ .title }}</h2>
 
           {{- with .text -}}
-            {{- $paras := split . "\n\n" -}}
-            {{- range $paras -}}<p>{{ . | markdownify }}</p>{{- end -}}
+            <div class="prose">{{ . | markdownify }}</div>
           {{- end -}}
 
-
-          <div class="grid">
-            {{- range .groups -}}
-              <div class="card">
-                <h3>{{ .h }}</h3>
-                {{- with .level -}}
-                  <p class="sub">{{ index $levels . }}</p>
-                {{- end -}}
-                {{- with .items -}}
-                  <ul>
-                    {{- range . -}}<li>{{ . }}</li>{{- end -}}
-                  </ul>
+          {{- with .groups -}}
+            {{- if gt (len .) 0 -}}
+              <div class="grid">
+                {{- range . -}}
+                  <div class="card">
+                    {{- with .h -}}<h3>{{ . }}</h3>{{- end -}}
+                    {{- with .level -}}
+                      {{- $lvl := . -}}
+                      {{- with (index $levels $lvl) -}}
+                        <p class="sub">{{ . }}</p>
+                      {{- end -}}
+                    {{- end -}}
+                    {{- with .items -}}
+                      {{- if gt (len .) 0 -}}
+                        <ul>
+                          {{- range . -}}<li>{{ . }}</li>{{- end -}}
+                        </ul>
+                      {{- end -}}
+                    {{- end -}}
+                  </div>
                 {{- end -}}
               </div>
             {{- end -}}
-          </div>
+          {{- end -}}
         </section>
       {{- end -}}
 
-
       <!-- Финальный CTA -->
-      {{- with $skills.cta -}}
-        {{- $ctaHref := "" -}}
-        {{- if .buttonHref -}}
-          {{- $ctaHref = (printf "/%s%s" $lang (trim .buttonHref "/")) | relLangURL -}}
+      {{- with (index $skills "cta") -}}
+        {{- $campaign := .campaign | default "skills-final" -}}
+        {{- $raw := .buttonHref | default "" -}}
+        {{- $href := "" -}}
+        {{- if and $raw (ne (substr $raw 0 4) "http") -}}
+          {{- /* относительный путь -> UTM */ -}}
+          {{- $href = printf "%s%s" $ctaBase (urlize $campaign) -}}
+        {{- else if $raw -}}
+          {{- /* абсолютная ссылка */ -}}
+          {{- $href = $raw -}}
         {{- else -}}
-          {{- $ctaHref = (printf "/%s/contacts/" $lang) | relLangURL -}}
+          {{- /* по умолчанию контакты с UTM */ -}}
+          {{- $href = printf "%s%s" $ctaBase (urlize $campaign) -}}
         {{- end -}}
-        <section class="service-cta-final card" style="text-align:center">
-          <h2>{{ .title }}</h2>
+
+        <section class="service-cta-final card" style="text-align:center" aria-labelledby="skills-final-h2">
+          <h2 id="skills-final-h2">{{ .title | default "Ready to talk?" }}</h2>
           {{- with .text -}}<p class="sub">{{ . }}</p>{{- end -}}
-          <a class="btn" href="{{ $ctaHref }}"
-            >{{ or .buttonText (or $ui.cta.contact "Contact me") }}</a
-          >
+          {{- if $href -}}
+            <a class="btn"
+               href="{{ $href }}"
+               rel="noopener"
+               data-analytics="skills-cta-{{ $campaign }}">
+              {{ .buttonText | default $ctaDefault }}
+            </a>
+          {{- end -}}
         </section>
+      {{- end -}}
+
+      {{/* JSON-LD ItemList для раздела Skills (SEO) */}}
+      {{- if gt (len $segments) 0 -}}
+        {{- $items := slice -}}
+        {{- range $i, $s := $segments -}}
+          {{- $items = $items | append (dict
+              "@type" "ListItem"
+              "position" (add $i 1)
+              "name" ($s.title | default (printf "Section %d" (add $i 1)))
+              "url" (printf "%s#%s" $.Permalink ($s.id | default (anchorize $s.title)))
+          ) -}}
+        {{- end -}}
+        <script type="application/ld+json">
+          {{ dict "@context" "https://schema.org" "@type" "ItemList" "itemListElement" $items | jsonify }}
+        </script>
       {{- end -}}
     </div>
   </div>

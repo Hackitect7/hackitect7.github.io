@@ -1,117 +1,130 @@
-title: "サービス"
-intro: "インフラアーキテクチャから DevOps、危機管理、ビジネス整合性まで、幅広い IT サービスを提供します。各サービスは、測定可能なレジリエンス、スケーラビリティ、効率性を実現するよう設計されています。"
+services:
+  title: "サービス"
+  intro: >
+    私は IT サービス全般を提供します — インフラ設計や DevOps から
+    危機管理やビジネス整合まで。各サービスは、測定可能な回復力、
+    スケーラビリティ、効率性を実現するために設計されています。
 
-sections:
-  - id: "infrastructure-architecture"
-    title: "インフラアーキテクチャ"
-    text: |
-      オンプレ、クラウド、ハイブリッド環境向けに堅牢でスケーラブルなインフラを設計。
-      データセンター設計やネットワークからキャパシティ計画、コスト最適化まで対応します。
-    bullets:
-      - "オンプレ & ハイブリッドクラウド設計"
-      - "マルチ DC のレジリエンス & フェイルオーバー"
-      - "ネットワーク、セキュリティゾーン、ストレージ戦略"
-    cta:
-      text: "インフラについて相談"
-      href: "contacts"
+  sections:
+    - id: "infrastructure-architecture"
+      title: "インフラアーキテクチャ"
+      text: |
+        オンプレミス、クラウド、ハイブリッド環境向けに堅牢で拡張可能なインフラを設計。
+        データセンター設計やネットワークからキャパシティ計画、コスト最適化まで。
+      bullets:
+        - "オンプレミス & ハイブリッドクラウド設計"
+        - "マルチ DC 回復力 & フェイルオーバー"
+        - "ネットワーク、セキュリティゾーン、ストレージ戦略"
+      cta:
+        text: "インフラについて相談する"
+        href: "contacts"
+        utmCampaign: "infrastructure-architecture"
 
-  - id: "devops-automation"
-    title: "DevOps & 自動化"
-    text: |
-      IaC と GitOps の原則に基づいた最新のデリバリーパイプラインを構築。
-      開発と運用を効率化し、デリバリーを加速させ、人為的ミスを減らします。
-    bullets:
-      - "CI/CD パイプライン (GitHub Actions, GitLab CI)"
-      - "Terraform & Ansible による IaC"
-      - "自動化された環境とセルフサービスワークフロー"
-    cta:
-      text: "DevOps ロードマップを計画"
-      href: "contacts"
+    - id: "devops-automation"
+      title: "DevOps & 自動化"
+      text: |
+        IaC と GitOps の原則で最新のデリバリーパイプラインを構築。
+        開発と運用を効率化し、デリバリーを加速し人為的ミスを削減。
+      bullets:
+        - "CI/CD パイプライン (GitHub Actions, GitLab CI)"
+        - "Terraform & Ansible による IaC"
+        - "自動化された環境とセルフサービスワークフロー"
+      cta:
+        text: "DevOps ロードマップを計画"
+        href: "contacts"
+        utmCampaign: "devops-automation"
 
-  - id: "observability-sre"
-    title: "可観測性 & SRE"
-    text: |
-      システムの健全性を維持するために可視性と信頼性の実践を導入。
-      監視とアラートから SLO/SLI の定義、インシデント対応フレームワークまで。
-    bullets:
-      - "Prometheus, Grafana, ELK スタック"
-      - "SLO/SLI & エラーバジェット"
-      - "インシデント対応プレイブック"
-    cta:
-      text: "信頼性を改善"
-      href: "contacts"
+    - id: "observability-sre"
+      title: "可観測性 & SRE"
+      text: |
+        システムの健全性を維持するための可視化と信頼性プラクティスを導入。
+        モニタリングやアラートから SLO/SLI 定義、インシデント対応フレームワークまで。
+      bullets:
+        - "Prometheus, Grafana, ELK スタック"
+        - "SLO/SLI & エラーバジェット"
+        - "インシデント対応プレイブック"
+      cta:
+        text: "信頼性を改善する"
+        href: "contacts"
+        utmCampaign: "observability-sre"
 
-  - id: "security"
-    title: "セキュリティ & ハードニング"
-    text: |
-      バズワードではなく実践的なセキュリティ対策を適用。
-      攻撃対象領域の縮小、最小特権の徹底、シークレットの保護に注力します。
-    bullets:
-      - "システム & コンテナのハードニング"
-      - "ID & アクセス制御"
-      - "シークレット管理と監査ログ"
-    cta:
-      text: "セキュリティを強化"
-      href: "contacts"
+    - id: "security"
+      title: "セキュリティ & ハードニング"
+      text: |
+        バズワードに頼らず実践的なセキュリティ対策を適用。
+        攻撃面の削減、最小権限の徹底、シークレットの保護に注力。
+      bullets:
+        - "システム & コンテナのハードニング"
+        - "ID & アクセス制御"
+        - "シークレット管理と監査証跡"
+      cta:
+        text: "セキュリティを強化する"
+        href: "contacts"
+        utmCampaign: "security"
 
-  - id: "crisis-management"
-    title: "危機的 IT マネジメント"
-    text: |
-      インシデント、障害、リスクの高い移行時に組織が復旧・適応できるよう支援。
-      カオスを体系的な復旧と長期的なレジリエンスに変えます。
-    bullets:
-      - "緊急インシデント対応"
-      - "災害復旧 & 事業継続計画"
-      - "ポストモーテムレビュー & 改善"
-    cta:
-      text: "危機対応の専門性が必要ですか？"
-      href: "contacts"
+    - id: "crisis-management"
+      title: "危機的 IT マネジメント"
+      text: |
+        インシデント、障害、リスクの高い移行時に組織の復旧と適応を支援。
+        混乱を構造化された復旧と長期的な回復力へ変換。
+      bullets:
+        - "緊急インシデント対応"
+        - "災害復旧 & 事業継続計画"
+        - "ポストモーテムレビュー & 改善"
+      cta:
+        text: "危機管理の専門知識が必要ですか？"
+        href: "contacts"
+        utmCampaign: "crisis-management"
 
-  - id: "consulting"
-    title: "コンサルティング & メンタリング"
-    text: |
-      チームや組織を対象に、ターゲットを絞ったコンサルティングと実践的メンタリングを提供。
-      ナレッジ移転やアーキテクチャレビューを通じて、内部専門性を強化します。
-    bullets:
-      - "アーキテクチャ & プロセスレビュー"
-      - "ワークショップ & 技術トレーニング"
-      - "エンジニア & マネージャー向けメンタリング"
-    cta:
-      text: "コンサルティングを予約"
-      href: "contacts"
+    - id: "consulting"
+      title: "コンサルティング & メンタリング"
+      text: |
+        対象を絞ったコンサルティングと実践的なメンタリングでチームや組織を支援。
+        ナレッジトランスファーとアーキテクチャレビューにより内部の専門知識を強化。
+      bullets:
+        - "アーキテクチャ & プロセスレビュー"
+        - "ワークショップ & 技術トレーニング"
+        - "エンジニア & マネージャーへのメンタリング"
+      cta:
+        text: "コンサルを予約"
+        href: "contacts"
+        utmCampaign: "consulting"
 
-  - id: "business-alignment"
-    title: "ビジネス整合性"
-    text: |
-      テクノロジーを実際のビジネス成果と結びつけます。
-      IT を単なるコストセンターではなく、効率性・スケーラビリティ・成長の推進力に。
-    bullets:
-      - "IT コスト最適化戦略"
-      - "ビジネス目標に沿ったロードマップ"
-      - "競争優位性としてのレジリエンスとスケーラビリティ"
-    cta:
-      text: "IT をビジネスに整合"
-      href: "contacts"
+    - id: "business-alignment"
+      title: "ビジネス整合"
+      text: |
+        技術を実際のビジネス成果と結び付ける。
+        IT をコストセンターではなく効率性、拡張性、成長を推進する要素に。
+      bullets:
+        - "IT コスト最適化戦略"
+        - "ビジネス目標に整合したロードマップ"
+        - "競争優位性としての回復力とスケーラビリティ"
+      cta:
+        text: "IT をビジネスに合わせる"
+        href: "contacts"
+        utmCampaign: "business-alignment"
 
-  - id: "business-outcomes"
-    kind: "bullets"
-    title: "テクノロジーからビジネス成果へ"
-    text: |
-      アーキテクチャと経済を橋渡しし、テクノロジーを戦略に役立てます。
-      価値を定量化し、支出を管理し、収益に直結する部分に信頼性を組み込みます。
-    bullets:
-      - "戦略をターゲットアーキテクチャ & オペレーティングモデルに変換"
-      - "価値を定量化: TCO/ROI、ユニットエコノミクス、経営層向けビジネスケース"
-      - "FinOps ガバナンス: 予算、タグ、アラート、プロダクト/チーム別コスト KPI"
-      - "デザイン段階からのコンプライアンス: ISO/SOC2/PCI/GDPR に対応したコントロール"
-      - "運用化: SLO、ダッシュボード、ランブック、インシデントプレイブック"
-      - "ベンダー & ライセンス最適化で測定可能なコスト削減"
-    cta:
-      text: "ビジネス/IT 整合を計画"
-      href: "/contacts/?utm_source=services&utm_medium=site&utm_campaign=business-outcomes"
+    - id: "business-outcomes"
+      kind: "bullets"
+      title: "技術からビジネス成果へ"
+      text: |
+        アーキテクチャと経済性を橋渡しし、技術を戦略に従わせる。
+        価値を定量化し、支出を統制し、信頼性を収益に影響する部分へ組み込む。
+      bullets:
+        - "戦略をターゲットアーキテクチャ & オペレーティングモデルへ変換"
+        - "価値の定量化: TCO/ROI, ユニットエコノミクス, 経営層向けビジネスケース"
+        - "FinOps ガバナンス: 予算、タグ、アラート、製品/チームごとのコスト KPI"
+        - "設計段階でのコンプライアンス: ISO/SOC2/PCI/GDPR へのマッピング"
+        - "運用化: SLO, ダッシュボード, ランブック, インシデントプレイブック"
+        - "ベンダー & ライセンス最適化で測定可能なコスト削減"
+      cta:
+        text: "ビジネス/IT 整合を計画"
+        href: "contacts"
+        utmCampaign: "business-outcomes"
 
-finalCta:
-  title: "お話ししませんか？"
-  text: "信頼性・自動化・明確さが必要ですか？ 機能するシステムを一緒に設計しましょう。"
-  contact: "連絡する"
-  href: "contacts"
+  finalCta:
+    title: "お話ししませんか？"
+    text: "信頼性、自動化、明快さが必要ですか？実際に機能するシステムを設計しましょう。"
+    contact: "お問い合わせ"
+    href: "contacts"
+    utmCampaign: "services-final"

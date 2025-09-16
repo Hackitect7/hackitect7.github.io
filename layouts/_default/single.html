@@ -1,18 +1,35 @@
 {{ define "main" }}
+  {{- $ctx := . -}}
+
+  {{/* Локализация (приводим к string) */}}
+  {{- $dateFmt := printf "%s" (partial "t.html" (dict "key" "ui.common.dateFormat" "ctx" $ctx "default" "Jan 02, 2006")) -}}
+  {{- $minRead := printf "%s" (partial "t.html" (dict "key" "ui.common.minRead"    "ctx" $ctx "default" "min read")) -}}
+
   <section class="hero section">
     <h1>{{ .Title }}</h1>
-    {{- /* Собираем строку меты безопасно */ -}}
-    {{- $meta := slice ( .Date.Format "02 Jan 2006" ) -}}
+
+    {{- /* Мета-инфо: дата, чтение, теги, категории */ -}}
+    {{- $meta := slice -}}
+    {{- with .Date -}}
+      {{- $meta = $meta | append (.Format $dateFmt) -}}
+    {{- end -}}
     {{- with .ReadingTime -}}
-      {{- $meta = $meta | append (printf "%d min read" .) -}}
+      {{- $meta = $meta | append (printf "%d %s" . $minRead) -}}
     {{- end -}}
     {{- with .Params.tags -}}
-      {{- $meta = $meta | append (delimit . ", ") -}}
+      {{- if gt (len .) 0 -}}
+        {{- $meta = $meta | append (delimit . ", ") -}}
+      {{- end -}}
     {{- end -}}
     {{- with .Params.categories -}}
-      {{- $meta = $meta | append (delimit . ", ") -}}
+      {{- if gt (len .) 0 -}}
+        {{- $meta = $meta | append (delimit . ", ") -}}
+      {{- end -}}
     {{- end -}}
-    <p class="sub">{{ delimit $meta " · " }}</p>
+
+    {{- if gt (len $meta) 0 -}}
+      <p class="sub">{{ delimit $meta " · " }}</p>
+    {{- end -}}
   </section>
 
   <article class="section card">

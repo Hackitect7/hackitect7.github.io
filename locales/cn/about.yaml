@@ -1,0 +1,172 @@
+about:
+  title: "关于 Hackitect7"
+  subtitle: "我设计具有弹性、安全、经济合理的 IT 系统，以服务业务需求。"
+  highlights:
+    - "企业架构与 SRE —— 可衡量的结果"
+    - "安全优先、关注 FinOps、大规模自动化"
+    - "连接战略与技术：从会议室到命令行"
+    - "增长蓝图：模块化、云原生、多区域就绪"
+    - "可持续 IT：成本高效、绿色意识、面向未来"
+
+  sections:
+    - id: "who"
+      title: "我是谁（以及为什么重要）"
+      text: >
+        我是一名首席架构师，专注于可靠、可观测和成本高效的系统。
+        我连接技术与业务：SLA/SLO、安全性和 TCO/ROI。
+        拥有 22+ 年 IT 经验，我将架构视为工程与工艺的结合 —— 我称之为 *系统交响*。
+      facts:
+        - label: "所在地："
+          text: "比什凯克 · UTC+6（可灵活适配美/欧时区）"
+        - label: "语言："
+          items:
+            - "俄语 —— 精通（会话、文档、演讲）"
+            - "英语 —— 擅长书写，会话基础"
+            - "其他语言 —— 可进行高质量书面交流"
+        - label: "合作形式："
+          text: "咨询、审计、实操交付、指导"
+
+    - id: "what"
+      title: "我做什么"
+      text: "核心能力与业务成果对齐。每一项服务都与可衡量的影响挂钩 —— 更快交付、更低成本、更少风险。"
+      cards:
+        - h: "架构"
+          p: "本地、云、混合；可靠性、扩展性、成本控制。"
+          bullets:
+            - "多区域设计"
+            - "网络与安全基线"
+            - "迁移与现代化"
+        - h: "DevOps 与自动化"
+          p: "CI/CD、IaC（Terraform/Ansible）、GitOps、平台工程。"
+          bullets:
+            - "黄金镜像/基础层"
+            - "策略即代码"
+            - "发布安全性（渐进式交付）"
+        - h: "SRE 与可观测性"
+          p: "SLO/SLI、事件响应、值班健康。"
+          bullets:
+            - "指标/日志/追踪"
+            - "运行手册 & 平均恢复时间↓"
+            - "容量管理"
+        - h: "安全与治理"
+          p: "最小特权、加固、ISO/SOC2/GDPR 实践。"
+        - h: "业务与战略"
+          p: "FinOps、TCO/ROI、与 OKR 对齐的现代化路线图。"
+
+    - id: "how"
+      title: "我的工作方式"
+      steps:
+        - "发现 → 评估风险、约束、经济性"
+        - "设计 → 架构、安全性、可观测性、成本护栏"
+        - "试点 → 验证 SLO、性能、成本"
+        - "规模化 → 自动化、代码化、文档化"
+        - "运维 → 度量、改进、传递"
+      notes: "合作包括清晰的交付物、运行手册和决策日志。"
+
+    - id: "proof"
+      title: "结果胜于雄辩"
+      cases:
+        - badge: "SRE"
+          title: "MTTR ↓55%，告警疲劳 ↓60%"
+          desc: "引入 SLO，统一告警和事件工作流。"
+          metrics:
+            - "统一运行手册"
+            - "事后分析 = 学习，而非指责"
+        - badge: "FinOps"
+          title: "云支出 ↓23%，性能无损失"
+          desc: "合理定价、自动扩展、存储分层、预留容量。"
+          metrics:
+            - "护栏与预算"
+            - "每周成本审查"
+
+    - id: "industries"
+      title: "行业"
+      text: >
+        我与各种规模和领域的公司合作，从初创到企业。
+        我的框架与行业无关，但最常应用于：
+      cards:
+        - h: "主要领域"
+          bullets:
+            - "金融与金融科技"
+            - "电子商务与零售"
+            - "电信与网络"
+            - "政府与 GovTech"
+        - h: "其他行业"
+          bullets:
+            - "医疗健康"
+            - "媒体与娱乐"
+            - "教育"
+            - "物流"
+
+    - id: "cred"
+      title: "独特价值"
+      cards:
+        - h: "专业经验"
+          bullets:
+            - "22+ 年涵盖基础设施、网络与 DevOps"
+            - "多云（AWS、GCP、Azure）—— 实操交付"
+            - "弹性架构、务实自动化、SRE 思维"
+            - "从裸机与网络到 Kubernetes 与可观测性"
+            - "供应商中立 —— 专注业务最佳实践，而非工具"
+        - h: "开源"
+          bullets:
+            - "GitHub: https://github.com/Hackitect7 —— 工具与脚本"
+            - "DevOps 速查表（多语言，Quarto）"
+            - "MikroTik RouterOS 自动化脚本"
+        - h: "社区"
+          bullets:
+            - "知识分享：博客与技术笔记"
+            - "内部赋能培训、指导"
+            - "品牌：Hackitect7 —— 系统交响"
+
+    - id: "values"
+      title: "我的价值观（与你的安心）"
+      text: "务实、安全默认、可衡量、文档优先。"
+      bullets:
+        - "尊重隐私与合规"
+        - "成本透明与护栏"
+        - "知识传递内建"
+
+    - id: "engagement"
+      title: "合作模式"
+      cards:
+        - h: "评估 / 审计"
+          p: "短期合作以发现风险与机会。"
+          bullets:
+            - "架构评审"
+            - "安全态势"
+            - "成本基线"
+        - h: "项目交付"
+          p: "以可衡量结果进行设计与实施。"
+          bullets:
+            - "路线图与里程碑"
+            - "SLO 与 KPI"
+            - "交接"
+        - h: "兼职架构师"
+          p: "持续战略指导与评审。"
+          bullets:
+            - "架构委员会"
+            - "供应商控制"
+            - "变更管理"
+
+  finalCta:
+    title: "让我们合作吧"
+    text: "从技术到业务成果。预约一次简短的探索电话，看看 Hackitect7 如何帮助你的团队。"
+    href: "contacts"
+    button: "联系方式"
+
+  schema:
+    person:
+      name: "Hackitect7"
+      title: "首席架构师"
+      sameAs:
+        - "https://github.com/Hackitect7"
+        - "https://linkedin.com/in/hackitect7"
+
+    organization:
+      name: "Hackitect7"
+      url: "https://hackitect7.github.io/"
+      slogan: "系统交响"
+      sameAs:
+        - "https://github.com/Hackitect7"
+        - "https://linkedin.com/in/hackitect7"
